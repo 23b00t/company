@@ -1,0 +1,8 @@
+* Planung
+1. Aufgabe "onload": Liste anzeigen
+   a) HTML-Gerüst erstellen
+   b) Datenbank erstellen
+   c) Dummy-Daten erstellen
+   d) Dummy-Daten auslesen
+   e) Dummy-Daten in richtige Felder ausgeben
+

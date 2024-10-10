@@ -1,0 +1,6 @@
+phpactor:
+  codeActions:
+    enable: true
+    generate: true
+  index:
+    enable: true
