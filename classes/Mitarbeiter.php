@@ -6,32 +6,47 @@
 class Mitarbeiter
 {
     /**
-     * @var int $id
+     * @var int|null $id
      */
-    private int $id;
+    private int|null $id;
     /**
-     * @var string $firstName
+     * @var string|null $firstName
      */
-    private string $firstName;
+    private string|null $firstName;
     /**
-     * @var string $lastName
+     * @var string|null $lastName
      */
-    private string $lastName;
+    private string|null $lastName;
+    /**
+     * @var string|null $gender
+     */
+    private string|null $gender;
+    /**
+     * @var float|null $salary
+     */
+    private float|null $salary;
 
     /**
-     * @param int $id
-     * @param string $firstName
-     * @param string $lastName
-     * @param string $gender
-     * @param float $salary
+     * @param int|null $id
+     * @param string|null $firstName
+     * @param string|null $lastName
+     * @param string|null $gender
+     * @param float|null $salary
      */
-    public function __construct(string $firstName, string $lastName, string $gender, float $salary, int $id = null)
-    {
-        $this->id = $id;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->gender = $gender;
-        $this->salary = $salary;
+    public function __construct(
+        int $id = null,
+        string $firstName = null,
+        string $lastName = null,
+        string $gender = null,
+        float $salary = null
+    ) {
+        if (isset($id)) {
+            $this->id = $id;
+            $this->firstName = $firstName;
+            $this->lastName = $lastName;
+            $this->gender = $gender;
+            $this->salary = $salary;
+        }
     }
 
     /**
@@ -65,14 +80,6 @@ class Mitarbeiter
     {
         return $this->salary;
     }
-    /**
-     * @var string $gender
-     */
-    private string $gender;
-    /**
-     * @var float $salary
-     */
-    private float $salary;
 
     /**
      * @return string
@@ -85,12 +92,12 @@ class Mitarbeiter
     /**
      * @return array
      */
-    public static function getAllAsObjects(): array
+    public function getAllAsObjects(): array
     {
         $pdo = Db::getConnection();
         $sql = 'SELECT * FROM mitarbeiter';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_CLASS, Mitarbeiter::class);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Mitarbeiter::class); //  | PDO::FETCH_PROPS_LATE
     }
 }
