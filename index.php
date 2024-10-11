@@ -3,6 +3,10 @@ include 'config.php';
 include "classes/Db.php";
 include "classes/Mitarbeiter.php";
 
+echo '<pre>';
+print_r(Mitarbeiter::getAllAsObjects());
+echo '</pre>';
+
 $action = $_GET['action'] ?? 'showTabelle';
 
 // $monatslohn = $_POST['monatslohn'] ?? '0';
@@ -13,4 +17,4 @@ if ($action === 'showTabelle') {
     $view = 'eingabe';
 }
 
-include_once __DIR__ . '/views/' . $view . '.php';
+include __DIR__ . '/views/' . $view . '.php';
