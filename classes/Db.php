@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * Design Pattern Singleton
  * man möchte nur 1 Objekt in der Klasse haben
  */

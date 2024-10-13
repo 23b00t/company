@@ -6,3 +6,23 @@
    d) Dummy-Daten auslesen
    e) Dummy-Daten in richtige Felder ausgeben
 
+2. funktionale Anforderungen
+   - event: load tabelle.php
+   - Struktur erstellen: index.php mit tabelle.php als Startseite
+   - in index.php Einbinden von view
+   - in tabelle.php Tabellenstruktur schreiben
+   - navigation schreiben und in tabelle.php einbinden
+   - DB mit 1 Tabelle erstellen
+   - 2 Dummy-Daten einfügen
+   - Datenbankanschluss einrichten
+   - Klasse Mitarbeiter erstellen
+   - Konstruktor und GETTER-/(SETTER) Methoden schreiben
+   - alle Datensätze als Objekte erstellen
+   - Daten in tabelle.php in table eintragen lassen
+   - Funktionstest
+   - event: delete in tabelle.php
+   - in index.php $action Fallunterscheidung "delete" einbauen
+   - in Mitarbeiter die Löschmethode ($id) schreiben
+   - nach Aufruf Tabelle mitarbeiter auslesen und Daten in tabelle.php in table eintragen lassen
+
+

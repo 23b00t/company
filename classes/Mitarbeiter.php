@@ -84,13 +84,13 @@ class Mitarbeiter
     /**
      * @return string
      */
-    public function firstName(): string
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
     /**
-     * @return array
+     * @return Mitarbeiter[]
      */
     public function getAllAsObjects(): array
     {
@@ -99,5 +99,20 @@ class Mitarbeiter
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, Mitarbeiter::class); //  | PDO::FETCH_PROPS_LATE
+    }
+
+    /**
+    * Method to delete Mitarbeiter from db
+    *
+    * @param $id
+    * @return void
+    */
+    public function deleteObjectById(int $id): void
+    {
+        $pdo = Db::getConnection();
+        $sql = 'DELETE FROM mitarbeiter WHERE id = ?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        // $stmt->fetch(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 }
