@@ -20,13 +20,13 @@ $id = $_GET['id'] ?? '0';
 $view = 'tabelle';
 if ($action === 'showTabelle') {
     $view = 'tabelle';
-} elseif ($action === 'showEingabe') {
-    $view = 'eingabe';
 } elseif ($action === 'delete') {
     (new Mitarbeiter())->deleteObjectById($id);
     // (new Mitarbeiter())->deleteObjectById(23);
     $employees = (new Mitarbeiter())->getAllAsObjects();
     $view = 'tabelle';
+} elseif ($action === 'showForm') {
+    $view = 'form';
 }
 
 include __DIR__ . '/views/' . $view . '.php';
