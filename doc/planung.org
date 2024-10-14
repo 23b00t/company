@@ -24,5 +24,11 @@
    - in index.php $action Fallunterscheidung "delete" einbauen
    - in Mitarbeiter die Löschmethode ($id) schreiben
    - nach Aufruf Tabelle mitarbeiter auslesen und Daten in tabelle.php in table eintragen lassen
+   - event: neuen Mitarbeiter in Datenbank eintragen
+   - form.php erstellen, Navigation einbinden
+   - 4 Inputfelder erstellen, hiddenfield action erstellen
+   - index.php erweitern um action === 'insert'
+   - Methode insert in Klasse Mitarbeiter schreiben, Mitarbeiterobjekt zurückgeben
+   - tabelle.php einbinden
 
 

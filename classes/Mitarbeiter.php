@@ -50,6 +50,8 @@ class Mitarbeiter
     }
 
     /**
+     * getId()
+     *
      * @return int
      */
     public function getId(): int
@@ -58,30 +60,8 @@ class Mitarbeiter
     }
 
     /**
-     * @return string
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGender(): string
-    {
-        return $this->gender;
-    }
-
-    /**
-     * @return float
-     */
-    public function getSalary(): float
-    {
-        return $this->salary;
-    }
-
-    /**
+     * getFirstName()
+     *
      * @return string
      */
     public function getFirstName(): string
@@ -90,6 +70,39 @@ class Mitarbeiter
     }
 
     /**
+     * getLastName()
+     *
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * getGender()
+     *
+     * @return string
+     */
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * getSalary()
+     *
+     * @return ?float
+     * return null to display empty form
+     */
+    public function getSalary(): ?float
+    {
+        return $this->salary;
+    }
+
+    /**
+     * getAllAsObjects()
+     *
      * @return Mitarbeiter[]
      */
     public function getAllAsObjects(): array
@@ -102,11 +115,12 @@ class Mitarbeiter
     }
 
     /**
-    * Method to delete Mitarbeiter from db
-    *
-    * @param $id
-    * @return void
-    */
+     * deleteObjectById()
+     * Method to delete Mitarbeiter from db
+     *
+     * @param $id
+     * @return void
+     */
     public function deleteObjectById(int $id): void
     {
         $pdo = Db::getConnection();
@@ -133,5 +147,35 @@ class Mitarbeiter
         $stmt->execute([$firstName, $lastName, $gender, $salaray]);
         $id = $pdo->lastInsertId();
         return new Mitarbeiter($id, $firstName, $lastName, $gender, $salaray);
+    }
+
+    /**
+     * getObjectById
+     *
+     * @param int $id
+     * @return Mitarbeiter
+     */
+    public function getObjectById(int $id): Mitarbeiter
+    {
+        $pdo = Db::getConnection();
+        $sql = 'SELECT * FROM mitarbeiter WHERE id = ?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchObject(Mitarbeiter::class);
+    }
+
+    /**
+     * update
+     *
+     * @return void
+     */
+    public function update(): void
+    {
+        $pdo = Db::getConnection();
+        $sql = 'UPDATE mitarbeiter SET firstName = ?, lastName = ?, gender = ?, salary = ? WHERE id = ?';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(
+            [$this->getFirstName(), $this->getLastName(), $this->getGender(), $this->getSalary(), $this->getId()]
+        );
     }
 }

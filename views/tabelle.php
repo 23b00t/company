@@ -32,7 +32,7 @@
           <td><a href="index.php?action=delete&id=<?= $employee->getId(); ?>">
             <button class="btn btn-danger">Löschen</button>
           </a></td>
-          <td><a href="index.php?action=edit&id=<?= $employee->getId(); ?>">
+          <td><a href="index.php?action=showEdit&id=<?= $employee->getId(); ?>">
             <button class="btn btn-warning">Ändern</button>
           </a></td>
         </tr>
