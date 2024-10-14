@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'user/firma',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '6b98c4e5c38ae6549035ffe01b6504927953844d',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -215,6 +215,15 @@
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'nikic/php-parser' => array(
+            'pretty_version' => 'v5.3.1',
+            'version' => '5.3.1.0',
+            'reference' => '8eea230464783aa9671db8eea6f8c6ac5285794b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../nikic/php-parser',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'phpactor/amp-fswatch' => array(
             'pretty_version' => '0.3.0',
@@ -489,6 +498,15 @@
                 0 => '0.2.5',
             ),
         ),
+        'phpstan/phpdoc-parser' => array(
+            'pretty_version' => '1.33.0',
+            'version' => '1.33.0.0',
+            'reference' => '82a311fd3690fb2bf7b64d5c98f912b3dd746140',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpstan/phpdoc-parser',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'psr/container' => array(
             'pretty_version' => '1.x-dev',
             'version' => '1.9999999.9999999.9999999-dev',
@@ -527,8 +545,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0',
+                0 => '1.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'ramsey/collection' => array(
@@ -564,6 +582,17 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'smeghead/php-class-diagram' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '434112f1cafbc638a9df2e1a6b648e9511a29b46',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../smeghead/php-class-diagram',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => true,
+        ),
         'symfony/console' => array(
             'pretty_version' => '5.4.x-dev',
             'version' => '5.4.9999999.9999999-dev',
@@ -592,6 +621,15 @@
             'install_path' => __DIR__ . '/../symfony/filesystem',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'symfony/finder' => array(
+            'pretty_version' => '7.2.x-dev',
+            'version' => '7.2.9999999.9999999-dev',
+            'reference' => 'b98a9af917cf81ec03cfec4824216fe5f3ed3fcc',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/finder',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'symfony/polyfill-ctype' => array(
             'pretty_version' => '1.x-dev',
@@ -713,9 +751,9 @@
             'dev_requirement' => false,
         ),
         'user/firma' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '6b98c4e5c38ae6549035ffe01b6504927953844d',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

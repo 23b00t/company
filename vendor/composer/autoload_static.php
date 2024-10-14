@@ -147,8 +147,10 @@ class ComposerStaticInit7849e44270903418afe340a4f005be7f
             'Symfony\\Component\\Yaml\\' => 23,
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Process\\' => 26,
+            'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Console\\' => 26,
+            'Smeghead\\PhpClassDiagram\\' => 25,
             'Safe\\' => 5,
         ),
         'R' => 
@@ -169,7 +171,9 @@ class ComposerStaticInit7849e44270903418afe340a4f005be7f
             'Phpactor\\ClassFileConverter\\' => 28,
             'Phpactor\\AmpFsWatch\\' => 20,
             'Phpactor\\' => 9,
+            'PhpParser\\' => 10,
             'Phly\\EventDispatcher\\' => 21,
+            'PHPStan\\PhpDocParser\\' => 21,
         ),
         'M' => 
         array (
@@ -271,6 +275,10 @@ class ComposerStaticInit7849e44270903418afe340a4f005be7f
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
+        'Symfony\\Component\\Finder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/finder',
+        ),
         'Symfony\\Component\\Filesystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/filesystem',
@@ -278,6 +286,10 @@ class ComposerStaticInit7849e44270903418afe340a4f005be7f
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Smeghead\\PhpClassDiagram\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/smeghead/php-class-diagram/src',
         ),
         'Safe\\' => 
         array (
@@ -337,9 +349,17 @@ class ComposerStaticInit7849e44270903418afe340a4f005be7f
         array (
             0 => __DIR__ . '/..' . '/phpactor/phpactor/lib',
         ),
+        'PhpParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
         'Phly\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpactor/phly-event-dispatcher/src',
+        ),
+        'PHPStan\\PhpDocParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
         ),
         'Monolog\\' => 
         array (
