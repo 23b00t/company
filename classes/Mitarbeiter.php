@@ -40,7 +40,7 @@ class Mitarbeiter
         string $gender = null,
         float $salary = null
     ) {
-        if (isset($id)) {
+        if (isset($gender)) {
             $this->id = $id;
             $this->firstName = $firstName;
             $this->lastName = $lastName;
@@ -52,9 +52,9 @@ class Mitarbeiter
     /**
      * getId()
      *
-     * @return int
+     * @return ?int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -107,6 +107,7 @@ class Mitarbeiter
      */
     public function getAllAsObjects(): array
     {
+        /** @var PDO $pdo */
         $pdo = Db::getConnection();
         $sql = 'SELECT * FROM mitarbeiter';
         $stmt = $pdo->prepare($sql);
@@ -123,6 +124,7 @@ class Mitarbeiter
      */
     public function deleteObjectById(int $id): void
     {
+        /** @var PDO $pdo */
         $pdo = Db::getConnection();
         $sql = 'DELETE FROM mitarbeiter WHERE id = ?';
         $stmt = $pdo->prepare($sql);
@@ -141,6 +143,7 @@ class Mitarbeiter
      */
     public function insert(string $firstName, string $lastName, string $gender, float $salaray): Mitarbeiter
     {
+        /** @var PDO $pdo */
         $pdo = Db::getConnection();
         $sql = 'INSERT INTO mitarbeiter VALUES(NULL, ?, ?, ?, ?)';
         $stmt = $pdo->prepare($sql);
@@ -157,6 +160,7 @@ class Mitarbeiter
      */
     public function getObjectById(int $id): Mitarbeiter
     {
+        /** @var PDO $pdo */
         $pdo = Db::getConnection();
         $sql = 'SELECT * FROM mitarbeiter WHERE id = ?';
         $stmt = $pdo->prepare($sql);
@@ -171,11 +175,12 @@ class Mitarbeiter
      */
     public function update(): void
     {
+        /** @var PDO $pdo */
         $pdo = Db::getConnection();
         $sql = 'UPDATE mitarbeiter SET firstName = ?, lastName = ?, gender = ?, salary = ? WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
-            [$this->getFirstName(), $this->getLastName(), $this->getGender(), $this->getSalary(), $this->getId()]
+            [$this->firstName, $this->lastName, $this->gender, $this->salary, $this->id]
         );
     }
 }

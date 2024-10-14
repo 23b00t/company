@@ -36,17 +36,17 @@
             <!-- Geschlechtscheckboxen -->
             <div class="mb-2 mt-3">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="female" 
+                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="w" 
                   <?= !preg_match('/^w.*/', $employee->getGender()) ?: 'checked' ?>>
                 <label class="form-check-label" for="inlineRadio1">weiblich</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="male"
+                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="m"
                   <?= !preg_match('/^m.*/', $employee->getGender()) ?: 'checked' ?>>
                 <label class="form-check-label" for="inlineRadio2">männlich</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="divers"
+                <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="d"
                   <?= !preg_match('/^d.*/', $employee->getGender()) ?: 'checked' ?>>
                 <label class="form-check-label" for="inlineRadio3">divers</label>
               </div>
@@ -60,7 +60,7 @@
             </div>
 
             <!-- Set action in hidden field -->
-            <input type="hidden" name="action" value="insert">
+            <input type="hidden" name="action" value="<?= $employee->getId() === null ? 'insert' : 'update'; ?>">
 
             <!-- Set id in hidden field -->
             <input type="hidden" name="id" value="<?= $employee->getId(); ?>"
