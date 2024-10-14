@@ -69,9 +69,7 @@
               <!-- Submitt button -->
               <button type="submit" class="btn btn-primary btn-block mt-3">Speichern</button>
               <!-- Reset button -->
-              <a href="index.php?action=showForm" >
-                <button class="btn btn-outline-warning btn-block mt-3">Reset</button>
-              </a>
+              <button type="reset" class="btn btn-outline-warning btn-block mt-3">Reset</button>
             </div>
           </form>
         </div>
