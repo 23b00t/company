@@ -115,4 +115,23 @@ class Mitarbeiter
         $stmt->execute([$id]);
         // $stmt->fetch(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
+
+    /**
+     * insert
+     *
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $gender
+     * @param float $salaray
+     * @return Mitarbeiter
+     */
+    public function insert(string $firstName, string $lastName, string $gender, float $salaray): Mitarbeiter
+    {
+        $pdo = Db::getConnection();
+        $sql = 'INSERT INTO mitarbeiter VALUES(NULL, ?, ?, ?, ?)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$firstName, $lastName, $gender, $salaray]);
+        $id = $pdo->lastInsertId();
+        return new Mitarbeiter($id, $firstName, $lastName, $gender, $salaray);
+    }
 }
