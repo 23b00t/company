@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class Auto
+ * Class Car
  */
-class Auto
+class Car
 {
     private int|null $id;
     private string|null $licensePlate;
@@ -73,7 +73,7 @@ class Auto
     /**
      * getAllAsObjects()
      *
-     * @return Auto[]
+     * @return Car[]
      */
     public function getAllAsObjects(): array
     {
@@ -82,12 +82,12 @@ class Auto
         $sql = 'SELECT * FROM car';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_CLASS, Auto::class); //  | PDO::FETCH_PROPS_LATE
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Car::class); //  | PDO::FETCH_PROPS_LATE
     }
 
     /**
      * deleteObjectById()
-     * Method to delete Auto from db
+     * Method to delete Car from db
      *
      * @param $id
      * @return void
@@ -108,9 +108,9 @@ class Auto
      * @param string $licensePlate
      * @param string $manufacturer
      * @param string $type
-     * @return Auto
+     * @return Car
      */
-    public function insert(string $licensePlate, string $manufacturer, string $type): Auto
+    public function insert(string $licensePlate, string $manufacturer, string $type): Car
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
@@ -118,23 +118,23 @@ class Auto
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$licensePlate, $manufacturer, $type]);
         $id = $pdo->lastInsertId();
-        return new Auto($id, $licensePlate, $manufacturer, $type);
+        return new Car($id, $licensePlate, $manufacturer, $type);
     }
 
     /**
      * getObjectById
      *
      * @param int $id
-     * @return Auto
+     * @return Car
      */
-    public function getObjectById(int $id): Auto
+    public function getObjectById(int $id): Car
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
         $sql = 'SELECT * FROM car WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetchObject(Auto::class);
+        return $stmt->fetchObject(Car::class);
     }
 
     /**

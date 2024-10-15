@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class Mitarbeiter
+ * Class Employee
  */
-class Mitarbeiter
+class Employee
 {
     /**
      * @var int|null $id
@@ -103,7 +103,7 @@ class Mitarbeiter
     /**
      * getAllAsObjects()
      *
-     * @return Mitarbeiter[]
+     * @return Employee[]
      */
     public function getAllAsObjects(): array
     {
@@ -112,12 +112,12 @@ class Mitarbeiter
         $sql = 'SELECT * FROM mitarbeiter';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_CLASS, Mitarbeiter::class); //  | PDO::FETCH_PROPS_LATE
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Employee::class); //  | PDO::FETCH_PROPS_LATE
     }
 
     /**
      * deleteObjectById()
-     * Method to delete Mitarbeiter from db
+     * Method to delete Employee from db
      *
      * @param $id
      * @return void
@@ -139,9 +139,9 @@ class Mitarbeiter
      * @param string $lastName
      * @param string $gender
      * @param float $salaray
-     * @return Mitarbeiter
+     * @return Employee
      */
-    public function insert(string $firstName, string $lastName, string $gender, float $salaray): Mitarbeiter
+    public function insert(string $firstName, string $lastName, string $gender, float $salaray): Employee
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
@@ -149,23 +149,23 @@ class Mitarbeiter
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$firstName, $lastName, $gender, $salaray]);
         $id = $pdo->lastInsertId();
-        return new Mitarbeiter($id, $firstName, $lastName, $gender, $salaray);
+        return new Employee($id, $firstName, $lastName, $gender, $salaray);
     }
 
     /**
      * getObjectById
      *
      * @param int $id
-     * @return Mitarbeiter
+     * @return Employee
      */
-    public function getObjectById(int $id): Mitarbeiter
+    public function getObjectById(int $id): Employee
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
         $sql = 'SELECT * FROM mitarbeiter WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetchObject(Mitarbeiter::class);
+        return $stmt->fetchObject(Employee::class);
     }
 
     /**

@@ -59,7 +59,7 @@
                 value="<?= $employee->getSalary() ?? ''; ?>">
             </div>
 
-            <input type="hidden" name="area" value="emplyee">
+            <input type="hidden" name="area" value="employee">
 
             <!-- Set action in hidden field -->
             <input type="hidden" name="action" value="<?= $employee->getId() === null ? 'insert' : 'update'; ?>">

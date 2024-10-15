@@ -2,18 +2,18 @@
 
 include 'config.php';
 include "classes/Db.php";
-include "classes/Mitarbeiter.php";
-include 'classes/Auto.php';
+include "classes/Employee.php";
+include 'classes/Car.php';
 
 echo '<pre>';
-// // print_r(Mitarbeiter::getAllAsObjects());
-// print_r((new Mitarbeiter())->getAllAsObjects());
+// // print_r(Employee::getAllAsObjects());
+// print_r((new Employee())->getAllAsObjects());
 // print_r($_GET);
 // print_r($_POST);
 echo '</pre>';
 
-$employees = (new Mitarbeiter())->getAllAsObjects();
-$cars = (new Auto())->getAllAsObjects();
+$employees = (new Employee())->getAllAsObjects();
+$cars = (new Car())->getAllAsObjects();
 
 // $_REQUEST = $_GET und $_POST
 $action = $_REQUEST['action'] ?? 'showTabelle';
@@ -30,49 +30,50 @@ $licensePlate = $_POST['licensePlate'] ?? '';
 $manufacturer = $_POST['manufacturer'] ?? '';
 $type = $_POST['type'] ?? '';
 
-// $monatslohn = $_POST['monatslohn'] ?? '0';
+// default view if no area is set
+$view = 'employee/tabelle';
 
 if ($area === 'employee') {
-    $view = 'mitarbeiter/tabelle';
+    $view = 'employee/tabelle';
     if ($action === 'showForm') {
-        // Dummy Mitarbeiter for creation; gender prefilled with w; same view for update;
+        // Dummy Employee for creation; gender prefilled with w; same view for update;
         // id = 0 to handle in view difference between insert und update
-        $employee = new Mitarbeiter(null, '', '', 'w', null);
-        $view = 'mitarbeiter/form';
+        $employee = new Employee(null, '', '', 'w', null);
+        $view = 'employee/form';
     } elseif ($action === 'delete') {
-        (new Mitarbeiter())->deleteObjectById($id);
-        // (new Mitarbeiter())->deleteObjectById(23);
-        $employees = (new Mitarbeiter())->getAllAsObjects();
+        (new Employee())->deleteObjectById($id);
+        // (new Employee())->deleteObjectById(23);
+        $employees = (new Employee())->getAllAsObjects();
     } elseif ($action === 'insert') {
-        $employee = (new Mitarbeiter())->insert($firstName, $lastName, $gender, $salary);
-        $employees = (new Mitarbeiter())->getAllAsObjects();
+        $employee = (new Employee())->insert($firstName, $lastName, $gender, $salary);
+        $employees = (new Employee())->getAllAsObjects();
     } elseif ($action === 'showEdit') {
-        $employee = (new Mitarbeiter())->getObjectById($id);
-        $view = 'mitarbeiter/form';
+        $employee = (new Employee())->getObjectById($id);
+        $view = 'employee/form';
     } elseif ($action === 'update') {
-        $employee = (new Mitarbeiter($id, $firstName, $lastName, $gender, $salary))->update();
-        $employees = (new Mitarbeiter())->getAllAsObjects();
+        $employee = (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
+        $employees = (new Employee())->getAllAsObjects();
     }
 } elseif ($area === 'car') {
-    $view = 'auto/tabelle';
+    $view = 'car/tabelle';
     if ($action === 'showForm') {
-        // Dummy Auto for creation; gender prefilled with w; same view for update;
+        // Dummy Car for creation; gender prefilled with w; same view for update;
         // id = 0 to handle in view difference between insert und update
-        $car = new Auto(null, '', '', '');
-        $view = 'auto/form';
+        $car = new Car(null, '', '', '');
+        $view = 'car/form';
     } elseif ($action === 'delete') {
-        (new Auto())->deleteObjectById($id);
-        // (new Auto())->deleteObjectById(23);
-        $cars = (new Auto())->getAllAsObjects();
+        (new Car())->deleteObjectById($id);
+        // (new Car())->deleteObjectById(23);
+        $cars = (new Car())->getAllAsObjects();
     } elseif ($action === 'insert') {
-        $car = (new Auto())->insert($licensePlate, $manufacturer, $type);
-        $cars = (new Auto())->getAllAsObjects();
+        $car = (new Car())->insert($licensePlate, $manufacturer, $type);
+        $cars = (new Car())->getAllAsObjects();
     } elseif ($action === 'showEdit') {
-        $car = (new Auto())->getObjectById($id);
-        $view = 'auto/form';
+        $car = (new Car())->getObjectById($id);
+        $view = 'car/form';
     } elseif ($action === 'update') {
-        $car = (new Auto($id, $licensePlate, $manufacturer, $type))->update();
-        $cars = (new Auto())->getAllAsObjects();
+        $car = (new Car($id, $licensePlate, $manufacturer, $type))->update();
+        $cars = (new Car())->getAllAsObjects();
     }
 }
 
