@@ -14,6 +14,7 @@ $area = $_REQUEST['area'] ?? 'employee'; // $_REQUEST = $_GET and $_POST
 
 /**
  * Controller action
+ * No default action means showTable because this is the default view
  */
 $action = $_REQUEST['action'] ?? '';
 
@@ -28,7 +29,7 @@ if ($area === 'employee') {
     $lastName = $_POST['lastName'] ?? '';
     $gender = $_POST['gender'] ?? '';
     $salary = $_POST['salary'] ?? '';
-    $salary = (float)$salary;
+    $salary = (float)$salary; // transform salary string to float
 
     // default employee view
     $view = 'employee/table';
@@ -44,12 +45,14 @@ if ($area === 'employee') {
         $employees = (new Employee())->getAllAsObjects();
     } elseif ($action === 'insert') {
         $employee = (new Employee())->insert($firstName, $lastName, $gender, $salary);
+        // Get all objects including the newly created to include it in standard view
         $employees = (new Employee())->getAllAsObjects();
     } elseif ($action === 'showEdit') {
         $employee = (new Employee())->getObjectById($id);
         $view = 'employee/form';
     } elseif ($action === 'update') {
         $employee = (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
+        // Get all objects including the updated to include it in standard view
         $employees = (new Employee())->getAllAsObjects();
     }
 } elseif ($area === 'car') {
