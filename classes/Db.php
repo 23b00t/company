@@ -14,7 +14,7 @@ class Db
         if (!isset(self::$dbh)) {
             // Connect to a MySQL database using driver invocation
             try {
-                self::$dbh = new PDO(DB_DNS, DB_USER, DB_PASSWD);
+                self::$dbh = new PDO(DB_DSN, DB_USER, DB_PASSWD);
             } catch (PDOException $e) {
                 echo 'Connection failed: ' . $e->getMessage();
             }
