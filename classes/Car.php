@@ -5,9 +5,21 @@
  */
 class Car
 {
+    /**
+     * @var int|null $id
+     */
     private int|null $id;
+    /**
+     * @var string|null $licensePlate
+     */
     private string|null $licensePlate;
+    /**
+     * @var string|null $manufacturer
+     */
     private string|null $manufacturer;
+    /**
+     * @var string|null $type
+     */
     private string|null $type;
 
     /**

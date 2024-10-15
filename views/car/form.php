@@ -1,5 +1,5 @@
 <?php
-/** @var firma\index $car  */
+/** @var $car  */
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +19,9 @@
       <div class="row justify-content-center">
         <div class="col-md-4">
           <h2 class="text-center mt-5">Auto</h2>
-          <!-- POST an index.php -->
+          <!-- POST to index.php -->
           <form action="index.php" method="POST">
+            <!-- Input fields for License plate, manufacturer and type -->
             <div class="form-group">
               <label for="licensePlate">Kennezeichen</label>
               <input type="text" class="form-control" id="licensePlate" name="licensePlate" required 
@@ -31,13 +32,13 @@
               <input type="text" class="form-control" id="manufacturer" name="manufacturer" required 
                 value="<?= $car->getManufacturer(); ?>">
             </div>
-
             <div class="form-group">
               <label for="type">Typ</label>
               <input type="text" class="form-control" id="type" name="type" required 
                 value="<?= $car->getType(); ?>">
             </div>
 
+            <!-- Set area in hidden field -->
             <input type="hidden" name="area" value="car">
 
             <!-- Set action in hidden field -->

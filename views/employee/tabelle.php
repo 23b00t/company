@@ -1,5 +1,5 @@
 <?php
-/** @var firma\index $employees  */
+/** @var $employees  */
 ?>
 
 <!DOCTYPE html>

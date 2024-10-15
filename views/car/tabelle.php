@@ -1,5 +1,5 @@
 <?php
-/** @var firma\index $cars  */
+/** @var $cars  */
 ?>
 
 <!DOCTYPE html>

@@ -5,36 +5,31 @@ include "classes/Db.php";
 include "classes/Employee.php";
 include 'classes/Car.php';
 
-echo '<pre>';
-// // print_r(Employee::getAllAsObjects());
-// print_r((new Employee())->getAllAsObjects());
-// print_r($_GET);
-// print_r($_POST);
-echo '</pre>';
-
-$employees = (new Employee())->getAllAsObjects();
-$cars = (new Car())->getAllAsObjects();
-
 // $_REQUEST = $_GET und $_POST
+/**
+ * Controller action
+ */
 $action = $_REQUEST['action'] ?? 'showTabelle';
+/**
+ * Area (Controller Name)
+ */
 $area = $_REQUEST['area'] ?? 'employee';
+
+// id of object handed over
 $id = $_REQUEST['id'] ?? null;
-
-$firstName = $_POST['firstName'] ?? '';
-$lastName = $_POST['lastName'] ?? '';
-$gender = $_POST['gender'] ?? '';
-$salary = $_POST['salary'] ?? '';
-$salary = (float)$salary;
-
-$licensePlate = $_POST['licensePlate'] ?? '';
-$manufacturer = $_POST['manufacturer'] ?? '';
-$type = $_POST['type'] ?? '';
 
 // default view if no area is set
 $view = 'employee/tabelle';
 
 if ($area === 'employee') {
-    $view = 'employee/tabelle';
+    // Get values
+    $employees = (new Employee())->getAllAsObjects();
+    $firstName = $_POST['firstName'] ?? '';
+    $lastName = $_POST['lastName'] ?? '';
+    $gender = $_POST['gender'] ?? '';
+    $salary = $_POST['salary'] ?? '';
+    $salary = (float)$salary;
+
     if ($action === 'showForm') {
         // Dummy Employee for creation; gender prefilled with w; same view for update;
         // id = 0 to handle in view difference between insert und update
@@ -55,6 +50,13 @@ if ($area === 'employee') {
         $employees = (new Employee())->getAllAsObjects();
     }
 } elseif ($area === 'car') {
+    // get values
+    $cars = (new Car())->getAllAsObjects();
+    $licensePlate = $_POST['licensePlate'] ?? '';
+    $manufacturer = $_POST['manufacturer'] ?? '';
+    $type = $_POST['type'] ?? '';
+
+    // set default car view
     $view = 'car/tabelle';
     if ($action === 'showForm') {
         // Dummy Car for creation; gender prefilled with w; same view for update;
@@ -78,3 +80,11 @@ if ($area === 'employee') {
 }
 
 include __DIR__ . '/views/' . $view . '.php';
+
+// Debug statements:
+echo '<pre>';
+// // print_r(Employee::getAllAsObjects());
+// print_r((new Employee())->getAllAsObjects());
+// print_r($_GET);
+// print_r($_POST);
+echo '</pre>';
