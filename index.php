@@ -7,19 +7,18 @@ include 'classes/Car.php';
 
 // $_REQUEST = $_GET und $_POST
 /**
+ * Area (Controller Name)
+ * default to employee if nothing is set
+ * e.g. by a call of index.php without params (Homepage)
+ */
+$area = $_REQUEST['area'] ?? 'employee';
+/**
  * Controller action
  */
 $action = $_REQUEST['action'] ?? 'showTabelle';
-/**
- * Area (Controller Name)
- */
-$area = $_REQUEST['area'] ?? 'employee';
 
 // id of object handed over
 $id = $_REQUEST['id'] ?? null;
-
-// default view if no area is set
-$view = 'employee/tabelle';
 
 if ($area === 'employee') {
     // Get values
@@ -29,6 +28,9 @@ if ($area === 'employee') {
     $gender = $_POST['gender'] ?? '';
     $salary = $_POST['salary'] ?? '';
     $salary = (float)$salary;
+
+    // default employee view
+    $view = 'employee/tabelle';
 
     if ($action === 'showForm') {
         // Dummy Employee for creation; gender prefilled with w; same view for update;
@@ -58,6 +60,7 @@ if ($area === 'employee') {
 
     // set default car view
     $view = 'car/tabelle';
+
     if ($action === 'showForm') {
         // Dummy Car for creation; gender prefilled with w; same view for update;
         // id = 0 to handle in view difference between insert und update
