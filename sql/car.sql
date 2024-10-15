@@ -1,6 +1,6 @@
 USE firma;
 
-DROP TABLE IF EXISTS auto;
+DROP TABLE IF EXISTS car;
 
 CREATE TABLE IF NOT EXISTS car (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -10,6 +10,6 @@ CREATE TABLE IF NOT EXISTS car (
 );
 
 INSERT INTO car (licensePlate, manufacturer, type) VALUES
-    ('B-YG 235', 'VW', 'Limosiene'),
-    ('B-BQ 235', 'BMW', 'Coupe'),
-    ('KL-LK 23', 'Audi', 'Caprio');
+    ('B-YG 235', 'VW', 'Polo'),
+    ('B-BQ 235', 'BMW', '3.18'),
+    ('KL-LK 23', 'Audi', 'A8');
