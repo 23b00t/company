@@ -1,5 +1,8 @@
 <?php
-/** @var $car  */
+/**
+ * @var $car
+ * @var $action
+ */
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +26,7 @@
           <form action="index.php" method="POST">
             <!-- Input fields for License plate, manufacturer and type -->
             <div class="form-group">
-              <label for="licensePlate">Kennezeichen</label>
+              <label for="licensePlate">Kennzeichen</label>
               <input type="text" class="form-control" id="licensePlate" name="licensePlate" required 
                 value="<?= $car->getLicensePlate(); ?>">
             </div>
@@ -42,13 +45,13 @@
             <input type="hidden" name="area" value="car">
 
             <!-- Set action in hidden field -->
-            <input type="hidden" name="action" value="<?= $car->getId() === null ? 'insert' : 'update'; ?>">
+            <input type="hidden" name="action" value="<?= $action; ?>">
 
             <!-- Set id in hidden field -->
             <input type="hidden" name="id" value="<?= $car->getId(); ?>"
 
             <div class="form-group">
-              <!-- Submitt button -->
+              <!-- Submit button -->
               <button type="submit" class="btn btn-primary btn-block mt-3">Speichern</button>
               <!-- Reset button -->
               <button type="reset" class="btn btn-outline-warning btn-block mt-3">Reset</button>

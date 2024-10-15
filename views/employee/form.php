@@ -1,5 +1,8 @@
 <?php
-/** @var $employee  */
+/**
+ * @var $employee
+ * @var $action
+ */
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +57,7 @@
 
             <!-- Salary -->
             <div class="form-group">
-              <label for="salary">Monataslohn</label>
+              <label for="salary">Monatslohn</label>
               <input type="number" step="0.01" class="form-control" id="salary" name="salary" 
                 value="<?= $employee->getSalary() ?? ''; ?>">
             </div>
@@ -63,13 +66,13 @@
             <input type="hidden" name="area" value="employee">
 
             <!-- Set action in hidden field -->
-            <input type="hidden" name="action" value="<?= $employee->getId() === null ? 'insert' : 'update'; ?>">
+            <input type="hidden" name="action" value="<?= $action; ?>">
 
             <!-- Set id in hidden field -->
             <input type="hidden" name="id" value="<?= $employee->getId(); ?>"
 
             <div class="form-group">
-              <!-- Submitt button -->
+              <!-- Submit button -->
               <button type="submit" class="btn btn-primary btn-block mt-3">Speichern</button>
               <!-- Reset button -->
               <button type="reset" class="btn btn-outline-warning btn-block mt-3">Reset</button>

@@ -6,22 +6,30 @@ include "classes/Employee.php";
 include 'classes/Car.php';
 
 /**
- * Area (Controller Name)
+ * @var string $area (Controller Name)
  * default to employee if nothing is set
  * e.g. by a call of index.php without params (Homepage)
  */
 $area = $_REQUEST['area'] ?? 'employee'; // $_REQUEST = $_GET and $_POST
 
 /**
- * Controller action
+ * @var string $action (Controller action)
  * No default action means showTable because this is the default view
  */
 $action = $_REQUEST['action'] ?? '';
 
-// id of object handed over (or null if there is none)
+/**
+ * @var int $id
+ * id of object handed over (or null if there is none)
+ */
 $id = $_REQUEST['id'] ?? null;
 
-// removed in both areas action showTable because tabele is the default view
+/**
+ * Based on $area route to requested controller
+ * removed in both areas action showTable because table is the default view
+ *
+ * @var string $view (view to render)
+ */
 if ($area === 'employee') {
     // Get values
     $employees = (new Employee())->getAllAsObjects();
@@ -35,10 +43,11 @@ if ($area === 'employee') {
     $view = 'employee/table';
 
     if ($action === 'showForm') {
-        // Dummy Employee for creation; gender prefilled with w; same view for update;
-        // id = null to handle in view difference between insert und update
+        // Dummy Employee for creation; gender pre-filled with w; same view for update;
+        // make $action available in form to handle both, insert and update
         $employee = new Employee(null, '', '', 'w', null);
         $view = 'employee/form';
+        $action = 'insert';
     } elseif ($action === 'delete') {
         (new Employee())->deleteObjectById($id);
         // (new Employee())->deleteObjectById(23);
@@ -50,6 +59,7 @@ if ($area === 'employee') {
     } elseif ($action === 'showEdit') {
         $employee = (new Employee())->getObjectById($id);
         $view = 'employee/form';
+        $action = 'update';
     } elseif ($action === 'update') {
         $employee = (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
         // Get all objects including the updated to include it in standard view
@@ -66,12 +76,13 @@ if ($area === 'employee') {
     $view = 'car/table';
 
     if ($action === 'showForm') {
-        // id = null to handle in view difference between insert und update
+        // make $action available in form to handle both, insert and update
         $car = new Car(null, '', '', '');
         $view = 'car/form';
+        $action = 'insert';
     } elseif ($action === 'delete') {
         (new Car())->deleteObjectById($id);
-        // Testcase for ErrorHandeling: (new Car())->deleteObjectById(23);
+        // Test case for Error Handling: (new Car())->deleteObjectById(23);
         $cars = (new Car())->getAllAsObjects();
     } elseif ($action === 'insert') {
         $car = (new Car())->insert($licensePlate, $manufacturer, $type);
@@ -79,18 +90,12 @@ if ($area === 'employee') {
     } elseif ($action === 'showEdit') {
         $car = (new Car())->getObjectById($id);
         $view = 'car/form';
+        $action = 'update';
     } elseif ($action === 'update') {
         $car = (new Car($id, $licensePlate, $manufacturer, $type))->update();
         $cars = (new Car())->getAllAsObjects();
     }
 }
 
+/** Include requested view */
 include __DIR__ . '/views/' . $view . '.php';
-
-// Debug statements:
-echo '<pre>';
-// // print_r(Employee::getAllAsObjects());
-// print_r((new Employee())->getAllAsObjects());
-// print_r($_GET);
-// print_r($_POST);
-echo '</pre>';
