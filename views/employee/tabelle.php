@@ -1,5 +1,5 @@
 <?php
-/** @var firma\index $employees  */
+/** @var $employees  */
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
   </head>
   <body>
   <div class="container">
-    <?php include_once __DIR__ . '/navigation.php'; ?>
+    <?php include_once __DIR__ . '/../navigation.php'; ?>
     <table class="table mt-4">
       <tr>
         <th scope="col">Vorname</th>
@@ -29,10 +29,10 @@
           <td><?= $employee->getLastName(); ?></td>
           <td><?= $employee->getGender(); ?></td>
           <td><?= $employee->getSalary(); ?></td>
-          <td><a href="index.php?action=delete&id=<?= $employee->getId(); ?>">
+          <td><a href="index.php?area=employee&action=delete&id=<?= $employee->getId(); ?>">
             <button class="btn btn-danger">Löschen</button>
           </a></td>
-          <td><a href="index.php?action=showEdit&id=<?= $employee->getId(); ?>">
+          <td><a href="index.php?area=employee&action=showEdit&id=<?= $employee->getId(); ?>">
             <button class="btn btn-warning">Ändern</button>
           </a></td>
         </tr>

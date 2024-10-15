@@ -1,5 +1,5 @@
 <?php
-/** @var firma\index $employee  */
+/** @var $employee  */
 ?>
 
 <!DOCTYPE html>
@@ -13,15 +13,15 @@
   </head>
   <body>
     <div>
-      <?php include_once __DIR__ . '/navigation.php'; ?>
+      <?php include_once __DIR__ . '/../navigation.php'; ?>
     </div>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-4">
           <h2 class="text-center mt-5">Mitarbeiter</h2>
-          <!-- POST an index.php -->
+          <!-- POST to index.php -->
           <form action="index.php" method="POST">
-            <!-- Name und Vorname  -->
+            <!-- Name and first name  -->
             <div class="form-group">
               <label for="firstName">Vorname</label>
               <input type="text" class="form-control" id="firstName" name="firstName" required 
@@ -33,7 +33,7 @@
                 value="<?= $employee->getLastName(); ?>">
             </div>
 
-            <!-- Geschlechtscheckboxen -->
+            <!-- Gender checkboxes -->
             <div class="mb-2 mt-3">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="w" 
@@ -52,12 +52,15 @@
               </div>
             </div>
 
-            <!-- Monataslohn -->
+            <!-- Salary -->
             <div class="form-group">
               <label for="salary">Monataslohn</label>
               <input type="number" step="0.01" class="form-control" id="salary" name="salary" 
                 value="<?= $employee->getSalary() ?? ''; ?>">
             </div>
+
+            <!-- Set area in hidden field -->
+            <input type="hidden" name="area" value="employee">
 
             <!-- Set action in hidden field -->
             <input type="hidden" name="action" value="<?= $employee->getId() === null ? 'insert' : 'update'; ?>">
