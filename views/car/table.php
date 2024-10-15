@@ -10,6 +10,7 @@
     <title>Liste</title>
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet'
       integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
   <body>
   <div class="container">
@@ -28,10 +29,10 @@
           <td><?= $car->getManufacturer(); ?></td>
           <td><?= $car->getType(); ?></td>
           <td><a href="index.php?area=car&action=delete&id=<?= $car->getId(); ?>">
-            <button class="btn btn-danger">Löschen</button>
+            <button class="btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i></button>
           </a></td>
           <td><a href="index.php?area=car&action=showEdit&id=<?= $car->getId(); ?>">
-            <button class="btn btn-warning">Ändern</button>
+            <button class="btn btn-outline-warning"><i class="fa-solid fa-pencil"></i></button>
           </a></td>
         </tr>
       <?php endforeach; ?>
