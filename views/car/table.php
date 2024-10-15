@@ -19,6 +19,8 @@
         <th scope="col">Kennzeichen</th>
         <th scope="col">Hersteller</th>
         <th scope="col">Typ</th>
+        <th scope="col">Löschen</th>
+        <th scope="col">Ändern</th>
       </tr>
       <?php foreach ($cars as $car) : ?>
         <tr>
