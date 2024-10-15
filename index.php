@@ -15,11 +15,12 @@ $area = $_REQUEST['area'] ?? 'employee';
 /**
  * Controller action
  */
-$action = $_REQUEST['action'] ?? 'showTabelle';
+$action = $_REQUEST['action'] ?? '';
 
 // id of object handed over
 $id = $_REQUEST['id'] ?? null;
 
+// removed in both areas action showTable because tabele is the default view
 if ($area === 'employee') {
     // Get values
     $employees = (new Employee())->getAllAsObjects();
@@ -30,11 +31,11 @@ if ($area === 'employee') {
     $salary = (float)$salary;
 
     // default employee view
-    $view = 'employee/tabelle';
+    $view = 'employee/table';
 
     if ($action === 'showForm') {
         // Dummy Employee for creation; gender prefilled with w; same view for update;
-        // id = 0 to handle in view difference between insert und update
+        // id = null to handle in view difference between insert und update
         $employee = new Employee(null, '', '', 'w', null);
         $view = 'employee/form';
     } elseif ($action === 'delete') {
@@ -59,16 +60,16 @@ if ($area === 'employee') {
     $type = $_POST['type'] ?? '';
 
     // set default car view
-    $view = 'car/tabelle';
+    $view = 'car/table';
 
     if ($action === 'showForm') {
         // Dummy Car for creation; gender prefilled with w; same view for update;
-        // id = 0 to handle in view difference between insert und update
+        // id = null to handle in view difference between insert und update
         $car = new Car(null, '', '', '');
         $view = 'car/form';
     } elseif ($action === 'delete') {
         (new Car())->deleteObjectById($id);
-        // (new Car())->deleteObjectById(23);
+        // Testcase for ErrorHandeling: (new Car())->deleteObjectById(23);
         $cars = (new Car())->getAllAsObjects();
     } elseif ($action === 'insert') {
         $car = (new Car())->insert($licensePlate, $manufacturer, $type);

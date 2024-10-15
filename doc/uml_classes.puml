@@ -1,0 +1,44 @@
+@startuml
+  ' skinparam classAttributeIconSize 0
+  class Employee {
+    -id : int|null
+    -firstName : string|null
+    -lastName : string|null
+    -gender : string|null
+    -salary : float|null
+    +__construct(id, firstName, lastName, gender, salary)
+    +getId()
+    +getFirstName()
+    +getLastName()
+    +getGender()
+    +getSalary()
+    +getAllAsObjects()
+    +deleteObjectById(id)
+    +insert(firstName, lastName, gender, salaray)
+    +getObjectById(id)
+    +update()
+  }
+  class Db {
+    -dbh : object
+    {static} +getConnection()
+  }
+  class Car {
+    -id : int|null
+    -licensePlate : string|null
+    -manufacturer : string|null
+    -type : string|null
+    +__construct(id, licensePlate, manufacturer, type)
+    +getLicensePlate()
+    +getManufacturer()
+    +getType()
+    +getId()
+    +getAllAsObjects()
+    +deleteObjectById(id)
+    +insert(licensePlate, manufacturer, type)
+    +getObjectById(id)
+    +update()
+  }
+  Car ..> Db
+  Employee ..> Db
+@enduml
+
