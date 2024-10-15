@@ -1,34 +1,56 @@
-* Planung
-1. Aufgabe "onload": Liste anzeigen
-   a) HTML-Gerüst erstellen
-   b) Datenbank erstellen
-   c) Dummy-Daten erstellen
-   d) Dummy-Daten auslesen
-   e) Dummy-Daten in richtige Felder ausgeben
-
-2. funktionale Anforderungen
-   - event: load tabelle.php
-   - Struktur erstellen: index.php mit tabelle.php als Startseite
-   - in index.php Einbinden von view
-   - in tabelle.php Tabellenstruktur schreiben
-   - navigation schreiben und in tabelle.php einbinden
-   - DB mit 1 Tabelle erstellen
-   - 2 Dummy-Daten einfügen
-   - Datenbankanschluss einrichten
-   - Klasse Mitarbeiter erstellen
-   - Konstruktor und GETTER-/(SETTER) Methoden schreiben
-   - alle Datensätze als Objekte erstellen
-   - Daten in tabelle.php in table eintragen lassen
-   - Funktionstest
-   - event: delete in tabelle.php
-   - in index.php $action Fallunterscheidung "delete" einbauen
-   - in Mitarbeiter die Löschmethode ($id) schreiben
-   - nach Aufruf Tabelle mitarbeiter auslesen und Daten in tabelle.php in table eintragen lassen
-   - event: neuen Mitarbeiter in Datenbank eintragen
-   - form.php erstellen, Navigation einbinden
-   - 4 Inputfelder erstellen, hiddenfield action erstellen
-   - index.php erweitern um action === 'insert'
-   - Methode insert in Klasse Mitarbeiter schreiben, Mitarbeiterobjekt zurückgeben
-   - tabelle.php einbinden
-
-
+* funktionale Anforderungen 
+** CRUD Mitarbeiter
+- event: load table.php
+- Struktur erstellen: index.php mit table.php als Startseite
+- in index.php Einbinden von view
+- in table.php Tabellenstruktur schreiben
+- navigation schreiben und in table.php einbinden
+- DB mit 1 Tabelle erstellen
+- Dummy-Daten einfügen
+- Datenbankanschluss einrichten
+- Klasse Employee erstellen
+- Konstruktor und GETTER-/(SETTER) Methoden schreiben
+- alle Datensätze als Objekte erstellen
+- Daten in table.php in table eintragen lassen
+- Funktionstest
+- event: delete in table.php
+- in index.php $action Fallunterscheidung "delete" einbauen
+- in Employee die Löschmethode ($id) schreiben
+- nach Aufruf Tabelle mitarbeiter auslesen und Daten in table.php in table eintragen lassen
+- event: neuen Employee in Datenbank eintragen
+- form.php erstellen, Navigation einbinden
+- 4 Inputfelder erstellen, hiddenfield action erstellen
+- index.php erweitern um action === 'insert'
+- Methode insert in Klasse Employee schreiben, Employee-Objekt zurückgeben
+- table.php einbinden
+** Index.php anpassen
+- Umbau index.php: area nutzen um zwischen Car und Employee Actions zu unterscheiden
+- Umbau der Struktur der Views; Ordner für car und employee Views
+- form.php und table.php in views/car verschieben (navigation.php bleibt in views)
+- navigation.php anpassen
+- in form hidden field area=employee ergänzen
+** CRUD Auto
+- event: load table.php
+- Struktur erstellen: index.php mit table.php als Startseite
+- in index.php Einbinden von view
+- in table.php Tabellenstruktur schreiben
+- navigation schreiben und in table.php einbinden
+- DB Tabelle hinzufügen
+- Dummy-Daten einfügen
+- Klasse Car erstellen
+- Konstruktor und GETTER-/(SETTER) Methoden schreiben
+- alle Datensätze als Objekte erstellen
+- Daten in table.php in table eintragen lassen
+- Funktionstest
+- event: delete in table.php
+- in index.php $action Fallunterscheidung "delete" einbauen
+- in Car die Löschmethode ($id) schreiben
+- nach Aufruf Tabelle mitarbeiter auslesen und Daten in table.php in table eintragen lassen
+- event: neuen Car in Datenbank eintragen
+- form.php erstellen, Navigation einbinden
+- 3 Inputfelder erstellen, hiddenfield action erstellen
+- hiddenfield area ergänzen
+- index.php erweitern um action === 'insert'
+- Methode insert in Klasse Car schreiben, Car-Objekt zurückgeben
+- table.php einbinden
+- navigation.php ergänzen (Autos, Auto hinzufügen)

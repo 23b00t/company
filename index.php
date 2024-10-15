@@ -5,19 +5,19 @@ include "classes/Db.php";
 include "classes/Employee.php";
 include 'classes/Car.php';
 
-// $_REQUEST = $_GET und $_POST
 /**
  * Area (Controller Name)
  * default to employee if nothing is set
  * e.g. by a call of index.php without params (Homepage)
  */
-$area = $_REQUEST['area'] ?? 'employee';
+$area = $_REQUEST['area'] ?? 'employee'; // $_REQUEST = $_GET and $_POST
+
 /**
  * Controller action
  */
 $action = $_REQUEST['action'] ?? '';
 
-// id of object handed over
+// id of object handed over (or null if there is none)
 $id = $_REQUEST['id'] ?? null;
 
 // removed in both areas action showTable because tabele is the default view
@@ -63,7 +63,6 @@ if ($area === 'employee') {
     $view = 'car/table';
 
     if ($action === 'showForm') {
-        // Dummy Car for creation; gender prefilled with w; same view for update;
         // id = null to handle in view difference between insert und update
         $car = new Car(null, '', '', '');
         $view = 'car/form';
