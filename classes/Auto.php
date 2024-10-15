@@ -5,23 +5,29 @@
  */
 class Auto
 {
-    private string $licensePlate;
-    private string $manufacturer;
-    private string $type;
-    private int $id;
+    private int|null $id;
+    private string|null $licensePlate;
+    private string|null $manufacturer;
+    private string|null $type;
 
     /**
-     * @param string $licensePlate
-     * @param string $manufacturer
-     * @param string $type
-     * @param int $id = null
+     * @param int|null $id
+     * @param string|null $licensePlate
+     * @param string|null $manufacturer
+     * @param string|null $type
      */
-    public function __construct(string $licensePlate, string $manufacturer, string $type, int $id = null)
-    {
-        $this->licensePlate = $licensePlate;
-        $this->manufacturer = $manufacturer;
-        $this->type = $type;
-        $this->id = $id;
+    public function __construct(
+        int $id = null,
+        string $licensePlate = null,
+        string $manufacturer = null,
+        string $type = null
+    ) {
+        if (isset($licensePlate)) {
+            $this->id = $id;
+            $this->licensePlate = $licensePlate;
+            $this->manufacturer = $manufacturer;
+            $this->type = $type;
+        }
     }
 
     /**
@@ -57,9 +63,9 @@ class Auto
     /**
      * getId
      *
-     * @return int
+     * @return ?int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

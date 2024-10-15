@@ -13,7 +13,7 @@
   </head>
   <body>
     <div>
-      <?php include_once __DIR__ . '/navigation.php'; ?>
+      <?php include_once __DIR__ . '/../navigation.php'; ?>
     </div>
     <div class="container">
       <div class="row justify-content-center">
@@ -58,6 +58,8 @@
               <input type="number" step="0.01" class="form-control" id="salary" name="salary" 
                 value="<?= $employee->getSalary() ?? ''; ?>">
             </div>
+
+            <input type="hidden" name="area" value="emplyee">
 
             <!-- Set action in hidden field -->
             <input type="hidden" name="action" value="<?= $employee->getId() === null ? 'insert' : 'update'; ?>">

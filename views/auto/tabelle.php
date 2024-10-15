@@ -1,5 +1,5 @@
 <?php
-/** @var firma\index $employees  */
+/** @var firma\index $cars  */
 ?>
 
 <!DOCTYPE html>
@@ -16,23 +16,19 @@
     <?php include_once __DIR__ . '/../navigation.php'; ?>
     <table class="table mt-4">
       <tr>
-        <th scope="col">Vorname</th>
-        <th scope="col">Nachname</th>
-        <th scope="col">Geschlecht</th>
-        <th scope="col">Monatslohn</th>
-        <th scope="col">Löschen</th>
-        <th scope="col">Ändern</th>
+        <th scope="col">Kennzeichen</th>
+        <th scope="col">Hersteller</th>
+        <th scope="col">Typ</th>
       </tr>
-      <?php foreach ($employees as $employee) : ?>
+      <?php foreach ($cars as $car) : ?>
         <tr>
-          <td><?= $employee->getFirstName(); ?></td>
-          <td><?= $employee->getLastName(); ?></td>
-          <td><?= $employee->getGender(); ?></td>
-          <td><?= $employee->getSalary(); ?></td>
-          <td><a href="index.php?area=employee&action=delete&id=<?= $employee->getId(); ?>">
+          <td><?= $car->getLicensePlate(); ?></td>
+          <td><?= $car->getManufacturer(); ?></td>
+          <td><?= $car->getType(); ?></td>
+          <td><a href="index.php?area=car&action=delete&id=<?= $car->getId(); ?>">
             <button class="btn btn-danger">Löschen</button>
           </a></td>
-          <td><a href="index.php?area=employee&action=showEdit&id=<?= $employee->getId(); ?>">
+          <td><a href="index.php?area=car&action=showEdit&id=<?= $car->getId(); ?>">
             <button class="btn btn-warning">Ändern</button>
           </a></td>
         </tr>
