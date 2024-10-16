@@ -1,10 +1,13 @@
 <?php
 
 include 'config.php';
-include 'classes/IBasic.php';
-include 'classes/Db.php';
-include 'classes/Employee.php';
-include 'classes/Car.php';
+
+/**
+ * Autoload classes
+ */
+spl_autoload_register(function ($className): void {
+    include 'classes/' . $className . '.php';
+});
 
 /**
  * @var string $area (Controller Name)
