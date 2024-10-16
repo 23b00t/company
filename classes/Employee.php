@@ -3,7 +3,7 @@
 /**
  * Class Employee
  */
-class Employee
+class Employee implements IBasic
 {
     /**
      * @var int|null $id

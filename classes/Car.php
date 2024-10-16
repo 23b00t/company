@@ -3,7 +3,7 @@
 /**
  * Class Car
  */
-class Car
+class Car implements IBasic
 {
     /**
      * @var int|null $id
