@@ -1,6 +1,5 @@
 @startuml
-  ' skinparam classAttributeIconSize 0
-  class Employee {
+  class "Employee\n<b>Class Employee</b>" as Employee {
     -id : int|null
     -firstName : string|null
     -lastName : string|null
@@ -18,11 +17,23 @@
     +getObjectById(id)
     +update()
   }
-  class Db {
+  class "Rental\n<b>Class Rental</b>" as Rental {
+    +getAllAsObjects()
+    +deleteObjectById(id)
+    +getObjectById(id)
+    +update()
+  }
+  interface "IBasic\n<b>IBasic</b>" as IBasic {
+    +getAllAsObjects()
+    +deleteObjectById(id)
+    +getObjectById(id)
+    +update()
+  }
+  class "Db\n<b>Design Pattern Singleton</b>" as Db {
     -dbh : object
     {static} +getConnection()
   }
-  class Car {
+  class "Car\n<b>Class Car</b>" as Car {
     -id : int|null
     -licensePlate : string|null
     -manufacturer : string|null
@@ -40,5 +51,8 @@
   }
   Car ..> Db
   Employee ..> Db
+  IBasic <|-- Car
+  IBasic <|-- Employee
+  IBasic <|-- Rental
 @enduml
 
