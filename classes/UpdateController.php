@@ -18,8 +18,8 @@ class UpdateController
     public function __construct(string $area, int $id, array $data)
     {
         $this->area = $area;
+        $this->id = $id;
         $cleanedData = array_values(array_filter($data, fn($value) => $value !== ''));
-        $cleanedData[] = $id;
         $this->data = $cleanedData;
     }
 
@@ -29,13 +29,13 @@ class UpdateController
     public function run(): array
     {
         if ($this->area === 'employee') {
-            $employee = new Employee();
-            $employee->update(...$this->data);
+            $employee = new Employee($this->id, ...$this->data);
+            $employee->update();
 
             return $employee->getAllAsObjects();
         } elseif ($this->area === 'car') {
-            $car = new Car();
-            $car->update(...$this->data);
+            $car = new Car($this->id, ...$this->data);
+            $car->update();
 
             return $car->getAllAsObjects();
         }

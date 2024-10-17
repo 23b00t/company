@@ -29,25 +29,38 @@ $action = $_REQUEST['action'] ?? '';
 $id = $_REQUEST['id'] ?? null;
 
 /**
- * Based on $area route to requested controller
- * removed in both areas action showTable because table is the default view
- *
  * @var string $view (view to render)
+ * Default view
  */
+$view = 'table';
 
-// Get values
+/**
+ * @var Employee[] $employees
+ * @var Car[] $cars
+ *
+ * Initialize for default view
+ */
 $employees = (new Employee())->getAllAsObjects();
+$cars = (new Car())->getAllAsObjects();
+
+/**
+ * Extract POST data
+ */
+// Get values employee
 $firstName = $_POST['firstName'] ?? '';
 $lastName = $_POST['lastName'] ?? '';
 $gender = $_POST['gender'] ?? '';
 $salary = $_POST['salary'] ?? '';
 // $salary = (float)$salary; // transform salary string to float
-// get values
-$cars = (new Car())->getAllAsObjects();
+// get values car
 $licensePlate = $_POST['licensePlate'] ?? '';
 $manufacturer = $_POST['manufacturer'] ?? '';
 $type = $_POST['type'] ?? '';
 
+/**
+ * @var array $data
+ * Pack POST data in array
+ */
 $data = [
     'firstName' => $firstName,
     'lastName' => $lastName,
@@ -58,51 +71,42 @@ $data = [
     'type' => $type
 ];
 
-$view = 'table';
+/** Build Action Controller from $action */
+$controllerName = ucfirst($action) . 'Controller';
+
+/** Initialize Action Controllers */
 if ($action === 'showTable') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area);
-    $array = $controller->run();
+    $array = (new $controllerName($area))->run();
     if ($area == 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
     }
 } elseif ($action === 'showForm') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($view, $action);
-    $controller->run();
+    (new $controllerName($view, $action))->run();
 } elseif ($action === 'showEdit') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $id, $view, $action);
-    $array = $controller->run();
+    $array = (new $controllerName($area, $id, $view, $action))->run();
     if ($area == 'employee') {
         $employee = $array;
     } elseif ($area === 'car') {
         $car = $array;
     }
 } elseif ($action === 'delete') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $id);
-    $array = $controller->run();
+    $array = (new $controllerName($area, $id))->run();
     if ($area == 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
     }
 } elseif ($action === 'insert') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $data);
-    $array = $controller->run();
+    $array = (new $controllerName($area, $data))->run();
     if ($area == 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
     }
 } elseif ($action === 'update') {
-    $controllerName = ucfirst($action) . 'Controller';
-    $controller = new $controllerName($area, $id, $data);
-    $array = $controller->run();
+    $array = (new $controllerName($area, $id, $data))->run();
     if ($area == 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
