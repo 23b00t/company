@@ -47,9 +47,7 @@ if ($area === 'employee') {
     $view = 'employee/table';
 
     if ($action === 'showForm') {
-        // Dummy Employee for creation; gender pre-filled with w; same view for update;
         // make $action available in form to handle both, insert and update
-        $employee = new Employee(null, '', '', 'w', null);
         $view = 'employee/form';
         $action = 'insert';
     } elseif ($action === 'delete') {
@@ -81,7 +79,6 @@ if ($area === 'employee') {
 
     if ($action === 'showForm') {
         // make $action available in form to handle both, insert and update
-        $car = new Car(null, '', '', '');
         $view = 'car/form';
         $action = 'insert';
     } elseif ($action === 'delete') {

@@ -27,13 +27,13 @@ interface IBasic
      * @param int $id
      * @return Object
      */
-    public function getObjectById(int $id): Object;
+    public function getObjectById(int $id): object;
 
     /**
      * update
      *
      * @return void
      */
-    public function update(): void; 
+    public function update(): void;
     // public function insert(mixed ...$args): Object;
 }

@@ -3,6 +3,9 @@
  * @var $car
  * @var $action
  */
+
+// Check if $car exists and is an instance of Car (edit route)
+$carExists = isset($car) && $car instanceof Car;
 ?>
 
 <!DOCTYPE html>
@@ -28,17 +31,17 @@
             <div class="form-group">
               <label for="licensePlate">Kennzeichen</label>
               <input type="text" class="form-control" id="licensePlate" name="licensePlate" required 
-                value="<?= $car->getLicensePlate(); ?>">
+                value="<?= $carExists ? $car->getLicensePlate() : ''; ?>">
             </div>
             <div class="form-group">
               <label for="manufacturer">Hersteller</label>
               <input type="text" class="form-control" id="manufacturer" name="manufacturer" required 
-                value="<?= $car->getManufacturer(); ?>">
+                value="<?= $carExists ? $car->getManufacturer() : ''; ?>">
             </div>
             <div class="form-group">
               <label for="type">Typ</label>
               <input type="text" class="form-control" id="type" name="type" required 
-                value="<?= $car->getType(); ?>">
+                value="<?= $carExists ? $car->getType() : ''; ?>">
             </div>
 
             <!-- Set area in hidden field -->
@@ -48,7 +51,7 @@
             <input type="hidden" name="action" value="<?= $action; ?>">
 
             <!-- Set id in hidden field -->
-            <input type="hidden" name="id" value="<?= $car->getId(); ?>"
+            <input type="hidden" name="id" value="<?= $carExists ? $car->getId() : ''; ?>"
 
             <div class="form-group">
               <!-- Submit button -->
