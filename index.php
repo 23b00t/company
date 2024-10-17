@@ -34,69 +34,81 @@ $id = $_REQUEST['id'] ?? null;
  *
  * @var string $view (view to render)
  */
-if ($area === 'employee') {
-    // Get values
-    $employees = (new Employee())->getAllAsObjects();
-    $firstName = $_POST['firstName'] ?? '';
-    $lastName = $_POST['lastName'] ?? '';
-    $gender = $_POST['gender'] ?? '';
-    $salary = $_POST['salary'] ?? '';
-    $salary = (float)$salary; // transform salary string to float
 
-    // default employee view
-    $view = 'employee/table';
+// Get values
+$employees = (new Employee())->getAllAsObjects();
+$firstName = $_POST['firstName'] ?? '';
+$lastName = $_POST['lastName'] ?? '';
+$gender = $_POST['gender'] ?? '';
+$salary = $_POST['salary'] ?? '';
+// $salary = (float)$salary; // transform salary string to float
+// get values
+$cars = (new Car())->getAllAsObjects();
+$licensePlate = $_POST['licensePlate'] ?? '';
+$manufacturer = $_POST['manufacturer'] ?? '';
+$type = $_POST['type'] ?? '';
 
-    if ($action === 'showForm') {
-        // make $action available in form to handle both, insert and update
-        $view = 'employee/form';
-        $action = 'insert';
-    } elseif ($action === 'delete') {
-        (new Employee())->deleteObjectById($id);
-        // (new Employee())->deleteObjectById(23);
-        $employees = (new Employee())->getAllAsObjects();
-    } elseif ($action === 'insert') {
-        $employee = (new Employee())->insert($firstName, $lastName, $gender, $salary);
-        // Get all objects including the newly created to include it in standard view
-        $employees = (new Employee())->getAllAsObjects();
-    } elseif ($action === 'showEdit') {
-        $employee = (new Employee())->getObjectById($id);
-        $view = 'employee/form';
-        $action = 'update';
-    } elseif ($action === 'update') {
-        $employee = (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
-        // Get all objects including the updated to include it in standard view
-        $employees = (new Employee())->getAllAsObjects();
+$data = [
+    'firstName' => $firstName,
+    'lastName' => $lastName,
+    'gender' => $gender,
+    'salary' => $salary,
+    'licensePlate' => $licensePlate,
+    'manufacturer' => $manufacturer,
+    'type' => $type
+];
+
+$view = 'table';
+if ($action === 'showTable') {
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area);
+    $array = $controller->run();
+    if ($area == 'employee') {
+        $employees = $array;
+    } elseif ($area === 'car') {
+        $cars = $array;
     }
-} elseif ($area === 'car') {
-    // get values
-    $cars = (new Car())->getAllAsObjects();
-    $licensePlate = $_POST['licensePlate'] ?? '';
-    $manufacturer = $_POST['manufacturer'] ?? '';
-    $type = $_POST['type'] ?? '';
-
-    // set default car view
-    $view = 'car/table';
-
-    if ($action === 'showForm') {
-        // make $action available in form to handle both, insert and update
-        $view = 'car/form';
-        $action = 'insert';
-    } elseif ($action === 'delete') {
-        (new Car())->deleteObjectById($id);
-        // Test case for Error Handling: (new Car())->deleteObjectById(23);
-        $cars = (new Car())->getAllAsObjects();
-    } elseif ($action === 'insert') {
-        $car = (new Car())->insert($licensePlate, $manufacturer, $type);
-        $cars = (new Car())->getAllAsObjects();
-    } elseif ($action === 'showEdit') {
-        $car = (new Car())->getObjectById($id);
-        $view = 'car/form';
-        $action = 'update';
-    } elseif ($action === 'update') {
-        $car = (new Car($id, $licensePlate, $manufacturer, $type))->update();
-        $cars = (new Car())->getAllAsObjects();
+} elseif ($action === 'showForm') {
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($view, $action);
+    $controller->run();
+} elseif ($action === 'showEdit') {
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $id, $view, $action);
+    $array = $controller->run();
+    if ($area == 'employee') {
+        $employee = $array;
+    } elseif ($area === 'car') {
+        $car = $array;
+    }
+} elseif ($action === 'delete') {
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $id);
+    $array = $controller->run();
+    if ($area == 'employee') {
+        $employees = $array;
+    } elseif ($area === 'car') {
+        $cars = $array;
+    }
+} elseif ($action === 'insert') {
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $data);
+    $array = $controller->run();
+    if ($area == 'employee') {
+        $employees = $array;
+    } elseif ($area === 'car') {
+        $cars = $array;
+    }
+} elseif ($action === 'update') {
+    $controllerName = ucfirst($action) . 'Controller';
+    $controller = new $controllerName($area, $id, $data);
+    $array = $controller->run();
+    if ($area == 'employee') {
+        $employees = $array;
+    } elseif ($area === 'car') {
+        $cars = $array;
     }
 }
 
 /** Include requested view */
-include __DIR__ . '/views/' . $view . '.php';
+include 'views/' . $area . '/' . $view . '.php';
