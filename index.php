@@ -18,9 +18,9 @@ $area = $_REQUEST['area'] ?? 'employee'; // $_REQUEST = $_GET and $_POST
 
 /**
  * @var string $action (Controller action)
- * No default action means showTable because this is the default view
+ * showTable as default action
  */
-$action = $_REQUEST['action'] ?? '';
+$action = $_REQUEST['action'] ?? 'showTable';
 
 /**
  * @var int $id
@@ -34,38 +34,22 @@ $id = $_REQUEST['id'] ?? null;
  */
 $view = 'table';
 
-/**
- * @var Employee[] $employees
- * @var Car[] $cars
- *
- * Initialize for default view
- */
-$employees = (new Employee())->getAllAsObjects();
-$cars = (new Car())->getAllAsObjects();
-
 /** Build Action Controller from $action */
 $controllerName = ucfirst($action) . 'Controller';
 
 /** Initialize Action Controllers */
-if ($action === 'showTable') {
-    $array = (new $controllerName($area))->run();
-    if ($area == 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
-} elseif ($action === 'showForm') {
+if ($action === 'showForm') {
     (new $controllerName($view, $action))->run();
 } elseif ($action === 'showEdit') {
     $array = (new $controllerName($area, $id, $view, $action))->run();
-    if ($area == 'employee') {
+    if ($area === 'employee') {
         $employee = $array;
     } elseif ($area === 'car') {
         $car = $array;
     }
 } elseif ($action === 'delete') {
     $array = (new $controllerName($area, $id))->run();
-    if ($area == 'employee') {
+    if ($area === 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
@@ -73,7 +57,7 @@ if ($action === 'showTable') {
 } elseif ($action === 'insert') {
     $data = (new FilterData($_POST))->filter();
     $array = (new $controllerName($area, $data))->run();
-    if ($area == 'employee') {
+    if ($area === 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
@@ -81,7 +65,14 @@ if ($action === 'showTable') {
 } elseif ($action === 'update') {
     $data = (new FilterData($_POST))->filter();
     $array = (new $controllerName($area, $id, $data))->run();
-    if ($area == 'employee') {
+    if ($area === 'employee') {
+        $employees = $array;
+    } elseif ($area === 'car') {
+        $cars = $array;
+    }
+} else { //($action === 'showTable')
+    $array = (new $controllerName($area))->run();
+    if ($area === 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
