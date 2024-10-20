@@ -19,8 +19,7 @@ class UpdateController
     {
         $this->area = $area;
         $this->id = $id;
-        $cleanedData = array_values(array_filter($data, fn($value) => $value !== ''));
-        $this->data = $cleanedData;
+        $this->data = $data;
     }
 
     /**

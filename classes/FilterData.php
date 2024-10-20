@@ -24,21 +24,24 @@ class FilterData
      */
     public function filter(): array
     {
-        $attributes = [
-            'firstName',
-            'lastName',
-            'gender',
-            'salary',
-            'licensePlate',
-            'manufacturer',
-            'type',
+        $area = $this->data['area'];
+
+        // Define attribute arrays for different areas
+        $attributesMap = [
+            'employee' => ['firstName', 'lastName', 'gender', 'salary'],
+            'car' => ['licensePlate', 'manufacturer', 'type']
         ];
 
+        // Check if area exists in the attributes map
+        if (!isset($attributesMap[$area])) {
+            return []; // Return empty if no matching area is found
+        }
+
+        $areaAttributes = $attributesMap[$area];
+
         $sanitizedData = [];
-        foreach ($attributes as $attribute) {
-            if (isset($this->data[$attribute])) {
-                $sanitizedData[] = $this->data[$attribute];
-            }
+        foreach ($areaAttributes as $attribute) {
+            $sanitizedData[] = $this->data[$attribute];
         }
 
         return $sanitizedData;
