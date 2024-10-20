@@ -43,34 +43,6 @@ $view = 'table';
 $employees = (new Employee())->getAllAsObjects();
 $cars = (new Car())->getAllAsObjects();
 
-/**
- * Extract POST data
- */
-// Get values employee
-$firstName = $_POST['firstName'] ?? '';
-$lastName = $_POST['lastName'] ?? '';
-$gender = $_POST['gender'] ?? '';
-$salary = $_POST['salary'] ?? '';
-// $salary = (float)$salary; // transform salary string to float
-// get values car
-$licensePlate = $_POST['licensePlate'] ?? '';
-$manufacturer = $_POST['manufacturer'] ?? '';
-$type = $_POST['type'] ?? '';
-
-/**
- * @var array $data
- * Pack POST data in array
- */
-$data = [
-    'firstName' => $firstName,
-    'lastName' => $lastName,
-    'gender' => $gender,
-    'salary' => $salary,
-    'licensePlate' => $licensePlate,
-    'manufacturer' => $manufacturer,
-    'type' => $type
-];
-
 /** Build Action Controller from $action */
 $controllerName = ucfirst($action) . 'Controller';
 
@@ -99,6 +71,7 @@ if ($action === 'showTable') {
         $cars = $array;
     }
 } elseif ($action === 'insert') {
+    $data = (new FilterData($_POST))->filter();
     $array = (new $controllerName($area, $data))->run();
     if ($area == 'employee') {
         $employees = $array;
@@ -106,6 +79,7 @@ if ($action === 'showTable') {
         $cars = $array;
     }
 } elseif ($action === 'update') {
+    $data = (new FilterData($_POST))->filter();
     $array = (new $controllerName($area, $id, $data))->run();
     if ($area == 'employee') {
         $employees = $array;

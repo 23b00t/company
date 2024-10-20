@@ -16,8 +16,9 @@ class InsertController
     public function __construct(string $area, array $data)
     {
         $this->area = $area;
-        $cleanedData = array_values(array_filter($data, fn($value) => $value !== ''));
-        $this->data = $cleanedData;
+        // $cleanedData = array_values(array_filter($data, fn($value) => $value !== ''));
+        // $this->data = $cleanedData;
+        $this->data = $data;
     }
 
     /**
