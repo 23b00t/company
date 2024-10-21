@@ -6,39 +6,53 @@
  */
 class UpdateController
 {
-    private string $area;
-    private string $view;
-
-
     /**
-     * @param string $area
-     * @param int $id
-     * @param array $data
+     * @var string $area
      */
-    public function __construct(string $area, string &$view)
-    {
-        $this->area = $area;
-        $view = 'table';
-        $this->view = $view;
-    }
+    private string $area;
+    /**
+     * @var int $id
+     */
+    private int $id;
 
     /**
-     * @return Employee[]|Car[]
+     * @var array<int,mixed>
+     */
+    private array $data;
+
+    /**
+     * __construct
+     *
+     * @param string $area
+     * @param string $view
      * @param int $id
      * @param array<int,mixed> $data
      */
-    public function invoke(int $id, array $data): array
+    public function __construct(string $area, string &$view, int $id, array $data)
     {
+        $this->area = $area;
+        $view = 'table';
+        $this->id = $id;
+        $this->data = $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function invoke(): array
+    {
+        $array = [];
         if ($this->area === 'employee') {
-            $employee = new Employee($id, ...$data);
+            $employee = new Employee($this->id, ...$this->data);
             $employee->update();
 
-            return $employee->getAllAsObjects();
+            $array = $employee->getAllAsObjects();
         } elseif ($this->area === 'car') {
-            $car = new Car($id, ...$data);
+            $car = new Car($this->id, ...$this->data);
             $car->update();
 
-            return $car->getAllAsObjects();
+            $array =  $car->getAllAsObjects();
         }
+        return $array;
     }
 }

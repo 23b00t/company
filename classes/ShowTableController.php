@@ -6,13 +6,20 @@
  */
 class ShowTableController
 {
+    /**
+     * @var string $area
+     */
     private string $area;
-    private string $view;
+
+    private ?array $requestData;
 
 
     /**
+     * __construct
+     *
      * @param string $area
      * @param string $view
+     * @param array<int,mixed> $requestData
      */
     public function __construct(string $area, string &$view)
     {
@@ -25,12 +32,12 @@ class ShowTableController
      */
     public function invoke(): array
     {
+        $array = [];
         if ($this->area === 'employee') {
-            $employees = (new Employee())->getAllAsObjects();
-            return $employees;
+            $array = (new Employee())->getAllAsObjects();
         } elseif ($this->area === 'car') {
-            $cars = (new Car())->getAllAsObjects();
-            return $cars;
+            $array = (new Car())->getAllAsObjects();
         }
+        return $array;
     }
 }

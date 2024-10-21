@@ -37,51 +37,28 @@ $view = 'table';
 /** Build Action Controller from $action */
 $controllerName = ucfirst($action) . 'Controller';
 
+$objectArrayName = $area . 's';
+$objectName = $area;
+
 /** Initialize Action Controllers */
 if ($action === 'showForm') {
     $array = (new $controllerName($area, $view, $id))->invoke();
-    if (count($array) > 0) {
-        if ($area == 'employee') {
-            $employee = $array[0];
-        } elseif ($area === 'car') {
-            $car = $array[0];
-        }
-    }
-    if (isset($id)) {
-        $action = 'update';
-    } else {
-        $action = 'insert';
-    }
+    $$objectName = $array[0] ?? [];
+    $action = isset($id) ? 'update' : 'insert';
 } elseif ($action === 'delete') {
-    $array = (new $controllerName($area, $view))->invoke($id);
-    if ($area === 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
+    $array = (new $controllerName($area, $view, $id))->invoke();
+    $$objectArrayName = $array;
 } elseif ($action === 'insert') {
     $data = (new FilterData($_POST))->filter();
-    $array = (new $controllerName($area, $view))->invoke($data);
-    if ($area === 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
+    $array = (new $controllerName($area, $view, $data))->invoke();
+    $$objectArrayName = $array;
 } elseif ($action === 'update') {
     $data = (new FilterData($_POST))->filter();
-    $array = (new $controllerName($area, $view))->invoke($id, $data);
-    if ($area === 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
+    $array = (new $controllerName($area, $view, $id, $data))->invoke();
+    $$objectArrayName = $array;
 } else { //($action === 'showTable')
     $array = (new $controllerName($area, $view))->invoke();
-    if ($area === 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
+    $$objectArrayName = $array;
 }
 
 /** Include requested view */

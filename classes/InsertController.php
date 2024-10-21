@@ -6,35 +6,47 @@
  */
 class InsertController
 {
+    /**
+     * @var string $area
+     */
     private string $area;
-    private string $view;
+    /**
+     * @var array $data
+     */
+    private array $data;
+
 
     /**
+     * __construct
+     *
      * @param string $area
-     * @param array $data
+     * @param string $view
+     * @param array<int,mixed> $data
      */
-    public function __construct(string $area, string &$view)
+    public function __construct(string $area, string &$view, array $data)
     {
         $this->area = $area;
         $view = 'table';
+        $this->data = $data;
     }
 
     /**
-     * @return Employee[]|Car[]
-     * @param array<int,mixed> $data
+     * @return array
      */
-    public function invoke(array $data): array
+    public function invoke(): array
     {
+        $array = [];
         if ($this->area === 'employee') {
             $employee = new Employee();
-            $employee->insert(...$data);
+            $employee->insert(...$this->data);
 
-            return $employee->getAllAsObjects();
+            $array = $employee->getAllAsObjects();
         } elseif ($this->area === 'car') {
             $car = new Car();
-            $car->insert(...$data);
+            $car->insert(...$this->data);
 
-            return $car->getAllAsObjects();
+            $array = $car->getAllAsObjects();
         }
+        return $array;
     }
 }

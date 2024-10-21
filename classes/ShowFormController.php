@@ -6,11 +6,18 @@
  */
 class ShowFormController
 {
+    /**
+     * @var string $area
+     */
     private string $area;
-    private string $view;
+    /**
+     * @var ?int $id
+     */
     private ?int $id;
 
     /**
+     * __construct
+     *
      * @param string $area
      * @param string $view
      * @param ?int $id
@@ -27,13 +34,14 @@ class ShowFormController
      */
     public function invoke(): array
     {
+        $array = [];
         if (isset($this->id)) {
             if ($this->area === 'employee') {
-                return [(new Employee())->getObjectById($this->id)];
+                $array = [(new Employee())->getObjectById($this->id)];
             } elseif ($this->area === 'car') {
-                return [(new Car())->getObjectById($this->id)];
+                $array = [(new Car())->getObjectById($this->id)];
             }
         }
-        return [];
+        return $array;
     }
 }
