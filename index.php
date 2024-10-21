@@ -47,19 +47,17 @@ if ($action === 'showForm') {
     $action = isset($id) ? 'update' : 'insert';
 } elseif ($action === 'delete') {
     $array = (new $controllerName($area, $view, $id))->invoke();
-    $$objectArrayName = $array;
 } elseif ($action === 'insert') {
     $data = (new FilterData($_POST))->filter();
     $array = (new $controllerName($area, $view, $data))->invoke();
-    $$objectArrayName = $array;
 } elseif ($action === 'update') {
     $data = (new FilterData($_POST))->filter();
     $array = (new $controllerName($area, $view, $id, $data))->invoke();
-    $$objectArrayName = $array;
 } else { //($action === 'showTable')
     $array = (new $controllerName($area, $view))->invoke();
-    $$objectArrayName = $array;
 }
+
+$$objectArrayName = $array ?? [];
 
 /** Include requested view */
 include 'views/' . $area . '/' . $view . '.php';
