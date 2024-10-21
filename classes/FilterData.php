@@ -44,6 +44,7 @@ class FilterData
             $sanitizedData[] = $this->data[$attribute];
         }
 
+        // If no data matches an empty array is returned
         return $sanitizedData;
     }
 }

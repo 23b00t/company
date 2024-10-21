@@ -37,47 +37,27 @@ $view = 'table';
 /** Build Action Controller from $action */
 $controllerName = ucfirst($action) . 'Controller';
 
+$objectArrayName = $area . 's';
+$objectName = $area;
+
 /** Initialize Action Controllers */
 if ($action === 'showForm') {
-    (new $controllerName($view, $action))->run();
-} elseif ($action === 'showEdit') {
-    $array = (new $controllerName($area, $id, $view, $action))->run();
-    if ($area === 'employee') {
-        $employee = $array;
-    } elseif ($area === 'car') {
-        $car = $array;
-    }
+    $array = (new $controllerName($area, $view, $id))->invoke();
+    $$objectName = $array[0] ?? [];
+    $action = isset($id) ? 'update' : 'insert';
 } elseif ($action === 'delete') {
-    $array = (new $controllerName($area, $id))->run();
-    if ($area === 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
+    $array = (new $controllerName($area, $view, $id))->invoke();
 } elseif ($action === 'insert') {
     $data = (new FilterData($_POST))->filter();
-    $array = (new $controllerName($area, $data))->run();
-    if ($area === 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
+    $array = (new $controllerName($area, $view, $data))->invoke();
 } elseif ($action === 'update') {
     $data = (new FilterData($_POST))->filter();
-    $array = (new $controllerName($area, $id, $data))->run();
-    if ($area === 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
+    $array = (new $controllerName($area, $view, $id, $data))->invoke();
 } else { //($action === 'showTable')
-    $array = (new $controllerName($area))->run();
-    if ($area === 'employee') {
-        $employees = $array;
-    } elseif ($area === 'car') {
-        $cars = $array;
-    }
+    $array = (new $controllerName($area, $view))->invoke();
 }
+
+$$objectArrayName = $array ?? [];
 
 /** Include requested view */
 include 'views/' . $area . '/' . $view . '.php';
