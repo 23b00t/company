@@ -11,15 +11,11 @@ class ShowTableController
      */
     private string $area;
 
-    private ?array $requestData;
-
-
     /**
      * __construct
      *
      * @param string $area
      * @param string $view
-     * @param array<int,mixed> $requestData
      */
     public function __construct(string $area, string &$view)
     {
