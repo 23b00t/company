@@ -7,33 +7,35 @@
 class UpdateController
 {
     private string $area;
-    private int $id;
-    private array $data;
+    private string $view;
+
 
     /**
      * @param string $area
      * @param int $id
      * @param array $data
      */
-    public function __construct(string $area, int $id, array $data)
+    public function __construct(string $area, string &$view)
     {
         $this->area = $area;
-        $this->id = $id;
-        $this->data = $data;
+        $view = 'table';
+        $this->view = $view;
     }
 
     /**
      * @return Employee[]|Car[]
+     * @param int $id
+     * @param array<int,mixed> $data
      */
-    public function run(): array
+    public function invoke(int $id, array $data): array
     {
         if ($this->area === 'employee') {
-            $employee = new Employee($this->id, ...$this->data);
+            $employee = new Employee($id, ...$data);
             $employee->update();
 
             return $employee->getAllAsObjects();
         } elseif ($this->area === 'car') {
-            $car = new Car($this->id, ...$this->data);
+            $car = new Car($id, ...$data);
             $car->update();
 
             return $car->getAllAsObjects();

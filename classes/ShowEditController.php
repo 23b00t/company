@@ -19,26 +19,24 @@ class ShowEditController
      */
     public function __construct(string $area, int $id, string &$view, string &$action)
     {
-        $this->view = &$view;
-        $this->action = &$action;
         $this->area = $area;
-        $this->id = $id;
+        $view = 'form';
     }
 
     /**
-     * @return Employee|Car
+     * @return array
+     * @param int $id
+     * @param string $action
      */
-    public function run(): Employee|Car
+    public function invoke(int $id, string &$action): array
     {
-        $this->view = 'form';
-        $this->action = 'update';
-
+        $action = 'update';
         if ($this->area === 'employee') {
-            $employee = (new Employee())->getObjectById($this->id);
-            return $employee;
+            $employee = (new Employee())->getObjectById($id);
+            return [$employee];
         } elseif ($this->area === 'car') {
-            $car = (new Car())->getObjectById($this->id);
-            return $car;
+            $car = (new Car())->getObjectById($id);
+            return [$car];
         }
     }
 }

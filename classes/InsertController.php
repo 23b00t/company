@@ -7,31 +7,32 @@
 class InsertController
 {
     private string $area;
-    private array $data;
+    private string $view;
 
     /**
      * @param string $area
      * @param array $data
      */
-    public function __construct(string $area, array $data)
+    public function __construct(string $area, string &$view)
     {
         $this->area = $area;
-        $this->data = $data;
+        $view = 'table';
     }
 
     /**
      * @return Employee[]|Car[]
+     * @param array<int,mixed> $data
      */
-    public function run(): array
+    public function invoke(array $data): array
     {
         if ($this->area === 'employee') {
             $employee = new Employee();
-            $employee->insert(...$this->data);
+            $employee->insert(...$data);
 
             return $employee->getAllAsObjects();
         } elseif ($this->area === 'car') {
             $car = new Car();
-            $car->insert(...$this->data);
+            $car->insert(...$data);
 
             return $car->getAllAsObjects();
         }

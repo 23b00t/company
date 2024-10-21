@@ -39,16 +39,21 @@ $controllerName = ucfirst($action) . 'Controller';
 
 /** Initialize Action Controllers */
 if ($action === 'showForm') {
-    (new $controllerName($view, $action))->run();
-} elseif ($action === 'showEdit') {
-    $array = (new $controllerName($area, $id, $view, $action))->run();
-    if ($area === 'employee') {
-        $employee = $array;
-    } elseif ($area === 'car') {
-        $car = $array;
+    $array = (new $controllerName($area, $view, $id))->invoke();
+    if (count($array) > 0) {
+        if ($area == 'employee') {
+            $employee = $array[0];
+        } elseif ($area === 'car') {
+            $car = $array[0];
+        }
+    }
+    if (isset($id)) {
+        $action = 'update';
+    } else {
+        $action = 'insert';
     }
 } elseif ($action === 'delete') {
-    $array = (new $controllerName($area, $id))->run();
+    $array = (new $controllerName($area, $view))->invoke($id);
     if ($area === 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
@@ -56,7 +61,7 @@ if ($action === 'showForm') {
     }
 } elseif ($action === 'insert') {
     $data = (new FilterData($_POST))->filter();
-    $array = (new $controllerName($area, $data))->run();
+    $array = (new $controllerName($area, $view))->invoke($data);
     if ($area === 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
@@ -64,14 +69,14 @@ if ($action === 'showForm') {
     }
 } elseif ($action === 'update') {
     $data = (new FilterData($_POST))->filter();
-    $array = (new $controllerName($area, $id, $data))->run();
+    $array = (new $controllerName($area, $view))->invoke($id, $data);
     if ($area === 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {
         $cars = $array;
     }
 } else { //($action === 'showTable')
-    $array = (new $controllerName($area))->run();
+    $array = (new $controllerName($area, $view))->invoke();
     if ($area === 'employee') {
         $employees = $array;
     } elseif ($area === 'car') {

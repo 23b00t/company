@@ -33,7 +33,7 @@
           <td><a href="index.php?area=employee&action=delete&id=<?= $employee->getId(); ?>">
             <button class="btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i></button>
           </a></td>
-          <td><a href="index.php?area=employee&action=showEdit&id=<?= $employee->getId(); ?>">
+          <td><a href="index.php?area=employee&action=showForm&id=<?= $employee->getId(); ?>">
             <button class="btn btn-outline-warning"><i class="fa-solid fa-pencil"></i></button>
           </a></td>
         </tr>

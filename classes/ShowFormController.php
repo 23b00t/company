@@ -6,26 +6,34 @@
  */
 class ShowFormController
 {
+    private string $area;
     private string $view;
-    private string $action;
-
+    private ?int $id;
 
     /**
+     * @param string $area
      * @param string $view
-     * @param string $action
+     * @param ?int $id
      */
-    public function __construct(string &$view, string &$action)
+    public function __construct(string $area, string &$view, int $id = null)
     {
-        $this->view = &$view;
-        $this->action = &$action;
+        $this->area = $area;
+        $view = 'form';
+        $this->id = $id;
     }
 
     /**
-     * @return void
+     * @return array<int,Employee>|array<int,Car>|array
      */
-    public function run(): void
+    public function invoke(): array
     {
-        $this->view = 'form';
-        $this->action = 'insert';
+        if (isset($this->id)) {
+            if ($this->area === 'employee') {
+                return [(new Employee())->getObjectById($this->id)];
+            } elseif ($this->area === 'car') {
+                return [(new Car())->getObjectById($this->id)];
+            }
+        }
+        return [];
     }
 }
