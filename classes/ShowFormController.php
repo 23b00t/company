@@ -17,6 +17,8 @@ class ShowFormController
 
     private string $view;
 
+    private string $action;
+
     /**
      * __construct
      *
@@ -27,6 +29,7 @@ class ShowFormController
         $this->area = $requestData['area'];
         $this->id = $requestData['id'] ?? null;
         $this->view = 'form';
+        $this->action = 'insert';
     }
 
     /**
@@ -36,20 +39,27 @@ class ShowFormController
      */
     public function invoke(): array
     {
+        $array = [];
         if (isset($this->id)) {
+            $this->action = 'update';
             if ($this->area === 'employee') {
                 $employee = (new Employee())->getObjectById($this->id);
-                return [  'employee' => $employee, 'action' => 'update' ];
+                $array = [  'employee' => $employee ];
             } elseif ($this->area === 'car') {
                 $car = (new Car())->getObjectById($this->id);
-                return [ 'car' => $car, 'action' => 'update' ];
+                $array = [ 'car' => $car ];
             }
         }
-        return [ 'action' => 'insert' ];
+        return $array;
     }
 
     public function getView(): string
     {
         return $this->view;
+    }
+
+    public function getAction(): string
+    {
+        return $this->action;
     }
 }

@@ -42,7 +42,8 @@ $array = $controller->invoke();
 
 $variableName = array_key_first($array);
 isset($array[$variableName]) && $$variableName = $array[$variableName];
-isset($array['action']) && $action = $array['action'];
+
+$action = method_exists($controller, 'getAction') ? $controller->getAction() : $action;
 
 /** Include requested view */
 include 'views/' . $area . '/' . $controller->getView() . '.php';
