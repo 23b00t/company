@@ -38,9 +38,11 @@ $data = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : $_GET;
  */
 $controller = new $controllerName($data);
 
-$ = $controller->invoke();
+$array = $controller->invoke();
 
-$action = method_exists($controller, 'getAction') ? $controller->getAction() : $action;
+$variableName = array_key_first($array);
+isset($array[$variableName]) && $$variableName = $array[$variableName];
+isset($array['action']) && $action = $array['action'];
 
 /** Include requested view */
 include 'views/' . $area . '/' . $controller->getView() . '.php';

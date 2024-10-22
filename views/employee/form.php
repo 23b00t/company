@@ -72,7 +72,7 @@ if ($employeeExists) {
             <!-- Salary -->
             <div class="form-group">
               <label for="salary">Monatslohn</label>
-              <input type="number" step="0.01" class="form-control" id="salary" name="salary" 
+              <input type="number" step="0.01" class="form-control" id="salary" name="salary" required 
                 value="<?= $employeeExists ? $employee->getSalary() : ''; ?>">
             </div>
 

@@ -17,8 +17,6 @@ class ShowFormController
 
     private string $view;
 
-    private string $action;
-
     /**
      * __construct
      *
@@ -41,23 +39,17 @@ class ShowFormController
         if (isset($this->id)) {
             if ($this->area === 'employee') {
                 $employee = (new Employee())->getObjectById($this->id);
-                return [  'employee' => $employee ];
+                return [  'employee' => $employee, 'action' => 'update' ];
             } elseif ($this->area === 'car') {
                 $car = (new Car())->getObjectById($this->id);
-                return [ 'car' => $car ];
+                return [ 'car' => $car, 'action' => 'update' ];
             }
-            $this->action = 'update';
         }
-        $this->action = 'insert';
+        return [ 'action' => 'insert' ];
     }
 
     public function getView(): string
     {
         return $this->view;
-    }
-
-    public function getAction(): string
-    {
-        return $this->action;
     }
 }
