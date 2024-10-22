@@ -18,30 +18,30 @@ class ShowFormController
     /**
      * __construct
      *
-     * @param string $area
-     * @param string $view
-     * @param ?int $id
+     * @param array<int,mixed> $data
      */
-    public function __construct(string $area, string &$view, int $id = null)
+    public function __construct(array $data)
     {
-        $this->area = $area;
-        $view = 'form';
-        $this->id = $id;
+        $this->area = $data['area'];
+        $this->id = $data['id'] ?? null;
     }
 
     /**
-     * @return array<int,Employee>|array<int,Car>|array
+     * invoke
+     *
+     * @return array
      */
     public function invoke(): array
     {
-        $array = [];
         if (isset($this->id)) {
             if ($this->area === 'employee') {
-                $array = [(new Employee())->getObjectById($this->id)];
+                $employee = (new Employee())->getObjectById($this->id);
+                return [ 'view' => 'form', 'action' => 'update', 'employee' => $employee ];
             } elseif ($this->area === 'car') {
-                $array = [(new Car())->getObjectById($this->id)];
+                $car = (new Car())->getObjectById($this->id);
+                return [ 'view' => 'form', 'action' => 'update', 'car' => $car ];
             }
         }
-        return $array;
+        return [ 'view' => 'form', 'action' => 'insert' ];
     }
 }

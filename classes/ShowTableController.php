@@ -14,26 +14,26 @@ class ShowTableController
     /**
      * __construct
      *
-     * @param string $area
-     * @param string $view
+     * @param array $data
      */
-    public function __construct(string $area, string &$view)
+    public function __construct(array $data)
     {
-        $this->area = $area;
-        $view = 'table';
+        $this->area = $data['area'] ?? 'employee';
     }
 
     /**
-     * @return Employee[]|Car[]
+     * invoke
+     *
+     * @return array
      */
     public function invoke(): array
     {
-        $array = [];
         if ($this->area === 'employee') {
-            $array = (new Employee())->getAllAsObjects();
+            $employees = (new Employee())->getAllAsObjects();
+            return [ 'view' => 'table', 'employees' => $employees ];
         } elseif ($this->area === 'car') {
-            $array = (new Car())->getAllAsObjects();
+            $cars = (new Car())->getAllAsObjects();
+            return [ 'view' => 'table', 'cars' => $cars ];
         }
-        return $array;
     }
 }

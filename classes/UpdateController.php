@@ -16,43 +16,41 @@ class UpdateController
     private int $id;
 
     /**
-     * @var array<int,mixed>
+     * @var array $postData
      */
-    private array $data;
+    private array $postData;
 
     /**
      * __construct
      *
-     * @param string $area
-     * @param string $view
-     * @param int $id
-     * @param array<int,mixed> $data
+     * @param array $data
      */
-    public function __construct(string $area, string &$view, int $id, array $data)
+    public function __construct(array $data)
     {
-        $this->area = $area;
-        $view = 'table';
-        $this->id = $id;
-        $this->data = $data;
+        $this->area = $data['area'];
+        $this->id = $data['id'];
+        $this->postData = (new FilterData($data))->filter();
     }
 
     /**
+     * invoke
+     *
      * @return array
      */
     public function invoke(): array
     {
-        $array = [];
         if ($this->area === 'employee') {
-            $employee = new Employee($this->id, ...$this->data);
+            $employee = new Employee($this->id, ...$this->postData);
             $employee->update();
 
-            $array = $employee->getAllAsObjects();
+            $employees = $employee->getAllAsObjects();
+            return [ 'view' => 'table', 'employees' => $employees ];
         } elseif ($this->area === 'car') {
-            $car = new Car($this->id, ...$this->data);
+            $car = new Car($this->id, ...$this->postData);
             $car->update();
 
-            $array =  $car->getAllAsObjects();
+            $cars =  $car->getAllAsObjects();
+            return [ 'view' => 'table', 'cars' => $cars ];
         }
-        return $array;
     }
 }

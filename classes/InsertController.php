@@ -2,7 +2,6 @@
 
 /**
  * Class: InsertController
- *
  */
 class InsertController
 {
@@ -11,42 +10,40 @@ class InsertController
      */
     private string $area;
     /**
-     * @var array $data
+     * @var array $postData
      */
-    private array $data;
-
+    private array $postData;
 
     /**
      * __construct
      *
-     * @param string $area
-     * @param string $view
-     * @param array<int,mixed> $data
+     * @param array $data
      */
-    public function __construct(string $area, string &$view, array $data)
+    public function __construct(array $data)
     {
-        $this->area = $area;
-        $view = 'table';
-        $this->data = $data;
+        $this->area = $data['area'];
+        $this->postData = (new FilterData($data))->filter();
     }
 
     /**
+     * invoke
+     *
      * @return array
      */
     public function invoke(): array
     {
-        $array = [];
         if ($this->area === 'employee') {
             $employee = new Employee();
-            $employee->insert(...$this->data);
+            $employee->insert(...$this->postData);
 
-            $array = $employee->getAllAsObjects();
+            $employees = $employee->getAllAsObjects();
+            return [ 'view' => 'table', 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
-            $car->insert(...$this->data);
+            $car->insert(...$this->postData);
 
-            $array = $car->getAllAsObjects();
+            $cars = $car->getAllAsObjects();
+            return [ 'view' => 'table', 'cars' => $cars ];
         }
-        return $array;
     }
 }

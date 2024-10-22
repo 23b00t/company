@@ -15,37 +15,37 @@ class DeleteController
      */
     private int $id;
 
+
     /**
      * __construct
      *
-     * @param string $area
-     * @param string $view
-     * @param int $id
+     * @param array $data
      */
-    public function __construct(string $area, string &$view, int $id)
+    public function __construct(array $data)
     {
-        $this->area = $area;
-        $view = 'table';
-        $this->id = $id;
+        $this->area = $data['area'];
+        $this->id = $data['id'];
     }
 
     /**
+     * invoke
+     *
      * @return Employee[]|Car[]
      */
     public function invoke(): array
     {
-        $array = [];
         if ($this->area === 'employee') {
             $employee = new Employee();
             $employee->deleteObjectById($this->id);
 
-            $array = $employee->getAllAsObjects();
+            $employees = $employee->getAllAsObjects();
+            return [ 'view' => 'table', 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
             $car->deleteObjectById($this->id);
 
-            $array = $car->getAllAsObjects();
+            $cars = $car->getAllAsObjects();
+            return [ 'view' => 'table', 'cars' => $cars ];
         }
-        return $array;
     }
 }
