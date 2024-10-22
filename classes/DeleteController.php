@@ -4,7 +4,7 @@
  * Class: DeleteController
  *
  */
-class DeleteController
+class DeleteController implements IController
 {
     /**
      * @var string $area

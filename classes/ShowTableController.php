@@ -4,7 +4,7 @@
  * Class: ShowTableController
  *
  */
-class ShowTableController
+class ShowTableController implements IController
 {
     /**
      * @var string $area
