@@ -32,11 +32,17 @@ $view = 'table';
 $controllerName = ucfirst($action) . 'Controller';
 
 /**
+ * Determine request method (POST or GET) and securely pass the corresponding
+ * data ($_POST or $_GET) to the controller, ensuring proper handling of input.
+ */
+$data = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : $_GET;
+
+/**
  * Invoke the controller and extract variables from the returned array
  * (e.g., 'view', 'employees') into the current scope for direct access
  * as $view, $employees, etc.
  */
-$array = (new $controllerName($_REQUEST))->invoke();
+$array = (new $controllerName($data))->invoke();
 
 extract($array);
 
