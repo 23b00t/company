@@ -20,6 +20,8 @@ class UpdateController
      */
     private array $postData;
 
+    private string $view;
+
     /**
      * __construct
      *
@@ -31,6 +33,7 @@ class UpdateController
         $this->id = $requestData['id'];
         // Extract object attribute values from POST requestData
         $this->postData = (new FilterData($requestData))->filter();
+        $this->view = 'table';
     }
 
     /**
@@ -45,13 +48,18 @@ class UpdateController
             $employee->update();
 
             $employees = $employee->getAllAsObjects();
-            return [ 'view' => 'table', 'employees' => $employees ];
+            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car($this->id, ...$this->postData);
             $car->update();
 
             $cars =  $car->getAllAsObjects();
-            return [ 'view' => 'table', 'cars' => $cars ];
+            return [ 'cars' => $cars ];
         }
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
     }
 }

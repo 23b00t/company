@@ -15,6 +15,8 @@ class DeleteController
      */
     private int $id;
 
+    private string $view;
+
 
     /**
      * __construct
@@ -25,6 +27,7 @@ class DeleteController
     {
         $this->area = $requestData['area'];
         $this->id = $requestData['id'];
+        $this->view = 'table';
     }
 
     /**
@@ -39,13 +42,18 @@ class DeleteController
             $employee->deleteObjectById($this->id);
 
             $employees = $employee->getAllAsObjects();
-            return [ 'view' => 'table', 'employees' => $employees ];
+            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
             $car->deleteObjectById($this->id);
 
             $cars = $car->getAllAsObjects();
-            return [ 'view' => 'table', 'cars' => $cars ];
+            return [ 'cars' => $cars ];
         }
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
     }
 }

@@ -15,6 +15,10 @@ class ShowFormController
      */
     private ?int $id;
 
+    private string $view;
+
+    private string $action;
+
     /**
      * __construct
      *
@@ -24,6 +28,7 @@ class ShowFormController
     {
         $this->area = $requestData['area'];
         $this->id = $requestData['id'] ?? null;
+        $this->view = 'form';
     }
 
     /**
@@ -36,12 +41,23 @@ class ShowFormController
         if (isset($this->id)) {
             if ($this->area === 'employee') {
                 $employee = (new Employee())->getObjectById($this->id);
-                return [ 'view' => 'form', 'action' => 'update', 'employee' => $employee ];
+                return [  'employee' => $employee ];
             } elseif ($this->area === 'car') {
                 $car = (new Car())->getObjectById($this->id);
-                return [ 'view' => 'form', 'action' => 'update', 'car' => $car ];
+                return [ 'car' => $car ];
             }
+            $this->action = 'update';
         }
-        return [ 'view' => 'form', 'action' => 'insert' ];
+        $this->action = 'insert';
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
+    }
+
+    public function getAction(): string
+    {
+        return $this->action;
     }
 }

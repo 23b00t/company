@@ -36,12 +36,11 @@ $data = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : $_GET;
  * (e.g., 'view', 'employees') into the current scope for direct access
  * as $view, $employees, etc.
  */
-$array = (new $controllerName($data))->invoke();
+$controller = new $controllerName($data);
 
-/**
- * @var string $view (returned from controller)
- */
-extract($array);
+$ = $controller->invoke();
+
+$action = method_exists($controller, 'getAction') ? $controller->getAction() : $action;
 
 /** Include requested view */
-include 'views/' . $area . '/' . $view . '.php';
+include 'views/' . $area . '/' . $controller->getView() . '.php';

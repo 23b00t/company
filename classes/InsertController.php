@@ -14,6 +14,8 @@ class InsertController
      */
     private array $postData;
 
+    private string $view;
+
     /**
      * __construct
      *
@@ -24,6 +26,7 @@ class InsertController
         $this->area = $requestData['area'];
         // Extract object attribute values from POST requestData
         $this->postData = (new FilterData($requestData))->filter();
+        $this->view = 'table';
     }
 
     /**
@@ -38,13 +41,18 @@ class InsertController
             $employee->insert(...$this->postData);
 
             $employees = $employee->getAllAsObjects();
-            return [ 'view' => 'table', 'employees' => $employees ];
+            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
             $car->insert(...$this->postData);
 
             $cars = $car->getAllAsObjects();
-            return [ 'view' => 'table', 'cars' => $cars ];
+            return [ 'cars' => $cars ];
         }
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
     }
 }
