@@ -16,17 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Clean up
--- 
-DROP DATABASE IF EXISTS firma;
-
---
 -- Current Database: `firma`
 --
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `firma` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 USE `firma`;
+
+--
+-- Table structure for table `car`
+--
+
+DROP TABLE IF EXISTS `car`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `car` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `licensePlate` varchar(255) NOT NULL,
+  `manufacturer` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `car`
+--
+
+LOCK TABLES `car` WRITE;
+/*!40000 ALTER TABLE `car` DISABLE KEYS */;
+INSERT INTO `car` VALUES (1,'B-YG 235','VW','Polo'),(2,'B-BQ 235','BMW','3.18'),(3,'KL-LK 23','Audi','A8'),(4,'B-YZ 123','Futurum','x11'),(9,'B-UG 235','Tessla','E7');
+/*!40000 ALTER TABLE `car` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `mitarbeiter`
@@ -42,7 +63,7 @@ CREATE TABLE `mitarbeiter` (
   `gender` varchar(10) NOT NULL,
   `salary` decimal(6,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +72,7 @@ CREATE TABLE `mitarbeiter` (
 
 LOCK TABLES `mitarbeiter` WRITE;
 /*!40000 ALTER TABLE `mitarbeiter` DISABLE KEYS */;
-INSERT INTO `mitarbeiter` VALUES (1,'Daniel','Kipp','m',4200.00),(2,'John','Doe','m',2300.00),(3,'Jane','Doe','w',4200.00),(4,'Tom','Müller','m',5000.00),(5,'Kim','Maier','d',5000.00),(6,'Erika','Smith','w',1000.00);
+INSERT INTO `mitarbeiter` VALUES (1,'Daniel','Kipper','m',4200.00),(3,'Jane','Doe','w',4200.00),(4,'Tom','Müller','m',5000.00),(5,'Kim','Maier','d',5000.00),(6,'Erika','Smith','d',9998.00),(51,'Lisa','Müller','d',5000.00);
 /*!40000 ALTER TABLE `mitarbeiter` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -64,4 +85,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-11 14:44:06
+-- Dump completed on 2024-10-22 11:37:54
