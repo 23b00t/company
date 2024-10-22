@@ -4,7 +4,7 @@
  * Class: UpdateController
  *
  */
-class UpdateController
+class UpdateController implements IController
 {
     /**
      * @var string $area

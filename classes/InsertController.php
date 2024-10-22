@@ -3,7 +3,7 @@
 /**
  * Class: InsertController
  */
-class InsertController
+class InsertController implements IController
 {
     /**
      * @var string $area
