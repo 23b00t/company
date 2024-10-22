@@ -8,7 +8,7 @@ interface IController
     /**
      * Constructor must accept an array parameter.
      *
-     * @param array $data
+     * @param array $requestData
      */
     public function __construct(array $requestData);
 
