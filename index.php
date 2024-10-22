@@ -14,19 +14,13 @@ spl_autoload_register(function ($className): void {
  * default to employee if nothing is set
  * e.g. by a call of index.php without params (Homepage)
  */
-$area = $_REQUEST['area'] ?? 'employee'; // $_REQUEST = $_GET and $_POST
+$area = $_REQUEST['area'] ?? 'employee';
 
 /**
  * @var string $action (Controller action)
  * showTable as default action
  */
 $action = $_REQUEST['action'] ?? 'showTable';
-
-/**
- * @var string $view (view to render)
- * Default view
- */
-$view = 'table';
 
 /** Build Action Controller Name from $action */
 $controllerName = ucfirst($action) . 'Controller';
@@ -44,6 +38,9 @@ $data = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : $_GET;
  */
 $array = (new $controllerName($data))->invoke();
 
+/**
+ * @var string $view (returned from controller)
+ */
 extract($array);
 
 /** Include requested view */
