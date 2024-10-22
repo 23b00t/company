@@ -31,7 +31,7 @@
           <td><a href="index.php?area=car&action=delete&id=<?= $car->getId(); ?>">
             <button class="btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i></button>
           </a></td>
-          <td><a href="index.php?area=car&action=showEdit&id=<?= $car->getId(); ?>">
+          <td><a href="index.php?area=car&action=showForm&id=<?= $car->getId(); ?>">
             <button class="btn btn-outline-warning"><i class="fa-solid fa-pencil"></i></button>
           </a></td>
         </tr>

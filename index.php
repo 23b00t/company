@@ -18,9 +18,9 @@ $area = $_REQUEST['area'] ?? 'employee'; // $_REQUEST = $_GET and $_POST
 
 /**
  * @var string $action (Controller action)
- * No default action means showTable because this is the default view
+ * showTable as default action
  */
-$action = $_REQUEST['action'] ?? '';
+$action = $_REQUEST['action'] ?? 'showTable';
 
 /**
  * @var int $id
@@ -29,74 +29,43 @@ $action = $_REQUEST['action'] ?? '';
 $id = $_REQUEST['id'] ?? null;
 
 /**
- * Based on $area route to requested controller
- * removed in both areas action showTable because table is the default view
- *
  * @var string $view (view to render)
+ * Default view
  */
-if ($area === 'employee') {
-    // Get values
-    $employees = (new Employee())->getAllAsObjects();
-    $firstName = $_POST['firstName'] ?? '';
-    $lastName = $_POST['lastName'] ?? '';
-    $gender = $_POST['gender'] ?? '';
-    $salary = $_POST['salary'] ?? '';
-    $salary = (float)$salary; // transform salary string to float
+$view = 'table';
 
-    // default employee view
-    $view = 'employee/table';
+/** Build Action Controller Name from $action */
+$controllerName = ucfirst($action) . 'Controller';
 
-    if ($action === 'showForm') {
-        // make $action available in form to handle both, insert and update
-        $view = 'employee/form';
-        $action = 'insert';
-    } elseif ($action === 'delete') {
-        (new Employee())->deleteObjectById($id);
-        // (new Employee())->deleteObjectById(23);
-        $employees = (new Employee())->getAllAsObjects();
-    } elseif ($action === 'insert') {
-        $employee = (new Employee())->insert($firstName, $lastName, $gender, $salary);
-        // Get all objects including the newly created to include it in standard view
-        $employees = (new Employee())->getAllAsObjects();
-    } elseif ($action === 'showEdit') {
-        $employee = (new Employee())->getObjectById($id);
-        $view = 'employee/form';
-        $action = 'update';
-    } elseif ($action === 'update') {
-        $employee = (new Employee($id, $firstName, $lastName, $gender, $salary))->update();
-        // Get all objects including the updated to include it in standard view
-        $employees = (new Employee())->getAllAsObjects();
-    }
-} elseif ($area === 'car') {
-    // get values
-    $cars = (new Car())->getAllAsObjects();
-    $licensePlate = $_POST['licensePlate'] ?? '';
-    $manufacturer = $_POST['manufacturer'] ?? '';
-    $type = $_POST['type'] ?? '';
+/** Initialize Action Controllers */
+if ($action === 'showForm') {
+    $array = (new $controllerName($area, $view, $id))->invoke();
+} elseif ($action === 'delete') {
+    $array = (new $controllerName($area, $view, $id))->invoke();
+} elseif ($action === 'insert') {
+    // Hand POST array to FilterData to get back an array with the attributes of the calling area
+    $data = (new FilterData($_POST))->filter();
+    $array = (new $controllerName($area, $view, $data))->invoke();
+} elseif ($action === 'update') {
+    $data = (new FilterData($_POST))->filter();
+    $array = (new $controllerName($area, $view, $id, $data))->invoke();
+} else { //($action === 'showTable')
+    $array = (new $controllerName($area, $view))->invoke();
+}
 
-    // set default car view
-    $view = 'car/table';
-
-    if ($action === 'showForm') {
-        // make $action available in form to handle both, insert and update
-        $view = 'car/form';
-        $action = 'insert';
-    } elseif ($action === 'delete') {
-        (new Car())->deleteObjectById($id);
-        // Test case for Error Handling: (new Car())->deleteObjectById(23);
-        $cars = (new Car())->getAllAsObjects();
-    } elseif ($action === 'insert') {
-        $car = (new Car())->insert($licensePlate, $manufacturer, $type);
-        $cars = (new Car())->getAllAsObjects();
-    } elseif ($action === 'showEdit') {
-        $car = (new Car())->getObjectById($id);
-        $view = 'car/form';
-        $action = 'update';
-    } elseif ($action === 'update') {
-        $car = (new Car($id, $licensePlate, $manufacturer, $type))->update();
-        $cars = (new Car())->getAllAsObjects();
-    }
+/**
+ * Assign to object array variable (e.g. $cars) or single object variable (e.g. $car) the data
+ * returned by the controller, or an emplty array if there is no data (inital call to index.php).
+ */
+if ($view === 'table') {
+    $objectArrayName = $area . 's'; // Set dynamic variable name for arrays of objects
+    $$objectArrayName = $array ?? [];
+} elseif ($view === 'form') {
+    $objectName = $area; // Set dynamic variable name for object
+    $$objectName = $array[0] ?? [];
+    // Check if $id is set, which means that the edit form is displayed and the next action is update
+    $action = isset($id) ? 'update' : 'insert';
 }
 
 /** Include requested view */
-include __DIR__ . '/views/' . $view . '.php';
+include 'views/' . $area . '/' . $view . '.php';
