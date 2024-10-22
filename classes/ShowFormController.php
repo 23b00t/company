@@ -18,12 +18,12 @@ class ShowFormController
     /**
      * __construct
      *
-     * @param array<int,mixed> $data
+     * @param array $requestData
      */
-    public function __construct(array $data)
+    public function __construct(array $requestData)
     {
-        $this->area = $data['area'];
-        $this->id = $data['id'] ?? null;
+        $this->area = $requestData['area'];
+        $this->id = $requestData['id'] ?? null;
     }
 
     /**

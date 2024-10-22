@@ -14,11 +14,11 @@ class ShowTableController
     /**
      * __construct
      *
-     * @param array $data
+     * @param array $requestData
      */
-    public function __construct(array $data)
+    public function __construct(array $requestData)
     {
-        $this->area = $data['area'] ?? 'employee';
+        $this->area = $requestData['area'] ?? 'employee';
     }
 
     /**

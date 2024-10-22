@@ -19,12 +19,12 @@ class DeleteController
     /**
      * __construct
      *
-     * @param array $data
+     * @param array $requestData
      */
-    public function __construct(array $data)
+    public function __construct(array $requestData)
     {
-        $this->area = $data['area'];
-        $this->id = $data['id'];
+        $this->area = $requestData['area'];
+        $this->id = $requestData['id'];
     }
 
     /**

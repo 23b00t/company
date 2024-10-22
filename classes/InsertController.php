@@ -17,12 +17,13 @@ class InsertController
     /**
      * __construct
      *
-     * @param array $data
+     * @param array $requestData
      */
-    public function __construct(array $data)
+    public function __construct(array $requestData)
     {
-        $this->area = $data['area'];
-        $this->postData = (new FilterData($data))->filter();
+        $this->area = $requestData['area'];
+        // Extract object attribute values from POST requestData
+        $this->postData = (new FilterData($requestData))->filter();
     }
 
     /**

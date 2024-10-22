@@ -3,18 +3,18 @@
 /**
  * Class FilterData
  *
- * Extract POST data and match it against predefined attributes
+ * Extract POST requestData and match it against predefined attributes
  */
 class FilterData
 {
-    private array $data;
+    private array $requestData;
 
     /**
-     * @param array $data
+     * @param array $requestData
      */
-    public function __construct(array $data)
+    public function __construct(array $requestData)
     {
-        $this->data = $data;
+        $this->requestData = $requestData;
     }
 
     /**
@@ -24,7 +24,7 @@ class FilterData
      */
     public function filter(): array
     {
-        $area = $this->data['area'];
+        $area = $this->requestData['area'];
 
         // Define attribute arrays for different areas
         $attributesMap = [
@@ -41,10 +41,10 @@ class FilterData
 
         $sanitizedData = [];
         foreach ($areaAttributes as $attribute) {
-            $sanitizedData[] = $this->data[$attribute];
+            $sanitizedData[] = $this->requestData[$attribute];
         }
 
-        // If no data matches an empty array is returned
+        // If no requestData matches an empty array is returned
         return $sanitizedData;
     }
 }
