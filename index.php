@@ -34,20 +34,16 @@ $id = $_REQUEST['id'] ?? null;
  */
 $view = 'table';
 
-/** Build Action Controller from $action */
+/** Build Action Controller Name from $action */
 $controllerName = ucfirst($action) . 'Controller';
-
-$objectArrayName = $area . 's';
-$objectName = $area;
 
 /** Initialize Action Controllers */
 if ($action === 'showForm') {
     $array = (new $controllerName($area, $view, $id))->invoke();
-    $$objectName = $array[0] ?? [];
-    $action = isset($id) ? 'update' : 'insert';
 } elseif ($action === 'delete') {
     $array = (new $controllerName($area, $view, $id))->invoke();
 } elseif ($action === 'insert') {
+    // Hand POST array to FilterData to get back an array with the attributes of the calling area
     $data = (new FilterData($_POST))->filter();
     $array = (new $controllerName($area, $view, $data))->invoke();
 } elseif ($action === 'update') {
@@ -57,7 +53,19 @@ if ($action === 'showForm') {
     $array = (new $controllerName($area, $view))->invoke();
 }
 
-$$objectArrayName = $array ?? [];
+/**
+ * Assign to object array variable (e.g. $cars) or single object variable (e.g. $car) the data
+ * returned by the controller, or an emplty array if there is no data (inital call to index.php).
+ */
+if ($view === 'table') {
+    $objectArrayName = $area . 's'; // Set dynamic variable name for arrays of objects
+    $$objectArrayName = $array ?? [];
+} elseif ($view === 'form') {
+    $objectName = $area; // Set dynamic variable name for object
+    $$objectName = $array[0] ?? [];
+    // Check if $id is set, which means that the edit form is displayed and the next action is update
+    $action = isset($id) ? 'update' : 'insert';
+}
 
 /** Include requested view */
 include 'views/' . $area . '/' . $view . '.php';
