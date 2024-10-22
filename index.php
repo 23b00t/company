@@ -43,5 +43,11 @@ $array = (new $controllerName($data))->invoke();
  */
 extract($array);
 
+// Implementation of extract:
+// foreach ($array as $key => $value) {
+//     $variableName = $key;
+//     $$variableName = $value;
+// }
+
 /** Include requested view */
 include 'views/' . $area . '/' . $view . '.php';

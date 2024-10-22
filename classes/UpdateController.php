@@ -14,7 +14,6 @@ class UpdateController
      * @var int $id
      */
     private int $id;
-
     /**
      * @var array $postData
      */
