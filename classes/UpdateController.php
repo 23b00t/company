@@ -44,13 +44,24 @@ class UpdateController
     public function invoke(): array
     {
         if ($this->area === 'employee') {
-            $employee = new Employee($this->id, ...$this->postData);
+            $employee = new Employee(
+                $this->id,
+                $this->postData['firstName'],
+                $this->postData['lastName'],
+                $this->postData['gender'],
+                (float)$this->postData['salary']
+            );
             $employee->update();
 
             $employees = $employee->getAllAsObjects();
             return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
-            $car = new Car($this->id, ...$this->postData);
+            $car = new Car(
+                $this->id,
+                $this->postData['licensePlate'],
+                $this->postData['manufacturer'],
+                $this->postData['type']
+            );
             $car->update();
 
             $cars =  $car->getAllAsObjects();

@@ -38,13 +38,18 @@ class InsertController
     {
         if ($this->area === 'employee') {
             $employee = new Employee();
-            $employee->insert(...$this->postData);
+            $employee->insert(
+                $this->postData['firstName'],
+                $this->postData['lastName'],
+                $this->postData['gender'],
+                (float)$this->postData['salary']
+            );
 
             $employees = $employee->getAllAsObjects();
             return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
-            $car->insert(...$this->postData);
+            $car->insert($this->postData['licensePlate'], $this->postData['manufacturer'], $this->postData['type']);
 
             $cars = $car->getAllAsObjects();
             return [ 'cars' => $cars ];

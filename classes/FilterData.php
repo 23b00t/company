@@ -41,7 +41,7 @@ class FilterData
 
         $sanitizedData = [];
         foreach ($areaAttributes as $attribute) {
-            $sanitizedData[] = $this->requestData[$attribute];
+            $sanitizedData[$attribute] = $this->requestData[$attribute];
         }
 
         // If no requestData matches an empty array is returned
