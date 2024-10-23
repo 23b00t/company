@@ -14,9 +14,13 @@ class ShowFormController implements IController
      * @var ?int $id
      */
     private ?int $id;
-
+    /**
+     * @var string $view
+     */
     private string $view;
-
+    /**
+     * @var string $action
+     */
     private string $action;
 
     /**
@@ -40,6 +44,7 @@ class ShowFormController implements IController
     public function invoke(): array
     {
         $array = [];
+        /** Show edit form with pre-filled fields */
         if (isset($this->id)) {
             $this->action = 'update';
             if ($this->area === 'employee') {
@@ -54,6 +59,10 @@ class ShowFormController implements IController
                 $employees = (new Employee())->getAllAsObjects();
                 $array = [ 'rental' => $rental, 'cars' => $cars, 'employees' => $employees ];
             }
+        /**
+         * Display an empty form. For models without foreign keys, return an empty array.
+         * For models with foreign keys, return associated foreign entities.
+         */
         } else {
             if ($this->area === 'rental') {
                 $cars = (new Car())->getAllAsObjects();

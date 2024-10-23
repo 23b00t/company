@@ -13,7 +13,9 @@ class InsertController implements IController
      * @var array $postData
      */
     private array $postData;
-
+    /**
+     * @var string $view
+     */
     private string $view;
 
     /**

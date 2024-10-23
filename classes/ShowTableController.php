@@ -10,7 +10,9 @@ class ShowTableController implements IController
      * @var string $area
      */
     private string $area;
-
+    /**
+     * @var string $view
+     */
     private string $view;
 
 

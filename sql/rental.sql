@@ -4,9 +4,9 @@ DROP TABLE IF EXISTS rental;
 
 CREATE TABLE IF NOT EXISTS rental (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    employeeId INT,
-    carId INT,
-    rentalFrom DATETIME,
+    employeeId INT NOT NULL,
+    carId INT NOT NULL,
+    rentalFrom DATETIME NOT NULL,
     rentalTo DATETIME,
     FOREIGN KEY (employeeId) REFERENCES mitarbeiter(id),
     FOREIGN KEY (carId) REFERENCES car(id),

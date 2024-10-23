@@ -50,7 +50,7 @@ extract($array);
 // $variableName = array_key_first($array);
 // isset($array[$variableName]) && $$variableName = $array[$variableName];
 
-$action = method_exists($controller, 'getAction') ? $controller->getAction() : $action;
+$action = $controllerName === 'ShowFormController' ? $controller->getAction() : $action;
 
 /** Include requested view */
 include 'views/' . $area . '/' . $controller->getView() . '.php';

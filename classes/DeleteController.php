@@ -33,7 +33,7 @@ class DeleteController implements IController
     /**
      * invoke
      *
-     * @return Employee[]|Car[]
+     * @return array
      */
     public function invoke(): array
     {
