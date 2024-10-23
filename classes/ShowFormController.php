@@ -50,7 +50,15 @@ class ShowFormController implements IController
                 $array = [ 'car' => $car ];
             } elseif ($this->area === 'rental') {
                 $rental = (new Rental())->getObjectById($this->id);
-                $array = [ 'rental' => $rental ];
+                $cars = (new Car())->getAllAsObjects();
+                $employees = (new Employee())->getAllAsObjects();
+                $array = [ 'rental' => $rental, 'cars' => $cars, 'employees' => $employees ];
+            }
+        } else {
+            if ($this->area === 'rental') {
+                $cars = (new Car())->getAllAsObjects();
+                $employees = (new Employee())->getAllAsObjects();
+                $array = [ 'cars' => $cars, 'employees' => $employees ];
             }
         }
         return $array;
