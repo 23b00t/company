@@ -13,7 +13,7 @@ class Rental implements IBasic
     {
     }
 
-    public function getObjectById(int $id): Object
+    public function getObjectById(int $id)
     {
     }
 
