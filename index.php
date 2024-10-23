@@ -40,8 +40,10 @@ $controller = new $controllerName($data);
 
 $array = $controller->invoke();
 
-$variableName = array_key_first($array);
-isset($array[$variableName]) && $$variableName = $array[$variableName];
+extract($array);
+
+// $variableName = array_key_first($array);
+// isset($array[$variableName]) && $$variableName = $array[$variableName];
 
 $action = method_exists($controller, 'getAction') ? $controller->getAction() : $action;
 

@@ -54,3 +54,12 @@
 - Methode insert in Klasse Car schreiben, Car-Objekt zurückgeben
 - table.php einbinden
 - navigation.php ergänzen (Autos, Auto hinzufügen)
+
+
+* Fragen Ausleige
+- Eintrag in bis Feld später möglich?
+- Doppelte Ausleihe verhindern, nur mögliche Termine vorschlagen
+- Bis nicht kleiner als von
+- Tabelle Ausleihe: Kennzeichen, Fahrer, Von, Bis, Löschen, Ändern
+- Navigation erweitern
+
