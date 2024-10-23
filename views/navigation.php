@@ -14,4 +14,9 @@
   <a href="index.php?area=car&action=showTable"><button class="btn btn-outline-success">Autos</button></a>
   <a href="index.php?area=car&action=showForm">
     <button class="btn btn-outline-success"><i class="fa-solid fa-plus"></i> Auto hinzufügen</button></a>
+
+  <!-- Rental links -->
+  <a href="index.php?area=rental&action=showTable"><button class="btn btn-outline-success">Mieten</button></a>
+  <a href="index.php?area=rental&action=showForm">
+    <button class="btn btn-outline-success"><i class="fa-solid fa-plus"></i> Miete hinzufügen</button></a>
 </div>
