@@ -130,7 +130,7 @@ class Rental implements IBasic
         return $this->rentalFrom;
     }
 
-    public function getRentalTo(): string
+    public function getRentalTo(): ?string
     {
         return $this->rentalTo;
     }
