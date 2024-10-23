@@ -19,6 +19,8 @@ class UpdateController implements IController
      */
     private array $postData;
 
+    private string $view;
+
     /**
      * __construct
      *
@@ -30,6 +32,7 @@ class UpdateController implements IController
         $this->id = $requestData['id'];
         // Extract object attribute values from POST requestData
         $this->postData = (new FilterData($requestData))->filter();
+        $this->view = 'table';
     }
 
     /**
@@ -50,7 +53,7 @@ class UpdateController implements IController
             $employee->update();
 
             $employees = $employee->getAllAsObjects();
-            return [ 'view' => 'table', 'employees' => $employees ];
+            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car(
                 $this->id,
@@ -61,7 +64,12 @@ class UpdateController implements IController
             $car->update();
 
             $cars =  $car->getAllAsObjects();
-            return [ 'view' => 'table', 'cars' => $cars ];
+            return [ 'cars' => $cars ];
         }
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
     }
 }

@@ -11,6 +11,9 @@ class ShowTableController implements IController
      */
     private string $area;
 
+    private string $view;
+
+
     /**
      * __construct
      *
@@ -19,6 +22,7 @@ class ShowTableController implements IController
     public function __construct(array $requestData)
     {
         $this->area = $requestData['area'] ?? 'employee';
+        $this->view = 'table';
     }
 
     /**
@@ -30,10 +34,15 @@ class ShowTableController implements IController
     {
         if ($this->area === 'employee') {
             $employees = (new Employee())->getAllAsObjects();
-            return [ 'view' => 'table', 'employees' => $employees ];
+            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $cars = (new Car())->getAllAsObjects();
-            return [ 'view' => 'table', 'cars' => $cars ];
+            return [ 'cars' => $cars ];
         }
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
     }
 }

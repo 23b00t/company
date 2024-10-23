@@ -15,6 +15,10 @@ class ShowFormController implements IController
      */
     private ?int $id;
 
+    private string $view;
+
+    private string $action;
+
     /**
      * __construct
      *
@@ -24,6 +28,8 @@ class ShowFormController implements IController
     {
         $this->area = $requestData['area'];
         $this->id = $requestData['id'] ?? null;
+        $this->view = 'form';
+        $this->action = 'insert';
     }
 
     /**
@@ -33,15 +39,27 @@ class ShowFormController implements IController
      */
     public function invoke(): array
     {
+        $array = [];
         if (isset($this->id)) {
+            $this->action = 'update';
             if ($this->area === 'employee') {
                 $employee = (new Employee())->getObjectById($this->id);
-                return [ 'view' => 'form', 'action' => 'update', 'employee' => $employee ];
+                $array = [  'employee' => $employee ];
             } elseif ($this->area === 'car') {
                 $car = (new Car())->getObjectById($this->id);
-                return [ 'view' => 'form', 'action' => 'update', 'car' => $car ];
+                $array = [ 'car' => $car ];
             }
         }
-        return [ 'view' => 'form', 'action' => 'insert' ];
+        return $array;
+    }
+
+    public function getView(): string
+    {
+        return $this->view;
+    }
+
+    public function getAction(): string
+    {
+        return $this->action;
     }
 }

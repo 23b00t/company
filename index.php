@@ -36,18 +36,24 @@ $data = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : $_GET;
  * (e.g., 'view', 'employees') into the current scope for direct access
  * as $view, $employees, etc.
  */
-$array = (new $controllerName($data))->invoke();
+$controller = new $controllerName($data);
 
-/**
- * @var string $view (returned from controller)
- */
+$array = $controller->invoke();
+
 extract($array);
 
+<<<<<<< HEAD
 // Implementation of extract:
 // foreach ($array as $key => $value) {
 //     $variableName = $key;
 //     $$variableName = $value;
 // }
+=======
+// $variableName = array_key_first($array);
+// isset($array[$variableName]) && $$variableName = $array[$variableName];
+
+$action = method_exists($controller, 'getAction') ? $controller->getAction() : $action;
+>>>>>>> useGetters
 
 /** Include requested view */
-include 'views/' . $area . '/' . $view . '.php';
+include 'views/' . $area . '/' . $controller->getView() . '.php';
