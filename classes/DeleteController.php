@@ -49,6 +49,12 @@ class DeleteController implements IController
 
             $cars = $car->getAllAsObjects();
             return [ 'cars' => $cars ];
+        } elseif ($this->area === 'rental') {
+            $rental = new Rental();
+            $rental->deleteObjectById($this->id);
+
+            $rentals = $rental->getAllAsObjects();
+            return [ 'rentals' => $rentals ];
         }
     }
 

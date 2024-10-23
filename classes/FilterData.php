@@ -29,7 +29,8 @@ class FilterData
         // Define attribute arrays for different areas
         $attributesMap = [
             'employee' => ['firstName', 'lastName', 'gender', 'salary'],
-            'car' => ['licensePlate', 'manufacturer', 'type']
+            'car' => ['licensePlate', 'manufacturer', 'type'],
+            'rental' => ['employeeId', 'carId', 'rentalFrom', 'rentalTo']
         ];
 
         // Check if area exists in the attributes map

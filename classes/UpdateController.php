@@ -18,7 +18,9 @@ class UpdateController implements IController
      * @var array $postData
      */
     private array $postData;
-
+    /**
+     * @var string $view
+     */
     private string $view;
 
     /**
@@ -65,6 +67,18 @@ class UpdateController implements IController
 
             $cars =  $car->getAllAsObjects();
             return [ 'cars' => $cars ];
+        } elseif ($this->area === 'rental') {
+            $rental = new Rental(
+                $this->id,
+                $this->postData['employeeId'],
+                $this->postData['carId'],
+                $this->postData['rentalFrom'],
+                $this->postData['rentalTo']
+            );
+            $rental->update();
+
+            $rentals =  $rental->getAllAsObjects();
+            return [ 'rentals' => $rentals ];
         }
     }
 

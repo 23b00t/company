@@ -53,6 +53,17 @@ class InsertController implements IController
 
             $cars = $car->getAllAsObjects();
             return [ 'cars' => $cars ];
+        } elseif ($this->area === 'rental') {
+            $rental = new Rental();
+            $rental->insert(
+                $this->postData['employeeId'],
+                $this->postData['carId'],
+                $this->postData['rentalFrom'],
+                $this->postData['rentalTo']
+            );
+
+            $rentals = $rental->getAllAsObjects();
+            return [ 'rentals' => $rentals ];
         }
     }
 

@@ -38,6 +38,9 @@ class ShowTableController implements IController
         } elseif ($this->area === 'car') {
             $cars = (new Car())->getAllAsObjects();
             return [ 'cars' => $cars ];
+        } elseif ($this->area === 'rental') {
+            $rentals = (new Rental())->getAllAsObjects();
+            return [ 'rentals' => $rentals ];
         }
     }
 
