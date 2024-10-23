@@ -2,7 +2,6 @@
 /** @var $employees  */
 ?>
 
-<?php include_once __DIR__ . '/../navigation.php'; ?>
 <table class="table mt-4">
   <tr>
     <th scope="col">Vorname</th>

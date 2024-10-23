@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
   <body>
+    <?php include __DIR__ . '/navbar.html'; ?>
     <div class="container">
-      <?php include __DIR__ . '/navigation.php'; ?>
       <?php include __DIR__ . '/' . $area . '/' . $controller->getView() . '.php'; ?>
     </div>
   </body>
