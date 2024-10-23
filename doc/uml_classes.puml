@@ -18,10 +18,27 @@
     +update()
   }
   class "Rental\n<b>Class Rental</b>" as Rental {
+    -employeeId : ?int
+    -carId : ?int
+    -rentalFrom : ?string
+    -rentalTo : ?string
+    -id : ?int
+    +__construct(id, employeeId, carId, rentalFrom, rentalTo)
     +getAllAsObjects()
     +deleteObjectById(id)
+    +insert(employeeId, carId, rentalFrom, rentalTo)
     +getObjectById(id)
     +update()
+    +getEmployeeId()
+    +getCarId()
+    +getRentalFrom()
+    +getRentalTo()
+    +getId()
+  }
+  class "FilterData\n<b>Class FilterData</b>" as FilterData {
+    -requestData : array
+    +__construct(requestData)
+    +filter()
   }
   interface "IBasic\n<b>IBasic</b>" as IBasic {
     +getAllAsObjects()
@@ -29,9 +46,48 @@
     +getObjectById(id)
     +update()
   }
+  class "InsertController\n<b>Class: InsertController</b>" as InsertController {
+    -area : string
+    -postData : array
+    -view : string
+    +__construct(requestData)
+    +invoke()
+    +getView()
+  }
+  interface "IController\n<b>Interface: IController</b>" as IController {
+    +__construct(requestData)
+    +invoke()
+    +getView()
+  }
+  class "ShowTableController\n<b>Class: ShowTableController</b>" as ShowTableController {
+    -area : string
+    -view : string
+    +__construct(requestData)
+    +invoke()
+    +getView()
+  }
   class "Db\n<b>Design Pattern Singleton</b>" as Db {
     -dbh : object
     {static} +getConnection()
+  }
+  class "ShowFormController\n<b>Class: ShowFormController</b>" as ShowFormController {
+    -area : string
+    -id : ?int
+    -view : string
+    -action : string
+    +__construct(requestData)
+    +invoke()
+    +getView()
+    +getAction()
+  }
+  class "UpdateController\n<b>Class: UpdateController</b>" as UpdateController {
+    -area : string
+    -id : int
+    -postData : array
+    -view : string
+    +__construct(requestData)
+    +invoke()
+    +getView()
   }
   class "Car\n<b>Class Car</b>" as Car {
     -id : int|null
@@ -49,10 +105,40 @@
     +getObjectById(id)
     +update()
   }
+  class "DeleteController\n<b>Class: DeleteController</b>" as DeleteController {
+    -area : string
+    -id : int
+    -view : string
+    +__construct(requestData)
+    +invoke()
+    +getView()
+  }
   Car ..> Db
+  DeleteController ..> Car
+  DeleteController ..> Employee
+  DeleteController ..> Rental
   Employee ..> Db
   IBasic <|-- Car
   IBasic <|-- Employee
   IBasic <|-- Rental
+  IController <|-- DeleteController
+  IController <|-- InsertController
+  IController <|-- ShowFormController
+  IController <|-- ShowTableController
+  IController <|-- UpdateController
+  InsertController ..> Car
+  InsertController ..> Employee
+  InsertController ..> FilterData
+  InsertController ..> Rental
+  Rental ..> Db
+  ShowFormController ..> Car
+  ShowFormController ..> Employee
+  ShowFormController ..> Rental
+  ShowTableController ..> Car
+  ShowTableController ..> Employee
+  ShowTableController ..> Rental
+  UpdateController ..> Car
+  UpdateController ..> Employee
+  UpdateController ..> FilterData
+  UpdateController ..> Rental
 @enduml
-
