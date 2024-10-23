@@ -62,6 +62,8 @@ class Rental implements IBasic
     }
 
     /**
+     * insert
+     *
      * @param int $employeeId
      * @param int $carId
      * @param string $rentalFrom

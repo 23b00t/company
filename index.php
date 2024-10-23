@@ -53,4 +53,4 @@ extract($array);
 $action = $controllerName === 'ShowFormController' ? $controller->getAction() : $action;
 
 /** Include requested view */
-include 'views/' . $area . '/' . $controller->getView() . '.php';
+include __DIR__ . '/views/application.html.php';
