@@ -78,7 +78,9 @@ class UpdateController implements IController
             $rental->update();
 
             $rentals =  $rental->getAllAsObjects();
-            return [ 'rentals' => $rentals ];
+            $cars = (new Car())->getAllAsObjects();
+            $employees = (new Employee())->getAllAsObjects();
+            return [ 'rentals' => $rentals, 'cars' => $cars, 'employees' => $employees ];
         }
     }
 

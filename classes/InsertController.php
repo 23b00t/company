@@ -63,7 +63,9 @@ class InsertController implements IController
             );
 
             $rentals = $rental->getAllAsObjects();
-            return [ 'rentals' => $rentals ];
+            $cars = (new Car())->getAllAsObjects();
+            $employees = (new Employee())->getAllAsObjects();
+            return [ 'rentals' => $rentals, 'cars' => $cars, 'employees' => $employees ];
         }
     }
 

@@ -93,7 +93,8 @@ class Rental implements IBasic
         $sql = 'SELECT * FROM rental WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetchObject(Rental::class);
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, Rental::class);
+        return $stmt->fetch();
     }
 
     /**
