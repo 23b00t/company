@@ -42,18 +42,15 @@ $array = $controller->invoke();
 
 extract($array);
 
-<<<<<<< HEAD
 // Implementation of extract:
 // foreach ($array as $key => $value) {
 //     $variableName = $key;
 //     $$variableName = $value;
 // }
-=======
 // $variableName = array_key_first($array);
 // isset($array[$variableName]) && $$variableName = $array[$variableName];
 
 $action = method_exists($controller, 'getAction') ? $controller->getAction() : $action;
->>>>>>> useGetters
 
 /** Include requested view */
 include 'views/' . $area . '/' . $controller->getView() . '.php';
