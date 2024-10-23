@@ -5,12 +5,11 @@
  */
 class Rental implements IBasic
 {
-    private int $employeeId;
-    private int $carId;
-    private string $rentalFrom;
-    private string $rentalTo;
-
-    private int $id;
+    private ?int $employeeId;
+    private ?int $carId;
+    private ?string $rentalFrom;
+    private ?string $rentalTo;
+    private ?int $id;
 
     /**
      * @param int $employeeId
@@ -111,5 +110,30 @@ class Rental implements IBasic
         $stmt->execute(
             [$this->employeeId, $this->carId, $this->rentalFrom, $this->rentalTo, $this->id]
         );
+    }
+
+    public function getEmployeeId(): int
+    {
+        return $this->employeeId;
+    }
+
+    public function getCarId(): int
+    {
+        return $this->carId;
+    }
+
+    public function getRentalFrom(): string
+    {
+        return $this->rentalFrom;
+    }
+
+    public function getRentalTo(): string
+    {
+        return $this->rentalTo;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 }
