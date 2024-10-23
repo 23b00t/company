@@ -1,10 +1,14 @@
 <?php
 
+/**
+ * index.php
+ * Handle all application requests
+ */
+
+/** Include DB config */
 include 'config.php';
 
-/**
- * Autoload classes
- */
+/** Autoload classes */
 spl_autoload_register(function ($className): void {
     include 'classes/' . $className . '.php';
 });
@@ -37,19 +41,10 @@ $data = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : $_GET;
  * as $view, $employees, etc.
  */
 $controller = new $controllerName($data);
-
 $array = $controller->invoke();
-
 extract($array);
 
-// Implementation of extract:
-// foreach ($array as $key => $value) {
-//     $variableName = $key;
-//     $$variableName = $value;
-// }
-// $variableName = array_key_first($array);
-// isset($array[$variableName]) && $$variableName = $array[$variableName];
-
+/** After calling ShowFormController set the action depending on usecase - update or insert */
 $action = $controllerName === 'ShowFormController' ? $controller->getAction() : $action;
 
 /** Include requested view */
