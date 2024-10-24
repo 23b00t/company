@@ -1,10 +1,10 @@
 @startuml
   class "Employee\n<b>Class Employee</b>" as Employee {
-    -id : int|null
-    -firstName : string|null
-    -lastName : string|null
-    -gender : string|null
-    -salary : float|null
+    -id : ?int
+    -firstName : ?string
+    -lastName : ?string
+    -gender : ?string
+    -salary : ?float
     +__construct(id, firstName, lastName, gender, salary)
     +getId()
     +getFirstName()
@@ -16,6 +16,8 @@
     +insert(firstName, lastName, gender, salaray)
     +getObjectById(id)
     +update()
+    +getName()
+    +getPulldownMenu(employeeId)
   }
   class "Rental\n<b>Class Rental</b>" as Rental {
     -employeeId : ?int
@@ -34,17 +36,14 @@
     +getRentalFrom()
     +getRentalTo()
     +getId()
+    +getLicensePlate()
+    +getEmployeePulldown()
+    +getCarPulldown()
   }
   class "FilterData\n<b>Class FilterData</b>" as FilterData {
     -requestData : array
     +__construct(requestData)
     +filter()
-  }
-  interface "IBasic\n<b>IBasic</b>" as IBasic {
-    +getAllAsObjects()
-    +deleteObjectById(id)
-    +getObjectById(id)
-    +update()
   }
   class "InsertController\n<b>Class: InsertController</b>" as InsertController {
     -area : string
@@ -90,10 +89,10 @@
     +getView()
   }
   class "Car\n<b>Class Car</b>" as Car {
-    -id : int|null
-    -licensePlate : string|null
-    -manufacturer : string|null
-    -type : string|null
+    -id : ?int
+    -licensePlate : ?string
+    -manufacturer : ?string
+    -type : ?string
     +__construct(id, licensePlate, manufacturer, type)
     +getLicensePlate()
     +getManufacturer()
@@ -104,6 +103,7 @@
     +insert(licensePlate, manufacturer, type)
     +getObjectById(id)
     +update()
+    +getPulldownMenu(carId)
   }
   class "DeleteController\n<b>Class: DeleteController</b>" as DeleteController {
     -area : string
@@ -113,32 +113,38 @@
     +invoke()
     +getView()
   }
-  Car ..> Db
-  DeleteController ..> Car
-  DeleteController ..> Employee
-  DeleteController ..> Rental
-  Employee ..> Db
-  IBasic <|-- Car
-  IBasic <|-- Employee
-  IBasic <|-- Rental
-  IController <|-- DeleteController
-  IController <|-- InsertController
-  IController <|-- ShowFormController
-  IController <|-- ShowTableController
-  IController <|-- UpdateController
-  InsertController ..> Car
-  InsertController ..> Employee
-  InsertController ..> FilterData
-  InsertController ..> Rental
-  Rental ..> Db
-  ShowFormController ..> Car
-  ShowFormController ..> Employee
-  ShowFormController ..> Rental
-  ShowTableController ..> Car
-  ShowTableController ..> Employee
-  ShowTableController ..> Rental
-  UpdateController ..> Car
-  UpdateController ..> Employee
-  UpdateController ..> FilterData
-  UpdateController ..> Rental
+  interface "IBasic\n<b>IBasic</b>" as IBasic {
+    +getAllAsObjects()
+    +deleteObjectById(id)
+    +getObjectById(id)
+    +update()
+  }
+  Car ...> Db
+  DeleteController ...> Car
+  InsertController ...> Car
+  ShowFormController ...> Car
+  ShowTableController ...> Car
+  UpdateController ...> Car
+  DeleteController ...> Employee
+  InsertController ...> Employee
+  ShowFormController ...> Employee
+  ShowTableController ...> Employee
+  UpdateController ...> Employee
+  DeleteController ...> Rental
+  InsertController ...> Rental
+  ShowFormController ...> Rental
+  ShowTableController ...> Rental
+  UpdateController ...> Rental
+  Employee ...> Db
+  IBasic <|-up-- Car
+  IBasic <|-up-- Employee
+  IBasic <|-up-- Rental
+  IController <|--- DeleteController
+  IController <|--- InsertController
+  IController <|--- ShowFormController
+  IController <|--- ShowTableController
+  IController <|--- UpdateController
+  InsertController .up..> FilterData
+  Rental ...> Db
+  UpdateController .up..> FilterData
 @enduml
