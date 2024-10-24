@@ -22,7 +22,7 @@
           $employee = array_values(
               array_filter($employees, fn ($e) => $e->getId() === $rental->getEmployeeId())
           )[0] ?? null;
-        $car = array_values(array_filter($cars, fn ($c) => $c->getId() === $rental->getCarId()))[0] ?? null;
+          $car = array_values(array_filter($cars, fn ($c) => $c->getId() === $rental->getCarId()))[0] ?? null;
         ?>
       <td><?= $employee ? $employee->getLastName() . ', ' . $employee->getFirstName() : 'Unbekannt'; ?></td>
       <td><?= $car ? $car->getLicensePlate() : 'Unbekannt'; ?></td>
