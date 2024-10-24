@@ -8,19 +8,19 @@ class Car implements IBasic
     /**
      * @var int|null $id
      */
-    private int|null $id;
+    private ?int $id;
     /**
      * @var string|null $licensePlate
      */
-    private string|null $licensePlate;
+    private ?string $licensePlate;
     /**
      * @var string|null $manufacturer
      */
-    private string|null $manufacturer;
+    private ?string $manufacturer;
     /**
      * @var string|null $type
      */
-    private string|null $type;
+    private ?string $type;
 
     /**
      * @param int|null $id
@@ -163,5 +163,36 @@ class Car implements IBasic
         $stmt->execute(
             [$this->licensePlate, $this->manufacturer, $this->type, $this->id]
         );
+    }
+
+    /**
+     * getPulldownMenu
+     * Method to populate pulldown menu of Rental
+     *
+     * @return string
+     * @param int $carId
+     */
+    public function getPulldownMenu(int $carId = null): string
+    {
+        $cars = $this->getAllAsObjects();
+
+        // Build HTML string dynamically including all cars (by id) and display there license plate
+        $html = '<select class="form-control" id="carId" name="carId" required>
+                <option value="" disabled '
+                // Select call to selection if the new route is used
+                . ($carId === null ? 'selected' : '')
+                . '>Fahrzeug auswählen</option>';
+
+        // Iterate over all cars and add them to the pulldown menu
+        foreach ($cars as $car) {
+            $html .= '<option value="' . htmlspecialchars($car->getId())
+                   . '"' . ($carId === $car->getId() ? ' selected' : '') . '>'
+                   . htmlspecialchars($car->getLicensePlate())
+                   . '</option>';
+        }
+
+        $html .= '</select>';
+
+        return $html;
     }
 }

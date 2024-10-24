@@ -36,7 +36,7 @@ CREATE TABLE `car` (
   `manufacturer` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,30 +50,62 @@ INSERT INTO `car` VALUES (1,'B-YG 235','VW','Polo'),(2,'B-BQ 235','BMW','3.18'),
 UNLOCK TABLES;
 
 --
--- Table structure for table `mitarbeiter`
+-- Table structure for table `employee`
 --
 
-DROP TABLE IF EXISTS `mitarbeiter`;
+DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mitarbeiter` (
+CREATE TABLE `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `salary` decimal(6,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mitarbeiter`
+-- Dumping data for table `employee`
 --
 
-LOCK TABLES `mitarbeiter` WRITE;
-/*!40000 ALTER TABLE `mitarbeiter` DISABLE KEYS */;
-INSERT INTO `mitarbeiter` VALUES (1,'Daniel','Kipper','m',4200.00),(3,'Jane','Doe','w',4200.00),(4,'Tom','Müller','m',5000.00),(5,'Kim','Maier','d',5000.00),(6,'Erika','Smith','d',9998.00),(51,'Lisa','Müller','d',5000.00);
-/*!40000 ALTER TABLE `mitarbeiter` ENABLE KEYS */;
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (1,'Daniel','Kipper','m',4200.00),(3,'Jane','Doe','w',4200.00),(4,'Tom','Müller','m',5000.00),(5,'Kim','Maier','d',5000.00),(6,'Erika','Smith','d',9998.00),(51,'Lisa','Müller','d',5023.00);
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rental`
+--
+
+DROP TABLE IF EXISTS `rental`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rental` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employeeId` int(11) NOT NULL,
+  `carId` int(11) NOT NULL,
+  `rentalFrom` datetime NOT NULL,
+  `rentalTo` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `employeeId` (`employeeId`),
+  KEY `carId` (`carId`),
+  CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`),
+  CONSTRAINT `rental_ibfk_2` FOREIGN KEY (`carId`) REFERENCES `car` (`id`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`rentalFrom` < `rentalTo`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rental`
+--
+
+LOCK TABLES `rental` WRITE;
+/*!40000 ALTER TABLE `rental` DISABLE KEYS */;
+INSERT INTO `rental` VALUES (1,1,1,'2024-10-22 08:00:00','2024-10-22 18:00:00'),(2,3,2,'2024-10-23 09:00:00','2024-10-23 17:00:00'),(3,4,3,'2024-10-24 10:00:00','2024-10-24 15:00:00'),(4,5,4,'2024-10-25 07:30:00','2024-10-25 16:30:00'),(5,6,1,'2024-10-26 12:00:00','2024-10-26 20:00:00'),(6,1,2,'2024-10-23 14:26:00','2024-10-26 14:28:00'),(9,51,9,'2024-01-01 01:00:00',NULL);
+/*!40000 ALTER TABLE `rental` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -85,4 +117,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-22 11:37:54
+-- Dump completed on 2024-10-24 12:23:56

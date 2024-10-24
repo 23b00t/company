@@ -13,6 +13,10 @@ class InsertController implements IController
      * @var array $postData
      */
     private array $postData;
+    /**
+     * @var string $view
+     */
+    private string $view;
 
     /**
      * __construct
@@ -24,6 +28,7 @@ class InsertController implements IController
         $this->area = $requestData['area'];
         // Extract object attribute values from POST requestData
         $this->postData = (new FilterData($requestData))->filter();
+        $this->view = 'table';
     }
 
     /**
@@ -43,13 +48,34 @@ class InsertController implements IController
             );
 
             $employees = $employee->getAllAsObjects();
-            return [ 'view' => 'table', 'employees' => $employees ];
+            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
             $car->insert($this->postData['licensePlate'], $this->postData['manufacturer'], $this->postData['type']);
 
             $cars = $car->getAllAsObjects();
-            return [ 'view' => 'table', 'cars' => $cars ];
+            return [ 'cars' => $cars ];
+        } elseif ($this->area === 'rental') {
+            $rental = new Rental();
+            $rental->insert(
+                $this->postData['employeeId'],
+                $this->postData['carId'],
+                $this->postData['rentalFrom'],
+                $this->postData['rentalTo']
+            );
+
+            $rentals = $rental->getAllAsObjects();
+            return [ 'rentals' => $rentals ];
         }
+    }
+
+    /**
+     * getView
+     *
+     * @return string
+     */
+    public function getView(): string
+    {
+        return $this->view;
     }
 }

@@ -1,12 +1,20 @@
 <?php
 
+/**
+ * index.php
+ * Handle all application requests
+ */
+
+/** Include DB config */
 include 'config.php';
 
-/**
- * Autoload classes
- */
+/** Autoload classes */
 spl_autoload_register(function ($className): void {
-    include 'classes/' . $className . '.php';
+    if (substr($className, -10) === 'Controller') {
+        include 'controllers/' . $className . '.php';
+    } else {
+        include 'classes/' . $className . '.php';
+    }
 });
 
 /**
@@ -36,18 +44,12 @@ $data = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : $_GET;
  * (e.g., 'view', 'employees') into the current scope for direct access
  * as $view, $employees, etc.
  */
-$array = (new $controllerName($data))->invoke();
-
-/**
- * @var string $view (returned from controller)
- */
+$controller = new $controllerName($data);
+$array = $controller->invoke();
 extract($array);
 
-// Implementation of extract:
-// foreach ($array as $key => $value) {
-//     $variableName = $key;
-//     $$variableName = $value;
-// }
+/** After calling ShowFormController set the action depending on usecase - update or insert */
+$action = $controllerName === 'ShowFormController' ? $controller->getAction() : $action;
 
 /** Include requested view */
-include 'views/' . $area . '/' . $view . '.php';
+include __DIR__ . '/views/application.html.php';

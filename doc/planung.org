@@ -16,7 +16,7 @@
 - event: delete in table.php
 - in index.php $action Fallunterscheidung "delete" einbauen
 - in Employee die Löschmethode ($id) schreiben
-- nach Aufruf Tabelle mitarbeiter auslesen und Daten in table.php in table eintragen lassen
+- nach Aufruf Tabelle employee auslesen und Daten in table.php in table eintragen lassen
 - event: neuen Employee in Datenbank eintragen
 - form.php erstellen, Navigation einbinden
 - 4 Inputfelder erstellen, hiddenfield action erstellen
@@ -45,7 +45,7 @@
 - event: delete in table.php
 - in index.php $action Fallunterscheidung "delete" einbauen
 - in Car die Löschmethode ($id) schreiben
-- nach Aufruf Tabelle mitarbeiter auslesen und Daten in table.php in table eintragen lassen
+- nach Aufruf Tabelle employee auslesen und Daten in table.php in table eintragen lassen
 - event: neuen Car in Datenbank eintragen
 - form.php erstellen, Navigation einbinden
 - 3 Inputfelder erstellen, hiddenfield action erstellen
@@ -54,3 +54,12 @@
 - Methode insert in Klasse Car schreiben, Car-Objekt zurückgeben
 - table.php einbinden
 - navigation.php ergänzen (Autos, Auto hinzufügen)
+
+
+* Fragen Ausleige
+- Eintrag in bis Feld später möglich?
+- Doppelte Ausleihe verhindern, nur mögliche Termine vorschlagen
+- Bis nicht kleiner als von
+- Tabelle Ausleihe: Kennzeichen, Fahrer, Von, Bis, Löschen, Ändern
+- Navigation erweitern
+

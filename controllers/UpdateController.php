@@ -18,6 +18,10 @@ class UpdateController implements IController
      * @var array $postData
      */
     private array $postData;
+    /**
+     * @var string $view
+     */
+    private string $view;
 
     /**
      * __construct
@@ -30,6 +34,7 @@ class UpdateController implements IController
         $this->id = $requestData['id'];
         // Extract object attribute values from POST requestData
         $this->postData = (new FilterData($requestData))->filter();
+        $this->view = 'table';
     }
 
     /**
@@ -50,7 +55,7 @@ class UpdateController implements IController
             $employee->update();
 
             $employees = $employee->getAllAsObjects();
-            return [ 'view' => 'table', 'employees' => $employees ];
+            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car(
                 $this->id,
@@ -61,7 +66,29 @@ class UpdateController implements IController
             $car->update();
 
             $cars =  $car->getAllAsObjects();
-            return [ 'view' => 'table', 'cars' => $cars ];
+            return [ 'cars' => $cars ];
+        } elseif ($this->area === 'rental') {
+            $rental = new Rental(
+                $this->id,
+                $this->postData['employeeId'],
+                $this->postData['carId'],
+                $this->postData['rentalFrom'],
+                $this->postData['rentalTo']
+            );
+            $rental->update();
+
+            $rentals =  $rental->getAllAsObjects();
+            return [ 'rentals' => $rentals ];
         }
+    }
+
+    /**
+     * getView
+     *
+     * @return string
+     */
+    public function getView(): string
+    {
+        return $this->view;
     }
 }

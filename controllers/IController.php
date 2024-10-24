@@ -8,7 +8,7 @@ interface IController
     /**
      * Constructor must accept an array parameter.
      *
-     * @param array $data
+     * @param array $requestData
      */
     public function __construct(array $requestData);
 
@@ -18,4 +18,11 @@ interface IController
      * @return array
      */
     public function invoke(): array;
+
+    /**
+     * getView
+     *
+     * @return string
+     */
+    public function getView(): string;
 }

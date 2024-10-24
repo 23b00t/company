@@ -8,23 +8,23 @@ class Employee implements IBasic
     /**
      * @var int|null $id
      */
-    private int|null $id;
+    private ?int $id;
     /**
      * @var string|null $firstName
      */
-    private string|null $firstName;
+    private ?string $firstName;
     /**
      * @var string|null $lastName
      */
-    private string|null $lastName;
+    private ?string $lastName;
     /**
      * @var string|null $gender
      */
-    private string|null $gender;
+    private ?string $gender;
     /**
      * @var float|null $salary
      */
-    private float|null $salary;
+    private ?float $salary;
 
     /**
      * @param int|null $id
@@ -109,7 +109,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM mitarbeiter';
+        $sql = 'SELECT * FROM employee';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, Employee::class); //  | PDO::FETCH_PROPS_LATE
@@ -126,7 +126,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'DELETE FROM mitarbeiter WHERE id = ?';
+        $sql = 'DELETE FROM employee WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
         // $stmt->fetch(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -145,7 +145,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'INSERT INTO mitarbeiter VALUES(NULL, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO employee VALUES(NULL, ?, ?, ?, ?)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$firstName, $lastName, $gender, $salaray]);
         $id = $pdo->lastInsertId();
@@ -162,7 +162,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM mitarbeiter WHERE id = ?';
+        $sql = 'SELECT * FROM employee WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetchObject(Employee::class);
@@ -177,10 +177,45 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'UPDATE mitarbeiter SET firstName = ?, lastName = ?, gender = ?, salary = ? WHERE id = ?';
+        $sql = 'UPDATE employee SET firstName = ?, lastName = ?, gender = ?, salary = ? WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [$this->firstName, $this->lastName, $this->gender, $this->salary, $this->id]
         );
+    }
+
+    public function getName(): string
+    {
+        return ($this->getFirstName() . ' ' . $this->getLastName());
+    }
+
+    /**
+     * getPulldownMenu
+     * Method to populate pulldown menu of Rental
+     *
+     * @return string
+     * @param int $employeeId
+     */
+    public function getPulldownMenu(int $employeeId = null): string
+    {
+        $employees = $this->getAllAsObjects();
+
+        // Build HTML string dynamically including all employees (by id) and display there license plate
+        $html = '<select class="form-control" id="employeeId" name="employeeId" required>
+                <option value="" disabled '
+                . ($employeeId === null ? 'selected' : '')
+                . '>Mitarbeiter auswählen</option>';
+
+        // Iterate over all employees and add them to the pulldown menu
+        foreach ($employees as $employee) {
+            $html .= '<option value="' . htmlspecialchars($employee->getId())
+                   . '"' . ($employeeId === $employee->getId() ? ' selected' : '') . '>'
+                   . htmlspecialchars($employee->getName())
+                   . '</option>';
+        }
+
+        $html .= '</select>';
+
+        return $html;
     }
 }

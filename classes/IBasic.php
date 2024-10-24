@@ -35,5 +35,4 @@ interface IBasic
      * @return void
      */
     public function update(): void;
-    // public function insert(mixed ...$args): Object;
 }

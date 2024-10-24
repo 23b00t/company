@@ -14,6 +14,10 @@ class DeleteController implements IController
      * @var int $id
      */
     private int $id;
+    /**
+     * @var string $view
+     */
+    private string $view;
 
 
     /**
@@ -25,12 +29,13 @@ class DeleteController implements IController
     {
         $this->area = $requestData['area'];
         $this->id = $requestData['id'];
+        $this->view = 'table';
     }
 
     /**
      * invoke
      *
-     * @return Employee[]|Car[]
+     * @return array
      */
     public function invoke(): array
     {
@@ -39,13 +44,29 @@ class DeleteController implements IController
             $employee->deleteObjectById($this->id);
 
             $employees = $employee->getAllAsObjects();
-            return [ 'view' => 'table', 'employees' => $employees ];
+            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
             $car->deleteObjectById($this->id);
 
             $cars = $car->getAllAsObjects();
-            return [ 'view' => 'table', 'cars' => $cars ];
+            return [ 'cars' => $cars ];
+        } elseif ($this->area === 'rental') {
+            $rental = new Rental();
+            $rental->deleteObjectById($this->id);
+
+            $rentals = $rental->getAllAsObjects();
+            return [ 'rentals' => $rentals ];
         }
+    }
+
+    /**
+     * getView
+     *
+     * @return string
+     */
+    public function getView(): string
+    {
+        return $this->view;
     }
 }

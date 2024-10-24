@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS firma;
 CREATE DATABASE firma;
 USE firma;
 
-CREATE TABLE IF NOT EXISTS mitarbeiter (
+CREATE TABLE IF NOT EXISTS employee (
     id INT AUTO_INCREMENT PRIMARY KEY,
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS mitarbeiter (
     salary DECIMAL (6,2) NOT NULL
 );
 
-INSERT INTO mitarbeiter (firstName, lastName, gender, salary) VALUES
+INSERT INTO employee (firstName, lastName, gender, salary) VALUES
     ('Daniel', 'Kipp', 'm', 4200.00),
     ('John', 'Doe', 'm', 2300.00),
     ('Jane', 'Doe', 'w', 4200.00),
