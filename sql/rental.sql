@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS rental (
     carId INT NOT NULL,
     rentalFrom DATETIME NOT NULL,
     rentalTo DATETIME,
-    FOREIGN KEY (employeeId) REFERENCES mitarbeiter(id),
+    FOREIGN KEY (employeeId) REFERENCES employee(id),
     FOREIGN KEY (carId) REFERENCES car(id),
     CHECK (rentalFrom < rentalTo)
 );

@@ -109,7 +109,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM mitarbeiter';
+        $sql = 'SELECT * FROM employee';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, Employee::class); //  | PDO::FETCH_PROPS_LATE
@@ -126,7 +126,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'DELETE FROM mitarbeiter WHERE id = ?';
+        $sql = 'DELETE FROM employee WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
         // $stmt->fetch(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -145,7 +145,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'INSERT INTO mitarbeiter VALUES(NULL, ?, ?, ?, ?)';
+        $sql = 'INSERT INTO employee VALUES(NULL, ?, ?, ?, ?)';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$firstName, $lastName, $gender, $salaray]);
         $id = $pdo->lastInsertId();
@@ -162,7 +162,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'SELECT * FROM mitarbeiter WHERE id = ?';
+        $sql = 'SELECT * FROM employee WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetchObject(Employee::class);
@@ -177,7 +177,7 @@ class Employee implements IBasic
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
-        $sql = 'UPDATE mitarbeiter SET firstName = ?, lastName = ?, gender = ?, salary = ? WHERE id = ?';
+        $sql = 'UPDATE employee SET firstName = ?, lastName = ?, gender = ?, salary = ? WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute(
             [$this->firstName, $this->lastName, $this->gender, $this->salary, $this->id]
