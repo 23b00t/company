@@ -1,9 +1,9 @@
 <?php
 /**
- * @var $rental
- * @var $employees
- * @var $cars
- * @var $action
+ * @var Rental $rental
+ * @var Employee[] $employees
+ * @var Car[] $cars
+ * @var string $action
  */
 
 $rentalExists = isset($rental) && $rental instanceof Rental;

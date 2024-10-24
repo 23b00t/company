@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @var $rentals
- * @var $employees
- * @var $cars
+ * @var Rental[] $rentals
+ * @var Employee[] $employees
+ * @var Car[] $cars
  */
 ?>
 

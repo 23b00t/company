@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @var $employee
- * @var $action
+ * @var Employee $employee
+ * @var string $action
  */
 
 // Check if $employee is set with an Employee (edit route)

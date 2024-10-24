@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @var $car
- * @var $action
+ * @var Car $car
+ * @var string $action
  */
 
 // Check if $car exists and is an instance of Car (edit route)

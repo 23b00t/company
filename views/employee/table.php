@@ -1,5 +1,5 @@
 <?php
-/** @var $employees  */
+/** @var Employee[] $employees  */
 ?>
 
 <table class="table mt-4">

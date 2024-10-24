@@ -1,5 +1,5 @@
 <?php
-/** @var $cars  */
+/** @var Car[] $cars  */
 ?>
 
 <table class="table mt-4">
