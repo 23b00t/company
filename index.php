@@ -10,7 +10,11 @@ include 'config.php';
 
 /** Autoload classes */
 spl_autoload_register(function ($className): void {
-    include 'classes/' . $className . '.php';
+    if (substr($className, -10) === 'Controller') {
+        include 'controllers/' . $className . '.php';
+    } else {
+        include 'classes/' . $className . '.php';
+    }
 });
 
 /**
