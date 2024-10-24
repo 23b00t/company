@@ -191,6 +191,7 @@ class Employee implements IBasic
 
     /**
      * getPulldownMenu
+     * Method to populate pulldown menu of Rental
      *
      * @return string
      * @param int $employeeId
@@ -198,11 +199,14 @@ class Employee implements IBasic
     public function getPulldownMenu(int $employeeId): string
     {
         $employees = $this->getAllAsObjects();
+
+        // Build HTML string dynamically including all employees (by id) and display there license plate
         $html = '<select class="form-control" id="employeeId" name="employeeId" required>
                 <option value="" disabled '
                 . ($employeeId === null ? 'selected' : '')
                 . '>Mitarbeiter auswählen</option>';
 
+        // Iterate over all employees and add them to the pulldown menu
         foreach ($employees as $employee) {
             $html .= '<option value="' . htmlspecialchars($employee->getId())
                    . '"' . ($employeeId === $employee->getId() ? ' selected' : '') . '>'
