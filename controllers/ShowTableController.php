@@ -42,9 +42,7 @@ class ShowTableController implements IController
             return [ 'cars' => $cars ];
         } elseif ($this->area === 'rental') {
             $rentals = (new Rental())->getAllAsObjects();
-            $cars = (new Car())->getAllAsObjects();
-            $employees = (new Employee())->getAllAsObjects();
-            return [ 'rentals' => $rentals, 'cars' => $cars, 'employees' => $employees ];
+            return [ 'rentals' => $rentals ];
         }
     }
 
