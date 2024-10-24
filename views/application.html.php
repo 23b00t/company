@@ -1,7 +1,8 @@
 <?php
+
 /**
- * @var $area
- * @var $controller
+ * @var string $area
+ * @var object $controller
  */
 ?>
 

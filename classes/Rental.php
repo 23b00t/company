@@ -5,17 +5,33 @@
  */
 class Rental implements IBasic
 {
-    private ?int $employeeId;
-    private ?int $carId;
-    private ?string $rentalFrom;
-    private ?string $rentalTo;
+    /**
+     * @var int|null $id
+     */
     private ?int $id;
+    /**
+     * @var int|null $employeeId
+     */
+    private ?int $employeeId;
+    /**
+     * @var int|null $carId
+     */
+    private ?int $carId;
+    /**
+     * @var string|null $rentalFrom
+     */
+    private ?string $rentalFrom;
+    /**
+     * @var string|null $rentalTo
+     */
+    private ?string $rentalTo;
 
     /**
-     * @param int $employeeId
-     * @param int $carId
-     * @param string $rentalFrom
-     * @param string $rentalTo
+     * @param int|null $id
+     * @param int|null $employeeId
+     * @param int|null $carId
+     * @param string|null $rentalFrom
+     * @param string|null $rentalTo
      */
     public function __construct(
         int $id = null,
@@ -71,7 +87,7 @@ class Rental implements IBasic
      *
      * @return Rental
      */
-    public function insert(int $employeeId, int $carId, string $rentalFrom, string $rentalTo): Rental
+    public function insert(int $employeeId, int $carId, string $rentalFrom, ?string $rentalTo): Rental
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
@@ -120,7 +136,7 @@ class Rental implements IBasic
      *
      * @return int
      */
-    public function getEmployeeId(): int
+    public function getEmployeeId(): ?int
     {
         return $this->employeeId;
     }
@@ -130,7 +146,7 @@ class Rental implements IBasic
      *
      * @return int
      */
-    public function getCarId(): int
+    public function getCarId(): ?int
     {
         return $this->carId;
     }
@@ -192,7 +208,7 @@ class Rental implements IBasic
      */
     public function getEmployeePulldown(): string
     {
-        $employeeId = $this->employeeId ?? null;
+        $employeeId = $this->employeeId;
         return (new Employee())->getPulldownMenu($employeeId);
     }
 
@@ -203,7 +219,7 @@ class Rental implements IBasic
      */
     public function getCarPulldown(): string
     {
-        $carId = $this->carId ?? null;
+        $carId = $this->carId;
         return (new Car())->getPulldownMenu($carId);
     }
 }

@@ -8,23 +8,23 @@ class Employee implements IBasic
     /**
      * @var int|null $id
      */
-    private int|null $id;
+    private ?int $id;
     /**
      * @var string|null $firstName
      */
-    private string|null $firstName;
+    private ?string $firstName;
     /**
      * @var string|null $lastName
      */
-    private string|null $lastName;
+    private ?string $lastName;
     /**
      * @var string|null $gender
      */
-    private string|null $gender;
+    private ?string $gender;
     /**
      * @var float|null $salary
      */
-    private float|null $salary;
+    private ?float $salary;
 
     /**
      * @param int|null $id
@@ -196,7 +196,7 @@ class Employee implements IBasic
      * @return string
      * @param int $employeeId
      */
-    public function getPulldownMenu(int $employeeId): string
+    public function getPulldownMenu(int $employeeId = null): string
     {
         $employees = $this->getAllAsObjects();
 

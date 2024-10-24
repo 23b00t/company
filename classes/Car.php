@@ -8,19 +8,19 @@ class Car implements IBasic
     /**
      * @var int|null $id
      */
-    private int|null $id;
+    private ?int $id;
     /**
      * @var string|null $licensePlate
      */
-    private string|null $licensePlate;
+    private ?string $licensePlate;
     /**
      * @var string|null $manufacturer
      */
-    private string|null $manufacturer;
+    private ?string $manufacturer;
     /**
      * @var string|null $type
      */
-    private string|null $type;
+    private ?string $type;
 
     /**
      * @param int|null $id
@@ -172,7 +172,7 @@ class Car implements IBasic
      * @return string
      * @param int $carId
      */
-    public function getPulldownMenu(int $carId): string
+    public function getPulldownMenu(int $carId = null): string
     {
         $cars = $this->getAllAsObjects();
 
