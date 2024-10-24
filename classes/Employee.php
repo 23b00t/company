@@ -183,4 +183,35 @@ class Employee implements IBasic
             [$this->firstName, $this->lastName, $this->gender, $this->salary, $this->id]
         );
     }
+
+    public function getName(): string
+    {
+        return ($this->getFirstName() . ' ' . $this->getLastName());
+    }
+
+    /**
+     * getPulldownMenu
+     *
+     * @return string
+     * @param int $employeeId
+     */
+    public function getPulldownMenu($employeeId): string
+    {
+        $employees = $this->getAllAsObjects();
+        $html = '<select class="form-control" id="employeeId" name="employeeId" required>
+                <option value="" disabled '
+                . ($employeeId === null ? 'selected' : '')
+                . '>Mitarbeiter auswählen</option>';
+
+        foreach ($employees as $employee) {
+            $html .= '<option value="' . htmlspecialchars($employee->getId())
+                   . '"' . ($employeeId === $employee->getId() ? ' selected' : '') . '>'
+                   . htmlspecialchars($employee->getName())
+                   . '</option>';
+        }
+
+        $html .= '</select>';
+
+        return $html;
+    }
 }

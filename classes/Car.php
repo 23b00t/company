@@ -164,4 +164,31 @@ class Car implements IBasic
             [$this->licensePlate, $this->manufacturer, $this->type, $this->id]
         );
     }
+
+    /**
+     * getPulldownMenu
+     *
+     * @return string
+     * @param int $carId
+     */
+    public function getPulldownMenu($carId): string
+    {
+        $cars = $this->getAllAsObjects();
+        $html = '<select class="form-control" id="carId" name="carId" required>
+                <option value="" disabled '
+                . ($carId === null ? 'selected' : '')
+                . '>Fahrzeug auswählen</option>';
+
+        foreach ($cars as $car) {
+            $html .= '<option value="' . htmlspecialchars($car->getId())
+                   . '"' . ($carId === $car->getId() ? ' selected' : '') . '>'
+                   . htmlspecialchars($car->getLicensePlate())
+                   . '</option>';
+        }
+
+        $html .= '</select>';
+
+        // $rentalExists && $rental->getCarId() == $car->getId() ? 'selected' : '';
+        return $html;
+    }
 }

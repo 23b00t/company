@@ -1,8 +1,7 @@
 <?php
+
 /**
  * @var Rental $rental
- * @var Employee[] $employees
- * @var Car[] $cars
  * @var string $action
  */
 
@@ -16,29 +15,13 @@ $rentalExists = isset($rental) && $rental instanceof Rental;
       <!-- Employee Dropdown -->
       <div class="form-group">
         <label for="employeeId">Mitarbeiter</label>
-        <select class="form-control" id="employeeId" name="employeeId" required>
-          <option value="" disabled <?= !$rentalExists ? 'selected' : ''; ?>>Mitarbeiter auswählen</option>
-          <?php foreach ($employees as $employee) : ?>
-            <option value="<?= $employee->getId(); ?>"
-                <?= $rentalExists && $rental->getEmployeeId() == $employee->getId() ? 'selected' : ''; ?>>
-                <?= $employee->getLastName() . ', ' . $employee->getFirstName(); ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
+        <?= $rentalExists ? $rental->getEmployeePulldown() : (new Rental())->getEmployeePulldown(); ?>
       </div>
 
       <!-- Car Dropdown -->
       <div class="form-group">
         <label for="carId">Fahrzeug</label>
-        <select class="form-control" id="carId" name="carId" required>
-          <option value="" disabled <?= !$rentalExists ? 'selected' : ''; ?>>Fahrzeug auswählen</option>
-          <?php foreach ($cars as $car) : ?>
-            <option value="<?= $car->getId(); ?>"
-                <?= $rentalExists && $rental->getCarId() == $car->getId() ? 'selected' : ''; ?>>
-                <?= $car->getLicensePlate(); ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
+        <?= $rentalExists ? $rental->getCarPulldown() : (new Rental())->getCarPulldown(); ?>
       </div>
 
       <!-- Rental From -->

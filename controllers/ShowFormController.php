@@ -55,19 +55,7 @@ class ShowFormController implements IController
                 $array = [ 'car' => $car ];
             } elseif ($this->area === 'rental') {
                 $rental = (new Rental())->getObjectById($this->id);
-                $cars = (new Car())->getAllAsObjects();
-                $employees = (new Employee())->getAllAsObjects();
-                $array = [ 'rental' => $rental, 'cars' => $cars, 'employees' => $employees ];
-            }
-        /**
-         * Display an empty form. For models without foreign keys, return an empty array.
-         * For models with foreign keys, return associated foreign entities.
-         */
-        } else {
-            if ($this->area === 'rental') {
-                $cars = (new Car())->getAllAsObjects();
-                $employees = (new Employee())->getAllAsObjects();
-                $array = [ 'cars' => $cars, 'employees' => $employees ];
+                $array = [ 'rental' => $rental ];
             }
         }
         return $array;

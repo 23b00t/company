@@ -139,4 +139,36 @@ class Rental implements IBasic
     {
         return $this->id;
     }
+
+    public function getName(): string
+    {
+        return (new Employee())->getObjectById($this->employeeId)->getName();
+    }
+
+    public function getLicensePlate(): string
+    {
+        return (new Car())->getObjectById($this->carId)->getLicensePlate();
+    }
+
+    /**
+     * getEmployeePulldown
+     *
+     * @return string
+     */
+    public function getEmployeePulldown(): string
+    {
+        $employeeId = $this->employeeId ?? null;
+        return (new Employee())->getPulldownMenu($employeeId);
+    }
+
+    /**
+     * getCarPulldown
+     *
+     * @return string
+     */
+    public function getCarPulldown(): string
+    {
+        $carId = $this->carId ?? null;
+        return (new Car())->getPulldownMenu($carId);
+    }
 }
