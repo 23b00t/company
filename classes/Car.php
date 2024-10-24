@@ -171,7 +171,7 @@ class Car implements IBasic
      * @return string
      * @param int $carId
      */
-    public function getPulldownMenu($carId): string
+    public function getPulldownMenu(int $carId): string
     {
         $cars = $this->getAllAsObjects();
         $html = '<select class="form-control" id="carId" name="carId" required>

@@ -195,7 +195,7 @@ class Employee implements IBasic
      * @return string
      * @param int $employeeId
      */
-    public function getPulldownMenu($employeeId): string
+    public function getPulldownMenu(int $employeeId): string
     {
         $employees = $this->getAllAsObjects();
         $html = '<select class="form-control" id="employeeId" name="employeeId" required>

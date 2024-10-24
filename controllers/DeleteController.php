@@ -14,7 +14,9 @@ class DeleteController implements IController
      * @var int $id
      */
     private int $id;
-
+    /**
+     * @var string $view
+     */
     private string $view;
 
 
@@ -60,6 +62,11 @@ class DeleteController implements IController
         }
     }
 
+    /**
+     * getView
+     *
+     * @return string
+     */
     public function getView(): string
     {
         return $this->view;

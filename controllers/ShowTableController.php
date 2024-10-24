@@ -48,6 +48,11 @@ class ShowTableController implements IController
         }
     }
 
+    /**
+     * getView
+     *
+     * @return string
+     */
     public function getView(): string
     {
         return $this->view;

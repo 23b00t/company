@@ -61,11 +61,21 @@ class ShowFormController implements IController
         return $array;
     }
 
+    /**
+     * getView
+     *
+     * @return string
+     */
     public function getView(): string
     {
         return $this->view;
     }
 
+    /**
+     * getAction
+     *
+     * @return string
+     */
     public function getAction(): string
     {
         return $this->action;

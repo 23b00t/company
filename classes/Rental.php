@@ -71,7 +71,7 @@ class Rental implements IBasic
      *
      * @return Rental
      */
-    public function insert($employeeId, $carId, $rentalFrom, $rentalTo): Rental
+    public function insert(int $employeeId, int $carId, string $rentalFrom, string $rentalTo): Rental
     {
         /** @var PDO $pdo */
         $pdo = Db::getConnection();
@@ -115,36 +115,71 @@ class Rental implements IBasic
         );
     }
 
+    /**
+     * getEmployeeId
+     *
+     * @return int
+     */
     public function getEmployeeId(): int
     {
         return $this->employeeId;
     }
 
+    /**
+     * getCarId
+     *
+     * @return int
+     */
     public function getCarId(): int
     {
         return $this->carId;
     }
 
+    /**
+     * getRentalFrom
+     *
+     * @return string
+     */
     public function getRentalFrom(): string
     {
         return $this->rentalFrom;
     }
 
+    /**
+     * getRentalTo
+     *
+     * @return ?string
+     */
     public function getRentalTo(): ?string
     {
         return $this->rentalTo;
     }
 
+    /**
+     * getId
+     *
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * getName
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return (new Employee())->getObjectById($this->employeeId)->getName();
     }
 
+    /**
+     * getLicensePlate
+     *
+     * @return string
+     */
     public function getLicensePlate(): string
     {
         return (new Car())->getObjectById($this->carId)->getLicensePlate();

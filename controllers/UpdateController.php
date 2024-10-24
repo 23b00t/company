@@ -78,12 +78,15 @@ class UpdateController implements IController
             $rental->update();
 
             $rentals =  $rental->getAllAsObjects();
-            $cars = (new Car())->getAllAsObjects();
-            $employees = (new Employee())->getAllAsObjects();
-            return [ 'rentals' => $rentals, 'cars' => $cars, 'employees' => $employees ];
+            return [ 'rentals' => $rentals ];
         }
     }
 
+    /**
+     * getView
+     *
+     * @return string
+     */
     public function getView(): string
     {
         return $this->view;

@@ -7,6 +7,9 @@
  */
 class FilterData
 {
+    /**
+     * @var array $requestData
+     */
     private array $requestData;
 
     /**

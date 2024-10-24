@@ -7,8 +7,16 @@
 
 class Db
 {
+    /**
+     * @var object $dbh
+     */
     private static object $dbh;
 
+    /**
+     * getConnection
+     *
+     * @return object
+     */
     public static function getConnection(): object
     {
         if (!isset(self::$dbh)) {
