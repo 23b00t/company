@@ -16,8 +16,8 @@
   </tr>
   <?php foreach ($rentals as $rental) : ?>
     <tr>
-      <td><?= $rental->getName(); ?> </td>
-      <td><?= $rental->getLicensePlate(); ?> </td>
+      <td><?= $rental->getEmployee()->getName(); ?> </td>
+      <td><?= $rental->getCar()->getLicensePlate(); ?> </td>
       <td><?= $rental->getRentalFrom(); ?></td>
       <td><?= $rental->getRentalTo(); ?></td>
       <td><a href="index.php?area=rental&action=delete&id=<?= $rental->getId(); ?>">

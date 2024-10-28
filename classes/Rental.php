@@ -25,6 +25,14 @@ class Rental implements IBasic
      * @var string|null $rentalTo
      */
     private ?string $rentalTo;
+    /**
+     * @var Employee $employee
+     */
+    private Employee $employee;
+    /**
+     * @var Car $car
+     */
+    private Car $car;
 
     /**
      * @param int|null $id
@@ -40,11 +48,15 @@ class Rental implements IBasic
         string $rentalFrom = null,
         string $rentalTo = null
     ) {
-        $this->employeeId = $employeeId;
-        $this->carId = $carId;
-        $this->rentalFrom = $rentalFrom;
-        $this->rentalTo = $rentalTo;
-        $this->id = $id;
+        if (isset($id)) {
+            $this->employeeId = $employeeId;
+            $this->carId = $carId;
+            $this->rentalFrom = $rentalFrom;
+            $this->rentalTo = $rentalTo;
+            $this->id = $id;
+            $this->employee = (new Employee())->getObjectById($this->employeeId);
+            $this->car = (new Car())->getObjectById($this->carId);
+        }
     }
 
     /**
@@ -59,7 +71,13 @@ class Rental implements IBasic
         $sql = 'SELECT * FROM rental';
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, Rental::class);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $return = [];
+        foreach ($results as $object) {
+            $return[] = new Rental(...$object);
+        }
+
+        return $return;
     }
 
     /**
@@ -111,8 +129,10 @@ class Rental implements IBasic
         $sql = 'SELECT * FROM rental WHERE id = ?';
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, Rental::class);
-        return $stmt->fetch();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $return = $result ? new Rental(...$result) : null;
+
+        return $return;
     }
 
     /**
@@ -182,23 +202,23 @@ class Rental implements IBasic
     }
 
     /**
-     * getName
+     * getEmployee
      *
-     * @return string
+     * @return Employee
      */
-    public function getName(): string
+    public function getEmployee(): Employee
     {
-        return (new Employee())->getObjectById($this->employeeId)->getName();
+        return $this->employee;
     }
 
     /**
-     * getLicensePlate
+     * getCar
      *
-     * @return string
+     * @return Car
      */
-    public function getLicensePlate(): string
+    public function getCar(): Car
     {
-        return (new Car())->getObjectById($this->carId)->getLicensePlate();
+        return $this->car;
     }
 
     /**
@@ -208,7 +228,7 @@ class Rental implements IBasic
      */
     public function getEmployeePulldown(): string
     {
-        $employeeId = $this->employeeId;
+        $employeeId = $this->employeeId ?? null;
         return (new Employee())->getPulldownMenu($employeeId);
     }
 
@@ -219,7 +239,7 @@ class Rental implements IBasic
      */
     public function getCarPulldown(): string
     {
-        $carId = $this->carId;
+        $carId = $this->carId ?? null;
         return (new Car())->getPulldownMenu($carId);
     }
 }
