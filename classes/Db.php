@@ -17,7 +17,7 @@ class Db
      *
      * @return object
      */
-    public static function getConnection(): object
+    public static function getConnection(): PDO
     {
         if (!isset(self::$dbh)) {
             // Connect to a MySQL database using driver invocation
