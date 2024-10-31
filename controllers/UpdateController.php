@@ -26,7 +26,6 @@ class UpdateController extends BaseController
         $this->id = $requestData['id'];
         // Extract object attribute values from POST requestData
         $this->postData = (new FilterData($requestData))->filter();
-        $this->view = 'table';
     }
 
     /**

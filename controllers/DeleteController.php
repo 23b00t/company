@@ -20,7 +20,6 @@ class DeleteController extends BaseController
     {
         parent::__construct($requestData);
         $this->id = $requestData['id'];
-        $this->view = 'table';
     }
 
     protected function employeeAction(): void
