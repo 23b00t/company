@@ -28,6 +28,22 @@ abstract class BaseController implements IController
     }
 
     /**
+     * invoke
+     *
+     * @return array
+     */
+    public function invoke(): array
+    {
+        if ($this->area === 'employee') {
+            employeeAction();
+        } elseif ($this->area === 'car') {
+            carAction();
+        } elseif ($this->area === 'rental') {
+            rentalAction();
+        }
+        return TableHelper::getAllObjectsByArea($this->area);
+    }
+    /**
      * getView
      *
      * @return string
