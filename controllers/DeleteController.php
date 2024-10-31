@@ -33,21 +33,13 @@ class DeleteController extends BaseController
         if ($this->area === 'employee') {
             $employee = new Employee();
             $employee->deleteObjectById($this->id);
-
-            $employees = $employee->getAllAsObjects();
-            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
             $car->deleteObjectById($this->id);
-
-            $cars = $car->getAllAsObjects();
-            return [ 'cars' => $cars ];
         } elseif ($this->area === 'rental') {
             $rental = new Rental();
             $rental->deleteObjectById($this->id);
-
-            $rentals = $rental->getAllAsObjects();
-            return [ 'rentals' => $rentals ];
         }
+        return TableHelper::getAllObjectsByArea($this->area);
     }
 }

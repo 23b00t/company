@@ -45,9 +45,6 @@ class UpdateController extends BaseController
                 (float)$this->postData['salary']
             );
             $employee->update();
-
-            $employees = $employee->getAllAsObjects();
-            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car(
                 $this->id,
@@ -56,9 +53,6 @@ class UpdateController extends BaseController
                 $this->postData['type']
             );
             $car->update();
-
-            $cars =  $car->getAllAsObjects();
-            return [ 'cars' => $cars ];
         } elseif ($this->area === 'rental') {
             $rental = new Rental(
                 $this->id,
@@ -68,9 +62,7 @@ class UpdateController extends BaseController
                 $this->postData['rentalTo']
             );
             $rental->update();
-
-            $rentals =  $rental->getAllAsObjects();
-            return [ 'rentals' => $rentals ];
         }
+        return TableHelper::getAllObjectsByArea($this->area);
     }
 }

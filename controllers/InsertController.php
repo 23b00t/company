@@ -38,15 +38,9 @@ class InsertController extends BaseController
                 $this->postData['gender'],
                 (float)$this->postData['salary']
             );
-
-            $employees = $employee->getAllAsObjects();
-            return [ 'employees' => $employees ];
         } elseif ($this->area === 'car') {
             $car = new Car();
             $car->insert($this->postData['licensePlate'], $this->postData['manufacturer'], $this->postData['type']);
-
-            $cars = $car->getAllAsObjects();
-            return [ 'cars' => $cars ];
         } elseif ($this->area === 'rental') {
             $rental = new Rental();
             $rental->insert(
@@ -55,9 +49,7 @@ class InsertController extends BaseController
                 $this->postData['rentalFrom'],
                 $this->postData['rentalTo']
             );
-
-            $rentals = $rental->getAllAsObjects();
-            return [ 'rentals' => $rentals ];
         }
+        return TableHelper::getAllObjectsByArea($this->area);
     }
 }

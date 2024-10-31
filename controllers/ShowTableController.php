@@ -22,15 +22,6 @@ class ShowTableController extends BaseController
      */
     public function invoke(): array
     {
-        if ($this->area === 'employee') {
-            $employees = (new Employee())->getAllAsObjects();
-            return [ 'employees' => $employees ];
-        } elseif ($this->area === 'car') {
-            $cars = (new Car())->getAllAsObjects();
-            return [ 'cars' => $cars ];
-        } elseif ($this->area === 'rental') {
-            $rentals = (new Rental())->getAllAsObjects();
-            return [ 'rentals' => $rentals ];
-        }
+        return TableHelper::getAllObjectsByArea($this->area);
     }
 }
