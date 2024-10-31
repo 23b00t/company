@@ -23,33 +23,32 @@ class InsertController extends BaseController
         $this->view = 'table';
     }
 
-    /**
-     * invoke
-     *
-     * @return array
-     */
-    public function invoke(): array
+    protected function employeeAction(): void
     {
-        if ($this->area === 'employee') {
-            $employee = new Employee();
-            $employee->insert(
-                $this->postData['firstName'],
-                $this->postData['lastName'],
-                $this->postData['gender'],
-                (float)$this->postData['salary']
-            );
-        } elseif ($this->area === 'car') {
-            $car = new Car();
-            $car->insert($this->postData['licensePlate'], $this->postData['manufacturer'], $this->postData['type']);
-        } elseif ($this->area === 'rental') {
-            $rental = new Rental();
-            $rental->insert(
-                $this->postData['employeeId'],
-                $this->postData['carId'],
-                $this->postData['rentalFrom'],
-                $this->postData['rentalTo']
-            );
-        }
-        return TableHelper::getAllObjectsByArea($this->area);
+        (new Employee())->insert(
+            $this->postData['firstName'],
+            $this->postData['lastName'],
+            $this->postData['gender'],
+            (float)$this->postData['salary']
+        );
+    }
+
+    protected function carAction(): void
+    {
+        (new Car())->insert(
+            $this->postData['licensePlate'],
+            $this->postData['manufacturer'],
+            $this->postData['type']
+        );
+    }
+
+    protected function rentalAction(): void
+    {
+        (new Rental())->insert(
+            $this->postData['employeeId'],
+            $this->postData['carId'],
+            $this->postData['rentalFrom'],
+            $this->postData['rentalTo']
+        );
     }
 }

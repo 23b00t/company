@@ -23,23 +23,18 @@ class DeleteController extends BaseController
         $this->view = 'table';
     }
 
-    /**
-     * invoke
-     *
-     * @return array
-     */
-    public function invoke(): array
+    protected function employeeAction(): void
     {
-        if ($this->area === 'employee') {
-            $employee = new Employee();
-            $employee->deleteObjectById($this->id);
-        } elseif ($this->area === 'car') {
-            $car = new Car();
-            $car->deleteObjectById($this->id);
-        } elseif ($this->area === 'rental') {
-            $rental = new Rental();
-            $rental->deleteObjectById($this->id);
-        }
-        return TableHelper::getAllObjectsByArea($this->area);
+        (new Employee())->deleteObjectById($this->id);
+    }
+
+    protected function carAction(): void
+    {
+        (new Car())->deleteObjectById($this->id);
+    }
+
+    protected function rentalAction(): void
+    {
+        (new Rental())->deleteObjectById($this->id);
     }
 }

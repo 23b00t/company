@@ -30,39 +30,52 @@ class UpdateController extends BaseController
     }
 
     /**
-     * invoke
+     * employeeAction
      *
-     * @return array
+     * @return void
      */
-    public function invoke(): array
+    protected function employeeAction(): void
     {
-        if ($this->area === 'employee') {
-            $employee = new Employee(
-                $this->id,
-                $this->postData['firstName'],
-                $this->postData['lastName'],
-                $this->postData['gender'],
-                (float)$this->postData['salary']
-            );
-            $employee->update();
-        } elseif ($this->area === 'car') {
-            $car = new Car(
-                $this->id,
-                $this->postData['licensePlate'],
-                $this->postData['manufacturer'],
-                $this->postData['type']
-            );
-            $car->update();
-        } elseif ($this->area === 'rental') {
-            $rental = new Rental(
-                $this->id,
-                $this->postData['employeeId'],
-                $this->postData['carId'],
-                $this->postData['rentalFrom'],
-                $this->postData['rentalTo']
-            );
-            $rental->update();
-        }
-        return TableHelper::getAllObjectsByArea($this->area);
+        $employee = new Employee(
+            $this->id,
+            $this->postData['firstName'],
+            $this->postData['lastName'],
+            $this->postData['gender'],
+            (float)$this->postData['salary']
+        );
+        $employee->update();
+    }
+
+    /**
+     * carAction
+     *
+     * @return void
+     */
+    protected function carAction(): void
+    {
+        $car = new Car(
+            $this->id,
+            $this->postData['licensePlate'],
+            $this->postData['manufacturer'],
+            $this->postData['type']
+        );
+        $car->update();
+    }
+
+    /**
+     * rentalAction
+     *
+     * @return void
+     */
+    protected function rentalAction(): void
+    {
+        $rental = new Rental(
+            $this->id,
+            $this->postData['employeeId'],
+            $this->postData['carId'],
+            $this->postData['rentalFrom'],
+            $this->postData['rentalTo']
+        );
+        $rental->update();
     }
 }
