@@ -20,7 +20,6 @@ class InsertController extends BaseController
         parent::__construct($requestData);
         // Extract object attribute values from POST requestData
         $this->postData = (new FilterData($requestData))->filter();
-        $this->view = 'table';
     }
 
     protected function employeeAction(): void

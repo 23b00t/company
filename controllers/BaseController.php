@@ -25,6 +25,7 @@ abstract class BaseController implements IController
     public function __construct(array $requestData)
     {
         $this->area = $requestData['area'] ?? 'employee';
+        $this->view = 'table';
     }
 
     /**
