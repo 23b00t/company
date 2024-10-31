@@ -35,14 +35,42 @@ abstract class BaseController implements IController
     public function invoke(): array
     {
         if ($this->area === 'employee') {
-            employeeAction();
+            $this->employeeAction();
         } elseif ($this->area === 'car') {
-            carAction();
+            $this->carAction();
         } elseif ($this->area === 'rental') {
-            rentalAction();
+            $this->rentalAction();
         }
         return TableHelper::getAllObjectsByArea($this->area);
     }
+
+    /**
+     * employeeAction
+     *
+     * @return void
+     */
+    public function employeeAction(): void
+    {
+    }
+
+    /**
+     * carAction
+     *
+     * @return void
+     */
+    public function carAction(): void
+    {
+    }
+
+    /**
+     * rentalAction
+     *
+     * @return void
+     */
+    public function rentalAction(): void
+    {
+    }
+
     /**
      * getView
      *

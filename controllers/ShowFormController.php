@@ -40,8 +40,6 @@ class ShowFormController extends BaseController
         if (isset($this->id)) {
             $this->action = 'update';
             if ($this->area === 'employee') {
-                $employee = (new Employee())->getObjectById($this->id);
-                $array = [  'employee' => $employee ];
             } elseif ($this->area === 'car') {
                 $car = (new Car())->getObjectById($this->id);
                 $array = [ 'car' => $car ];

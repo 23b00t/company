@@ -14,14 +14,4 @@ class ShowTableController extends BaseController
         parent::__construct($requestData);
         $this->view = 'table';
     }
-
-    /**
-     * invoke
-     *
-     * @return array
-     */
-    public function invoke(): array
-    {
-        return TableHelper::getAllObjectsByArea($this->area);
-    }
 }
