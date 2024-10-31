@@ -4,21 +4,12 @@
  * Class: DeleteController
  *
  */
-class DeleteController implements IController
+class DeleteController extends BaseController
 {
-    /**
-     * @var string $area
-     */
-    private string $area;
     /**
      * @var int $id
      */
     private int $id;
-    /**
-     * @var string $view
-     */
-    private string $view;
-
 
     /**
      * __construct
@@ -27,7 +18,7 @@ class DeleteController implements IController
      */
     public function __construct(array $requestData)
     {
-        $this->area = $requestData['area'];
+        parent::__construct($requestData);
         $this->id = $requestData['id'];
         $this->view = 'table';
     }
@@ -58,15 +49,5 @@ class DeleteController implements IController
             $rentals = $rental->getAllAsObjects();
             return [ 'rentals' => $rentals ];
         }
-    }
-
-    /**
-     * getView
-     *
-     * @return string
-     */
-    public function getView(): string
-    {
-        return $this->view;
     }
 }
