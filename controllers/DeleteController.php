@@ -23,17 +23,17 @@ class DeleteController extends BaseController
         $this->view = 'table';
     }
 
-    public function employeeAction(): void
+    protected function employeeAction(): void
     {
         (new Employee())->deleteObjectById($this->id);
     }
 
-    public function carAction(): void
+    protected function carAction(): void
     {
         (new Car())->deleteObjectById($this->id);
     }
 
-    public function rentalAction(): void
+    protected function rentalAction(): void
     {
         (new Rental())->deleteObjectById($this->id);
     }

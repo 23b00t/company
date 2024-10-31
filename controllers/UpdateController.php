@@ -34,7 +34,7 @@ class UpdateController extends BaseController
      *
      * @return void
      */
-    public function employeeAction(): void
+    protected function employeeAction(): void
     {
         $employee = new Employee(
             $this->id,
@@ -51,7 +51,7 @@ class UpdateController extends BaseController
      *
      * @return void
      */
-    public function carAction(): void
+    protected function carAction(): void
     {
         $car = new Car(
             $this->id,
@@ -67,7 +67,7 @@ class UpdateController extends BaseController
      *
      * @return void
      */
-    public function rentalAction(): void
+    protected function rentalAction(): void
     {
         $rental = new Rental(
             $this->id,

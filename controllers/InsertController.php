@@ -23,7 +23,7 @@ class InsertController extends BaseController
         $this->view = 'table';
     }
 
-    public function employeeAction(): void
+    protected function employeeAction(): void
     {
         (new Employee())->insert(
             $this->postData['firstName'],
@@ -33,7 +33,7 @@ class InsertController extends BaseController
         );
     }
 
-    public function carAction(): void
+    protected function carAction(): void
     {
         (new Car())->insert(
             $this->postData['licensePlate'],
@@ -42,7 +42,7 @@ class InsertController extends BaseController
         );
     }
 
-    public function rentalAction(): void
+    protected function rentalAction(): void
     {
         (new Rental())->insert(
             $this->postData['employeeId'],

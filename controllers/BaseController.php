@@ -49,7 +49,7 @@ abstract class BaseController implements IController
      *
      * @return void
      */
-    public function employeeAction(): void
+    protected function employeeAction(): void
     {
     }
 
@@ -58,7 +58,7 @@ abstract class BaseController implements IController
      *
      * @return void
      */
-    public function carAction(): void
+    protected function carAction(): void
     {
     }
 
@@ -67,7 +67,7 @@ abstract class BaseController implements IController
      *
      * @return void
      */
-    public function rentalAction(): void
+    protected function rentalAction(): void
     {
     }
 
