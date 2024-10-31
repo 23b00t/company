@@ -4,26 +4,14 @@
  * Class: ShowTableController
  *
  */
-class ShowTableController implements IController
+class ShowTableController extends BaseController
 {
     /**
-     * @var string $area
-     */
-    private string $area;
-    /**
-     * @var string $view
-     */
-    private string $view;
-
-
-    /**
-     * __construct
-     *
      * @param array $requestData
      */
     public function __construct(array $requestData)
     {
-        $this->area = $requestData['area'] ?? 'employee';
+        parent::__construct($requestData);
         $this->view = 'table';
     }
 
@@ -44,15 +32,5 @@ class ShowTableController implements IController
             $rentals = (new Rental())->getAllAsObjects();
             return [ 'rentals' => $rentals ];
         }
-    }
-
-    /**
-     * getView
-     *
-     * @return string
-     */
-    public function getView(): string
-    {
-        return $this->view;
     }
 }
