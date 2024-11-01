@@ -6,7 +6,7 @@
  * @see IController
  * @abstract
  */
-abstract class BaseController implements IController
+abstract class BaseController
 {
     /**
      * @var string $area
