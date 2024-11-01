@@ -35,14 +35,18 @@ abstract class BaseController
      */
     public function invoke(): array
     {
-        if ($this->area === 'employee') {
-            $this->employeeAction();
-        } elseif ($this->area === 'car') {
-            $this->carAction();
-        } elseif ($this->area === 'rental') {
-            $this->rentalAction();
+        try {
+            if ($this->area === 'employee') {
+                $this->employeeAction();
+            } elseif ($this->area === 'car') {
+                $this->carAction();
+            } elseif ($this->area === 'rental') {
+                $this->rentalAction();
+            }
+            return TableHelper::getAllObjectsByArea($this->area);
+        } catch (Error $e) {
+            throw new Exception($e);
         }
-        return TableHelper::getAllObjectsByArea($this->area);
     }
 
     /**

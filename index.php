@@ -53,7 +53,10 @@ try {
     $action = $controllerName === 'ShowFormController' ? $controller->getAction() : $action;
 
     /** Include requested view */
-    include __DIR__ . '/views/application.html.php';
 } catch (Exception $e) {
-    include __DIR__ . '/views/error.php';
+    // Write log file
+    $timestamp = (new DateTime())->format('Y-m-d H:i:s ');
+    file_put_contents(LOG_PATH, $timestamp . $e->getMessage() . "\n", FILE_APPEND);
+} finally {
+    include __DIR__ . '/views/application.html.php';
 }
