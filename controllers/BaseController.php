@@ -44,7 +44,7 @@ abstract class BaseController
                 $this->rentalAction();
             }
             return TableHelper::getAllObjectsByArea($this->area);
-        } catch (Error $e) {
+        } catch (Throwable $e) {
             throw new Exception($e);
         }
     }

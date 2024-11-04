@@ -35,22 +35,26 @@ class ShowFormController extends BaseController
      */
     public function invoke(): array
     {
-        $array = [];
-        /** Show edit form with pre-filled fields */
-        if (isset($this->id)) {
-            $this->action = 'update';
-            if ($this->area === 'employee') {
-                $employee = (new Employee())->getObjectById($this->id);
-                $array = [  'employee' => $employee ];
-            } elseif ($this->area === 'car') {
-                $car = (new Car())->getObjectById($this->id);
-                $array = [ 'car' => $car ];
-            } elseif ($this->area === 'rental') {
-                $rental = (new Rental())->getObjectById($this->id);
-                $array = [ 'rental' => $rental ];
+        try {
+            $array = [];
+            /** Show edit form with pre-filled fields */
+            if (isset($this->id)) {
+                $this->action = 'update';
+                if ($this->area === 'employee') {
+                    $employee = (new Employee())->getObjectById($this->id);
+                    $array = [  'employee' => $employee ];
+                } elseif ($this->area === 'car') {
+                    $car = (new Car())->getObjectById($this->id);
+                    $array = [ 'car' => $car ];
+                } elseif ($this->area === 'rental') {
+                    $rental = (new Rental())->getObjectById($this->id);
+                    $array = [ 'rental' => $rental ];
+                }
             }
+            return $array;
+        } catch (Throwable $e) {
+            throw new Exception($e);
         }
-        return $array;
     }
 
     /**
