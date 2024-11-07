@@ -46,14 +46,15 @@ try {
      * as $view, $employees, etc.
      */
     $controller = new $controllerName($data);
-    $array = $controller->invoke();
-    extract($array);
+    $response = $controller->invoke();
+    $msg = $response['msg'] ?? '';
+    isset($response['array']) && extract($response['array']);
 
     /** After calling ShowFormController set the action depending on usecase - update or insert */
     $action = $controllerName === 'ShowFormController' ? $controller->getAction() : $action;
 
     /** Include requested view */
-} catch (Exception $e) {
+} catch (Throwable $e) {
     // Write log file
     $timestamp = (new DateTime())->format('Y-m-d H:i:s ');
     file_put_contents(LOG_PATH, $timestamp . $e->getMessage() . "\n", FILE_APPEND);

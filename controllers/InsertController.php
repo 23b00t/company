@@ -20,6 +20,7 @@ class InsertController extends BaseController
         parent::__construct($requestData);
         // Extract object attribute values from POST requestData
         $this->postData = (new FilterData($requestData))->filter();
+        $this->msg = 'Erfolgreich hinzugefügt';
     }
 
     protected function employeeAction(): void

@@ -20,6 +20,7 @@ class DeleteController extends BaseController
     {
         parent::__construct($requestData);
         $this->id = $requestData['id'];
+        $this->msg = 'Löschen erfolgreich!';
     }
 
     protected function employeeAction(): void

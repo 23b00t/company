@@ -16,6 +16,10 @@ abstract class BaseController
      * @var string $view
      */
     protected string $view;
+    /**
+     * @var string $msg
+     */
+    protected string $msg;
 
     /**
      * __construct
@@ -26,6 +30,7 @@ abstract class BaseController
     {
         $this->area = $requestData['area'] ?? 'employee';
         $this->view = 'table';
+        $this->msg = '';
     }
 
     /**
@@ -43,8 +48,14 @@ abstract class BaseController
             } elseif ($this->area === 'rental') {
                 $this->rentalAction();
             }
-            return TableHelper::getAllObjectsByArea($this->area);
+            return ['array' => TableHelper::getAllObjectsByArea($this->area), 'msg' => $this->msg];
         } catch (Throwable $e) {
+            if ($e->getCode() === '23000') {
+                return [
+                    'array' => TableHelper::getAllObjectsByArea($this->area),
+                    'msg' => 'Du kannst kein Objekt löschen, dass noch verwendet wird.'
+                ];
+            }
             throw new Exception($e);
         }
     }
