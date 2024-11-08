@@ -1,0 +1,6 @@
+# remove hidden files
+.git
+.idea
+.php-cs-fixer.cache
+vendor/*
+config.php

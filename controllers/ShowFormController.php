@@ -33,7 +33,7 @@ class ShowFormController extends BaseController
      *
      * @return array
      */
-    public function invoke(): array
+    public function invoke(): Response
     {
         try {
             $array = [];
@@ -51,19 +51,11 @@ class ShowFormController extends BaseController
                     $array = [ 'rental' => $rental ];
                 }
             }
-            return $array;
+            $response = new Response($array);
+            $response->setAction($this->action);
+            return $response;
         } catch (Throwable $e) {
             throw new Exception($e);
         }
-    }
-
-    /**
-     * getAction
-     *
-     * @return string
-     */
-    public function getAction(): string
-    {
-        return $this->action;
     }
 }

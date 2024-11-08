@@ -47,11 +47,13 @@ try {
      */
     $controller = new $controllerName($data);
     $response = $controller->invoke();
-    $msg = $response['msg'] ?? '';
-    isset($response['array']) && extract($response['array']);
 
-    /** After calling ShowFormController set the action depending on usecase - update or insert */
-    $action = $controllerName === 'ShowFormController' ? $controller->getAction() : $action;
+    $msg = $response->getMsg();
+    /** Get associative array of Object(s) from Response and extract it */
+    $objects = $response->getArray();
+    extract($objects);
+
+    $action = empty($response->getAction()) ? $action : $response->getAction();
 
     /** Include requested view */
 } catch (Throwable $e) {
