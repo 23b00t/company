@@ -38,7 +38,7 @@ abstract class BaseController
      *
      * @return array
      */
-    public function invoke(): Response
+    public function invoke(): Response|Exception
     {
         try {
             if ($this->area === 'employee') {
