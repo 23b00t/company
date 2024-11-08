@@ -38,7 +38,7 @@ abstract class BaseController
      *
      * @return array
      */
-    public function invoke(): array
+    public function invoke(): Response
     {
         try {
             if ($this->area === 'employee') {
@@ -48,13 +48,15 @@ abstract class BaseController
             } elseif ($this->area === 'rental') {
                 $this->rentalAction();
             }
-            return ['array' => TableHelper::getAllObjectsByArea($this->area), 'msg' => $this->msg];
+            $response = new Response(TableHelper::getAllObjectsByArea($this->area));
+            $response->setMsg($this->msg);
+
+            return $response;
         } catch (Throwable $e) {
             if ($e->getCode() === '23000') {
-                return [
-                    'array' => TableHelper::getAllObjectsByArea($this->area),
-                    'msg' => 'Du kannst kein Objekt löschen, dass noch verwendet wird.'
-                ];
+                $response = new Response(TableHelper::getAllObjectsByArea($this->area));
+                $response->setMsg('Du kannst kein Objekt löschen, dass noch verwendet wird.');
+                return $response;
             }
             throw new Exception($e);
         }
