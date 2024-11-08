@@ -55,7 +55,7 @@ abstract class BaseController
         } catch (Throwable $e) {
             if ($e->getCode() === '23000') {
                 $response = new Response(TableHelper::getAllObjectsByArea($this->area));
-                $response->setMsg('Du kannst kein Objekt löschen, dass noch verwendet wird.');
+                $response->setMsg('Achtung: Du kannst kein Objekt löschen, dass noch verwendet wird.');
                 return $response;
             }
             throw new Exception($e);

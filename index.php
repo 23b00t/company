@@ -55,11 +55,14 @@ try {
 
     $action = empty($response->getAction()) ? $action : $response->getAction();
 
-    /** Include requested view */
+    $view = $controller->getView();
 } catch (Throwable $e) {
     // Write log file
     $timestamp = (new DateTime())->format('Y-m-d H:i:s ');
     file_put_contents(LOG_PATH, $timestamp . $e->getMessage() . "\n", FILE_APPEND);
+    $area = 'error';
+    $view = 'message';
 } finally {
+    /** Include requested view */
     include __DIR__ . '/views/application.html.php';
 }
