@@ -6,6 +6,15 @@
  */
 
 try {
+    // NOTE: https://stackoverflow.com/questions/1241728/can-i-try-catch-a-warning
+    set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+        // error was suppressed with the @-operator
+        if (0 === error_reporting()) {
+            return false;
+        }
+
+        throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+    });
     /** Include DB config */
     include 'config.php';
 
@@ -48,18 +57,22 @@ try {
     $controller = new $controllerName($data);
     $response = $controller->invoke();
 
-    $msg = $response->getMsg();
+    $msg = $response->getMsg() ?? '';
     /** Get associative array of Object(s) from Response and extract it */
-    $objects = $response->getArray();
+    $objects = $response->getArray() ?? [];
     extract($objects);
 
     $action = empty($response->getAction()) ? $action : $response->getAction();
 
-    /** Include requested view */
+    $view = $controller->getView();
 } catch (Throwable $e) {
     // Write log file
     $timestamp = (new DateTime())->format('Y-m-d H:i:s ');
     file_put_contents(LOG_PATH, $timestamp . $e->getMessage() . "\n", FILE_APPEND);
+    $area = 'error';
+    $view = 'message';
+    $msg = '';
 } finally {
+    /** Include requested view */
     include __DIR__ . '/views/application.html.php';
 }
