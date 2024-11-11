@@ -1,0 +1,13 @@
+* Lastenheft Autovermietung Firma
+** Kurzbeschreibung
+- Zu erstellen ist eine CRUD-Anwendung für das vorhandene Intranet einer Firma.  Die Ausleihe von Firmenfahrzeugen soll
+  protokolliert werden, damit bei Strafmandaten der verursachende Fahrer zur Rechenschaft gezogen werden kann.  
+- Der Standarduser darf Ausleihen von Autos an Mitarbeiter eingeben, sehen, löschen und ändern.  Der Administrator darf Autos
+  und Mitarbeiter anlegen, ändern, löschen und auslesen.
+- Mitarbeiter und Autos dürfen nicht gelöscht werden, solange sie in der Tabelle Ausleihe noch vorhanden sind. 
+- Das Projekt ist in 2 Wochen fertigzustellen.
+
+** Funktionale Anforderungen  
+- Alle Daten - Mitarbeiter, Autos, Ausleihen (mit Start- und Enddatum) - werden in einer SQL-Datenbank vorgehalten.    
+- Der Standarduser sieht nur die Ausleihen, der Administrator alle Daten, siehe Use-Case-Diagramm. 
+
