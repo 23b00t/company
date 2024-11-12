@@ -53,12 +53,7 @@ abstract class BaseController
 
             return $response;
         } catch (Throwable $e) {
-            if ($e->getCode() === '23000') {
-                $response = new Response(TableHelper::getAllObjectsByArea($this->area));
-                $response->setMsg('Achtung: Du kannst kein Objekt löschen, dass noch verwendet wird.');
-                return $response;
-            }
-            throw new Exception($e);
+            return $this->handleError($e);
         }
     }
 
@@ -108,5 +103,16 @@ abstract class BaseController
     public function setView(string $view): void
     {
         $this->view = $view;
+    }
+
+    /**
+     * handleError
+     *
+     * @param Throwable $e
+     * @return Exception|Response
+     */
+    protected function handleError(Throwable $e): Exception|Response
+    {
+        throw new Exception($e);
     }
 }
